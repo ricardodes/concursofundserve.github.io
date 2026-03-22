@@ -1745,7 +1745,7 @@ async function openAI(subject, event) {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        model: 'claude-sonnet-4-20250514', max_tokens: 300,
+        model: 'claude-sonnet-4-5', max_tokens: 300,
         system: 'Você é um professor de concurso público especialista em RPPS. Explique o tópico de forma didática e direta em português, máx 200 palavras. Destaque o que cai em prova. Use • para listas curtas.',
         messages: [{ role: 'user', content: 'Explique de forma objetiva para concurso: ' + subject }]
       })
@@ -1845,7 +1845,7 @@ async function sendAIMsg(textOverride) {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        model: 'claude-sonnet-4-20250514', max_tokens: 600,
+        model: 'claude-sonnet-4-5', max_tokens: 600,
         system: `Você é um professor especialista em concursos públicos brasileiros, especialmente RPPS, previdência social, matemática financeira, TI e língua portuguesa. O aluno estuda para Analista Previdenciário da FUNSERV Sorocaba (prova 24/mai/2026, Instituto Avalia). Tema atual: ${aiSubject}. Responda didaticamente em português, máx 350 palavras, destaque artigos e prazos quando relevante, use negrito para pontos-chave.`,
         messages: aiHistory
       })
@@ -2153,7 +2153,7 @@ Responda APENAS com o JSON array, exemplo:
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        model: 'claude-sonnet-4-20250514',
+        model: 'claude-sonnet-4-5',
         max_tokens: 4000,
         system: 'Você é um elaborador de questões de concurso público. Responda APENAS com JSON puro, sem markdown, sem texto antes ou depois do array JSON.',
         messages: [{ role: 'user', content: prompt }]
