@@ -1743,7 +1743,7 @@ async function openAI(subject, event) {
   try {
     const res = await fetch(PROXY_URL, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'text/plain' },
       body: JSON.stringify({
         model: 'claude-sonnet-4-5', max_tokens: 300,
         system: 'Você é um professor de concurso público especialista em RPPS. Explique o tópico de forma didática e direta em português, máx 200 palavras. Destaque o que cai em prova. Use • para listas curtas.',
@@ -1843,7 +1843,7 @@ async function sendAIMsg(textOverride) {
   try {
     const res = await fetch(PROXY_URL, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'text/plain' },
       body: JSON.stringify({
         model: 'claude-sonnet-4-5', max_tokens: 600,
         system: `Você é um professor especialista em concursos públicos brasileiros, especialmente RPPS, previdência social, matemática financeira, TI e língua portuguesa. O aluno estuda para Analista Previdenciário da FUNSERV Sorocaba (prova 24/mai/2026, Instituto Avalia). Tema atual: ${aiSubject}. Responda didaticamente em português, máx 350 palavras, destaque artigos e prazos quando relevante, use negrito para pontos-chave.`,
@@ -2151,7 +2151,7 @@ Responda APENAS com o JSON array, exemplo:
   try {
     const res = await fetch(PROXY_URL, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'text/plain' },
       body: JSON.stringify({
         model: 'claude-sonnet-4-5',
         max_tokens: 4000,
