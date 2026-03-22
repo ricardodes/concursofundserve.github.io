@@ -1618,22 +1618,37 @@ tbody td:first-child{font-weight:600;color:var(--navy2);white-space:nowrap}
 
 <script>
 // ============================================================
-// API ANTHROPIC DIRETA (sem proxy, sem custo extra)
+// GEMINI API — TOTALMENTE GRATUITO
+// 1. Acesse: https://aistudio.google.com/app/apikey
+// 2. Clique em "Create API Key"
+// 3. Cole a chave abaixo entre as aspas
 // ============================================================
-const ANTHROPIC_API_URL = 'https://api.anthropic.com/v1/messages';
+const GEMINI_API_KEY = 'AIzaSyAQcVrp98aa_sip1bdSlQtb5Uh31kp8gqQ';
+const GEMINI_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${GEMINI_API_KEY}`;
 
-async function callClaude(payload) {
-  const res = await fetch(ANTHROPIC_API_URL, {
+async function callAI(systemPrompt, messages) {
+  // Monta histórico no formato Gemini
+  const contents = [];
+  if (messages.length > 0) {
+    for (const m of messages) {
+      contents.push({
+        role: m.role === 'assistant' ? 'model' : 'user',
+        parts: [{ text: m.content }]
+      });
+    }
+  }
+  const res = await fetch(GEMINI_URL, {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'x-api-key': '',
-      'anthropic-version': '2023-06-01',
-      'anthropic-beta': 'claude-ai-artifacts'
-    },
-    body: JSON.stringify({ ...payload, model: 'claude-sonnet-4-6' })
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      system_instruction: { parts: [{ text: systemPrompt }] },
+      contents,
+      generationConfig: { maxOutputTokens: 4000 }
+    })
   });
-  return res.json();
+  const data = await res.json();
+  if (data.error) throw new Error(data.error.message);
+  return data.candidates?.[0]?.content?.parts?.[0]?.text || '';
 }
 
 // ============================================================
@@ -1754,12 +1769,10 @@ async function openAI(subject, event) {
   box.style.display = 'block';
   
   try {
-    const data = await callClaude({
-      max_tokens: 300,
-      system: 'Você é um professor de concurso público especialista em RPPS. Explique o tópico de forma didática e direta em português, máx 200 palavras. Destaque o que cai em prova. Use • para listas curtas.',
-      messages: [{ role: 'user', content: 'Explique de forma objetiva para concurso: ' + subject }]
-    });
-    const reply = data.content?.[0]?.text || 'Não foi possível gerar explicação.';
+    const reply = await callAI(
+      'Você é um professor de concurso público especialista em RPPS. Explique o tópico de forma didática e direta em português, máx 200 palavras. Destaque o que cai em prova. Use • para listas curtas.',
+      [{ role: 'user', content: 'Explique de forma objetiva para concurso: ' + subject }]
+    );
     bodyEl.innerHTML = reply.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/\n/g, '<br>').replace(/• /g, '• ');
   } catch(e) {
     bodyEl.innerHTML = '⚠️ Sem conexão com IA no momento.';
@@ -1849,13 +1862,11 @@ async function sendAIMsg(textOverride) {
   showAILoading();
   aiHistory.push({ role: 'user', content: text });
   try {
-    const data = await callClaude({
-      max_tokens: 600,
-      system: `Você é um professor especialista em concursos públicos brasileiros, especialmente RPPS, previdência social, matemática financeira, TI e língua portuguesa. O aluno estuda para Analista Previdenciário da FUNSERV Sorocaba (prova 24/mai/2026, Instituto Avalia). Tema atual: ${aiSubject}. Responda didaticamente em português, máx 350 palavras, destaque artigos e prazos quando relevante, use negrito para pontos-chave.`,
-      messages: aiHistory
-    });
+    const reply = await callAI(
+      `Você é um professor especialista em concursos públicos brasileiros, especialmente RPPS, previdência social, matemática financeira, TI e língua portuguesa. O aluno estuda para Analista Previdenciário da FUNSERV Sorocaba (prova 24/mai/2026, Instituto Avalia). Tema atual: ${aiSubject}. Responda didaticamente em português, máx 350 palavras, destaque artigos e prazos quando relevante, use negrito para pontos-chave.`,
+      aiHistory
+    );
     removeAILoading();
-    const reply = data.content?.[0]?.text || 'Não foi possível gerar resposta. Tente novamente.';
     aiHistory.push({ role: 'assistant', content: reply });
     addAIMsg(reply.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/\*(.*?)\*/g, '<em>$1</em>').replace(/\n/g, '<br>'));
   } catch(e) {
@@ -2152,12 +2163,10 @@ Responda APENAS com o JSON array, exemplo:
 [{"t":"Enunciado?","ops":["A) op1","B) op2","C) op3","D) op4"],"c":0,"exp":"Explicação."}]`;
 
   try {
-    const data = await callClaude({
-      max_tokens: 4000,
-      system: 'Você é um elaborador de questões de concurso público. Responda APENAS com JSON puro, sem markdown, sem texto antes ou depois do array JSON.',
-      messages: [{ role: 'user', content: prompt }]
-    });
-    const rawText = data.content?.[0]?.text || '[]';
+    const rawText = await callAI(
+      'Você é um elaborador de questões de concurso público. Responda APENAS com JSON puro, sem markdown, sem texto antes ou depois do array JSON.',
+      [{ role: 'user', content: prompt }]
+    );
     
     // Clean and parse JSON
     const cleaned = rawText.replace(/```json|```/g, '').trim();
