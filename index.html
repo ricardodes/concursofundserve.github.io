@@ -1624,7 +1624,7 @@ tbody td:first-child{font-weight:600;color:var(--navy2);white-space:nowrap}
 // 3. Cole a chave abaixo entre as aspas
 // ============================================================
 const GEMINI_API_KEY = 'AIzaSyAQcVrp98aa_sip1bdSlQtb5Uh31kp8gqQ';
-const GEMINI_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${GEMINI_API_KEY}`;
+const GEMINI_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_API_KEY}`;
 
 async function callAI(systemPrompt, messages) {
   // Monta histórico no formato Gemini
