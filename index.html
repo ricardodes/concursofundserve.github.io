@@ -296,9 +296,20 @@ tbody td:first-child{font-weight:600;color:var(--navy2);white-space:nowrap}
 .ai-tooltip-close{background:rgba(255,255,255,.2);border:none;color:#fff;width:18px;height:18px;border-radius:50%;cursor:pointer;font-size:11px;display:flex;align-items:center;justify-content:center}
 .ai-tooltip-body{max-height:200px;overflow-y:auto}
 
+
+.proxy-banner{display:none;background:#ef4444;color:#fff;text-align:center;padding:12px 20px;font-size:13px;font-weight:600;position:sticky;top:0;z-index:9999}
+.proxy-banner a{color:#fff;text-decoration:underline;margin-left:8px}
+
 </style>
 </head>
 <body>
+
+<div class="proxy-banner" id="proxy-banner">
+  ⚠️ IA desconectada — configure o proxy para usar os recursos de IA.
+  <a href="https://github.com/ricardodes/concursofundserve.github.io/blob/main/CLOUDFLARE_WORKER_proxy.js" target="_blank">Ver instruções</a>
+  <button onclick="document.getElementById('proxy-banner').style.display='none'" style="background:rgba(255,255,255,.3);border:none;color:#fff;padding:3px 10px;border-radius:6px;cursor:pointer;margin-left:10px;font-weight:700">✕</button>
+</div>
+
 <!-- SIDEBAR -->
 <nav class="sidebar" id="sidebar">
   <div class="sb-header">
@@ -1607,6 +1618,12 @@ tbody td:first-child{font-weight:600;color:var(--navy2);white-space:nowrap}
 
 <script>
 // ============================================================
+// CONFIGURAÇÃO DO PROXY (troque pela URL do seu Cloudflare Worker)
+// Instruções: baixe o arquivo CLOUDFLARE_WORKER_proxy.js e siga os passos
+// ============================================================
+const PROXY_URL = 'https://rpps-proxy.pl-economica.workers.dev';
+
+// ============================================================
 // NAVIGATION & STATE
 // ============================================================
 let currentChapter = parseInt(localStorage.getItem('funserv_chapter') || '1');
@@ -1724,9 +1741,9 @@ async function openAI(subject, event) {
   box.style.display = 'block';
   
   try {
-    const res = await fetch('https://api.anthropic.com/v1/messages', {
+    const res = await fetch(PROXY_URL, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'anthropic-dangerous-direct-browser-access': 'true' },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         model: 'claude-sonnet-4-20250514', max_tokens: 300,
         system: 'Você é um professor de concurso público especialista em RPPS. Explique o tópico de forma didática e direta em português, máx 200 palavras. Destaque o que cai em prova. Use • para listas curtas.',
@@ -1824,9 +1841,9 @@ async function sendAIMsg(textOverride) {
   showAILoading();
   aiHistory.push({ role: 'user', content: text });
   try {
-    const res = await fetch('https://api.anthropic.com/v1/messages', {
+    const res = await fetch(PROXY_URL, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'anthropic-dangerous-direct-browser-access': 'true' },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         model: 'claude-sonnet-4-20250514', max_tokens: 600,
         system: `Você é um professor especialista em concursos públicos brasileiros, especialmente RPPS, previdência social, matemática financeira, TI e língua portuguesa. O aluno estuda para Analista Previdenciário da FUNSERV Sorocaba (prova 24/mai/2026, Instituto Avalia). Tema atual: ${aiSubject}. Responda didaticamente em português, máx 350 palavras, destaque artigos e prazos quando relevante, use negrito para pontos-chave.`,
@@ -2132,9 +2149,9 @@ Responda APENAS com o JSON array, exemplo:
 [{"t":"Enunciado?","ops":["A) op1","B) op2","C) op3","D) op4"],"c":0,"exp":"Explicação."}]`;
 
   try {
-    const res = await fetch('https://api.anthropic.com/v1/messages', {
+    const res = await fetch(PROXY_URL, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'anthropic-dangerous-direct-browser-access': 'true' },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         model: 'claude-sonnet-4-20250514',
         max_tokens: 4000,
