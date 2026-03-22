@@ -1864,7 +1864,7 @@ async function sendAIMsg(textOverride) {
 }
 
 document.getElementById('ai-input').addEventListener('keydown', e => {
-  if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendAIMsg(); }
+  if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendAI(); }
 });
 
 // ============================================================
@@ -2291,6 +2291,9 @@ function buildTimeline() {
 // ============================================================
 restoreDone();
 goTo(currentChapter);
+
+// Alias para compatibilidade com botões HTML
+function sendAI() { sendAIMsg(); }
 </script>
 </body>
 </html>
