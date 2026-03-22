@@ -1618,10 +1618,23 @@ tbody td:first-child{font-weight:600;color:var(--navy2);white-space:nowrap}
 
 <script>
 // ============================================================
-// CONFIGURAÇÃO DO PROXY (troque pela URL do seu Cloudflare Worker)
-// Instruções: baixe o arquivo CLOUDFLARE_WORKER_proxy.js e siga os passos
+// API ANTHROPIC DIRETA (sem proxy, sem custo extra)
 // ============================================================
-const PROXY_URL = 'https://rpps-proxy.pl-economica.workers.dev';
+const ANTHROPIC_API_URL = 'https://api.anthropic.com/v1/messages';
+
+async function callClaude(payload) {
+  const res = await fetch(ANTHROPIC_API_URL, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'x-api-key': '',
+      'anthropic-version': '2023-06-01',
+      'anthropic-beta': 'claude-ai-artifacts'
+    },
+    body: JSON.stringify({ ...payload, model: 'claude-sonnet-4-6' })
+  });
+  return res.json();
+}
 
 // ============================================================
 // NAVIGATION & STATE
@@ -1741,16 +1754,11 @@ async function openAI(subject, event) {
   box.style.display = 'block';
   
   try {
-    const res = await fetch(PROXY_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'text/plain' },
-      body: JSON.stringify({
-        model: 'claude-sonnet-4-6', max_tokens: 300,
-        system: 'Você é um professor de concurso público especialista em RPPS. Explique o tópico de forma didática e direta em português, máx 200 palavras. Destaque o que cai em prova. Use • para listas curtas.',
-        messages: [{ role: 'user', content: 'Explique de forma objetiva para concurso: ' + subject }]
-      })
+    const data = await callClaude({
+      max_tokens: 300,
+      system: 'Você é um professor de concurso público especialista em RPPS. Explique o tópico de forma didática e direta em português, máx 200 palavras. Destaque o que cai em prova. Use • para listas curtas.',
+      messages: [{ role: 'user', content: 'Explique de forma objetiva para concurso: ' + subject }]
     });
-    const data = await res.json();
     const reply = data.content?.[0]?.text || 'Não foi possível gerar explicação.';
     bodyEl.innerHTML = reply.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/\n/g, '<br>').replace(/• /g, '• ');
   } catch(e) {
@@ -1841,16 +1849,11 @@ async function sendAIMsg(textOverride) {
   showAILoading();
   aiHistory.push({ role: 'user', content: text });
   try {
-    const res = await fetch(PROXY_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'text/plain' },
-      body: JSON.stringify({
-        model: 'claude-sonnet-4-6', max_tokens: 600,
-        system: `Você é um professor especialista em concursos públicos brasileiros, especialmente RPPS, previdência social, matemática financeira, TI e língua portuguesa. O aluno estuda para Analista Previdenciário da FUNSERV Sorocaba (prova 24/mai/2026, Instituto Avalia). Tema atual: ${aiSubject}. Responda didaticamente em português, máx 350 palavras, destaque artigos e prazos quando relevante, use negrito para pontos-chave.`,
-        messages: aiHistory
-      })
+    const data = await callClaude({
+      max_tokens: 600,
+      system: `Você é um professor especialista em concursos públicos brasileiros, especialmente RPPS, previdência social, matemática financeira, TI e língua portuguesa. O aluno estuda para Analista Previdenciário da FUNSERV Sorocaba (prova 24/mai/2026, Instituto Avalia). Tema atual: ${aiSubject}. Responda didaticamente em português, máx 350 palavras, destaque artigos e prazos quando relevante, use negrito para pontos-chave.`,
+      messages: aiHistory
     });
-    const data = await res.json();
     removeAILoading();
     const reply = data.content?.[0]?.text || 'Não foi possível gerar resposta. Tente novamente.';
     aiHistory.push({ role: 'assistant', content: reply });
@@ -2149,17 +2152,11 @@ Responda APENAS com o JSON array, exemplo:
 [{"t":"Enunciado?","ops":["A) op1","B) op2","C) op3","D) op4"],"c":0,"exp":"Explicação."}]`;
 
   try {
-    const res = await fetch(PROXY_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'text/plain' },
-      body: JSON.stringify({
-        model: 'claude-sonnet-4-6',
-        max_tokens: 4000,
-        system: 'Você é um elaborador de questões de concurso público. Responda APENAS com JSON puro, sem markdown, sem texto antes ou depois do array JSON.',
-        messages: [{ role: 'user', content: prompt }]
-      })
+    const data = await callClaude({
+      max_tokens: 4000,
+      system: 'Você é um elaborador de questões de concurso público. Responda APENAS com JSON puro, sem markdown, sem texto antes ou depois do array JSON.',
+      messages: [{ role: 'user', content: prompt }]
     });
-    const data = await res.json();
     const rawText = data.content?.[0]?.text || '[]';
     
     // Clean and parse JSON
