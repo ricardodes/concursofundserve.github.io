@@ -1623,33 +1623,34 @@ tbody td:first-child{font-weight:600;color:var(--navy2);white-space:nowrap}
 // 2. Clique em "Create API Key"
 // 3. Cole a chave abaixo entre as aspas
 // ============================================================
-const GEMINI_API_KEY = 'AIzaSyC-Q4mXh1RLyXU-vDJAfixDbHLXbxP2EFM';
-const GEMINI_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-lite:generateContent?key=${GEMINI_API_KEY}`;
+// NÃO COMMITAR CHAVE REAL AQUI!
+// Cole sua chave Groq no console do navegador ou use prompt para inserir
+let GROQ_API_KEY = prompt("Cole sua Groq API Key aqui (não commitar!):") || '';
+const GROQ_URL = 'https://api.groq.com/openai/v1/chat/completions';
 
 async function callAI(systemPrompt, messages) {
-  // Monta histórico no formato Gemini
-  const contents = [];
-  if (messages.length > 0) {
-    for (const m of messages) {
-      contents.push({
-        role: m.role === 'assistant' ? 'model' : 'user',
-        parts: [{ text: m.content }]
-      });
-    }
-  }
-  const res = await fetch(GEMINI_URL, {
+  const res = await fetch(GROQ_URL, {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    headers: {
+      'Authorization': `Bearer ${GROQ_API_KEY}`,
+      'Content-Type': 'application/json'
+    },
     body: JSON.stringify({
-      system_instruction: { parts: [{ text: systemPrompt }] },
-      contents,
-      generationConfig: { maxOutputTokens: 4000 }
+      model: "llama-3.3-70b-versatile",   // ou "mixtral-8x7b-32768" se quiser mais leve
+      messages: [
+        { role: "system", content: systemPrompt },
+        ...messages
+      ],
+      max_tokens: 800,
+      temperature: 0.7
     })
   });
+
   const data = await res.json();
   if (data.error) throw new Error(data.error.message);
-  return data.candidates?.[0]?.content?.parts?.[0]?.text || '';
+  return data.choices?.[0]?.message?.content || '';
 }
+
 
 // ============================================================
 // NAVIGATION & STATE
