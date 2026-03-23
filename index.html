@@ -203,9 +203,10 @@ html{scroll-behavior:smooth}
 body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);line-height:1.65;display:flex;min-height:100vh;font-size:15px}
 
 /* SIDEBAR */
-.sidebar{width:var(--sidebar-w);min-height:100vh;background:var(--navy);position:fixed;left:0;top:0;overflow-y:auto;z-index:200;display:flex;flex-direction:column;scrollbar-width:thin;scrollbar-color:rgba(255,255,255,.15) transparent}
-.sidebar::-webkit-scrollbar{width:4px}
-.sidebar::-webkit-scrollbar-thumb{background:rgba(255,255,255,.15);border-radius:2px}
+.sidebar{width:var(--sidebar-w);height:100vh;background:var(--navy);position:fixed;left:0;top:0;overflow-y:auto;z-index:200;display:flex;flex-direction:column;scrollbar-width:thin;scrollbar-color:rgba(255,255,255,.25) transparent}
+.sidebar::-webkit-scrollbar{width:5px}
+.sidebar::-webkit-scrollbar-thumb{background:rgba(255,255,255,.25);border-radius:3px}
+.sidebar::-webkit-scrollbar-track{background:transparent}
 .sb-header{padding:22px 18px 16px;border-bottom:1px solid rgba(255,255,255,.1)}
 .sb-title{font-size:14px;font-weight:800;color:#fff;line-height:1.3}
 .sb-sub{font-size:11px;color:rgba(255,255,255,.5);margin-top:3px}
@@ -490,6 +491,36 @@ tbody td:first-child{font-weight:600;color:var(--navy2);white-space:nowrap}
 
 <!-- IA Claude integrada - sem proxy necessário -->
 
+<!-- MODAL: CONFIGURAR CHAVE GEMINI -->
+<div id="apikey-modal-overlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:10000;align-items:center;justify-content:center">
+  <div style="background:#fff;border-radius:14px;padding:28px 28px 24px;max-width:480px;width:94%;box-shadow:0 12px 48px rgba(0,0,0,.3);position:relative">
+    <div style="font-size:20px;font-weight:800;color:#0f2744;margin-bottom:6px">🔑 Configurar IA (Gemini)</div>
+    <p style="font-size:13px;color:#6b7280;margin-bottom:18px;line-height:1.6">A chave fica salva <strong>só no seu navegador</strong> (localStorage). Nenhum dado sai do seu computador.</p>
+    <ol style="font-size:13px;color:#374151;line-height:2;margin-bottom:16px;padding-left:18px">
+      <li>Acesse <a href="https://aistudio.google.com/app/apikey" target="_blank" style="color:#2563eb;font-weight:600">aistudio.google.com/app/apikey</a></li>
+      <li>Clique em <strong>"Create API Key"</strong> (gratuito)</li>
+      <li>Cole a chave abaixo e clique em Salvar</li>
+    </ol>
+    <input id="apikey-input" type="text" placeholder="Cole sua chave aqui: AIza..."
+      style="width:100%;border:1.5px solid #e2ddd6;border-radius:8px;padding:10px 12px;font-size:14px;font-family:monospace;outline:none;margin-bottom:6px;box-sizing:border-box"
+      oninput="document.getElementById('apikey-err').style.display='none'">
+    <div id="apikey-err" style="display:none;color:#dc2626;font-size:12px;margin-bottom:8px">Cole uma chave valida (comeca com AIza...)</div>
+    <div style="display:flex;gap:10px;margin-top:12px">
+      <button onclick="saveApiKey()" style="flex:1;background:#0f2744;color:#fff;border:none;border-radius:8px;padding:11px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit">Salvar e Ativar IA</button>
+      <button onclick="closeApiKeyModal()" style="background:#f3f4f6;color:#374151;border:none;border-radius:8px;padding:11px 16px;font-size:14px;font-weight:600;cursor:pointer;font-family:inherit">Fechar</button>
+    </div>
+    <div id="apikey-saved-msg" style="display:none;margin-top:10px;text-align:center;font-size:13px;color:#059669;font-weight:600">Chave salva! A IA esta ativa.</div>
+  </div>
+</div>
+
+<!-- BANNER API KEY -->
+<div id="api-banner" style="display:none;position:fixed;top:0;left:0;right:0;z-index:9999;background:#d97706;color:#fff;text-align:center;padding:9px 20px;font-size:13px;font-weight:600">
+  IA nao configurada —
+  <button onclick="openApiKeyModal()" style="background:rgba(0,0,0,.25);border:none;color:#fff;border-radius:6px;padding:3px 12px;cursor:pointer;font-size:13px;font-weight:700;font-family:inherit;margin:0 6px">Configurar agora (gratis)</button>
+  A chave fica salva no navegador, sem editar arquivos.
+  <button onclick="this.parentElement.style.display='none'" style="margin-left:12px;background:rgba(0,0,0,.25);border:none;color:#fff;border-radius:4px;padding:2px 8px;cursor:pointer;font-size:12px">X</button>
+</div>
+
 <!-- SIDEBAR -->
 <nav class="sidebar" id="sidebar">
   <div class="sb-header">
@@ -618,6 +649,10 @@ tbody td:first-child{font-weight:600;color:var(--navy2);white-space:nowrap}
 
   <div class="sb-divider"></div>
   <div class="sb-section">⚡ Ferramentas</div>
+  <div class="sb-item" onclick="openApiKeyModal()">
+    <div style="width:22px;height:22px;border-radius:50%;background:rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0">🔑</div>
+    <div class="sb-text" id="sb-ia-label">Configurar IA Gemini</div>
+  </div>
   <div class="sb-item" onclick="openPainel()">
     <div style="width:22px;height:22px;border-radius:50%;background:rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0">📊</div>
     <div class="sb-text">Painel de Desempenho</div>
@@ -2770,29 +2805,107 @@ tbody td:first-child{font-weight:600;color:var(--navy2);white-space:nowrap}
 
 <script>
 // ============================================================
-// GEMINI API — TOTALMENTE GRATUITO
-// 1. Acesse: https://aistudio.google.com/app/apikey
-// 2. Clique em "Create API Key"
-// 3. Cole a chave abaixo entre as aspas
+// GEMINI 1.5 FLASH — CHAVE CONFIGURADA NA INTERFACE
+// A chave é salva no localStorage do navegador.
+// Não é necessário editar o HTML.
 // ============================================================
-// ============================================================
-// CLAUDE API — INTEGRADO, SEM CHAVE NECESSÁRIA
-// ============================================================
+
+function getApiKey() {
+  return localStorage.getItem('funserv_gemini_key') || '';
+}
+
+// saveApiKey defined below with updateIAStatus
+
+function openApiKeyModal() {
+  const overlay = document.getElementById('apikey-modal-overlay');
+  if (overlay) {
+    overlay.style.display = 'flex';
+    const input = document.getElementById('apikey-input');
+    const existing = getApiKey();
+    if (input) { input.value = existing; setTimeout(()=>input.focus(),200); }
+    const msg = document.getElementById('apikey-saved-msg');
+    if (msg) msg.style.display = 'none';
+  }
+}
+
+function closeApiKeyModal() {
+  const overlay = document.getElementById('apikey-modal-overlay');
+  if (overlay) overlay.style.display = 'none';
+}
+
+// Mostrar banner e atualizar label sidebar conforme status da chave
+function updateIAStatus() {
+  const hasKey = !!getApiKey();
+  const banner = document.getElementById('api-banner');
+  const label = document.getElementById('sb-ia-label');
+  if (banner) banner.style.display = hasKey ? 'none' : 'block';
+  if (label) label.textContent = hasKey ? '✅ IA Ativa (Gemini)' : '🔑 Configurar IA Gemini';
+}
+
+document.addEventListener('DOMContentLoaded', updateIAStatus);
+
+function saveApiKey() {
+  const input = document.getElementById('apikey-input');
+  const key = (input ? input.value : '').trim();
+  if (!key || !key.startsWith('AIza')) {
+    const err = document.getElementById('apikey-err');
+    if (err) err.style.display = 'block';
+    return;
+  }
+  localStorage.setItem('funserv_gemini_key', key);
+  const msg = document.getElementById('apikey-saved-msg');
+  if (msg) { msg.style.display = 'block'; }
+  updateIAStatus();
+  setTimeout(closeApiKeyModal, 1200);
+}
+
 async function callAI(systemPrompt, messages) {
-  const res = await fetch('https://api.anthropic.com/v1/messages', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      model: 'claude-sonnet-4-20250514',
-      max_tokens: 1000,
-      system: systemPrompt,
-      messages: messages
-    })
-  });
+  const GEMINI_API_KEY = getApiKey();
+  if (!GEMINI_API_KEY) {
+    openApiKeyModal();
+    throw new Error('CHAVE_NAO_CONFIGURADA');
+  }
+
+  // Montar histórico Gemini (system como primeiro user turn)
+  const geminiContents = [];
+  // System prompt como primeira mensagem user
+  geminiContents.push({ role: 'user', parts: [{ text: systemPrompt }] });
+  geminiContents.push({ role: 'model', parts: [{ text: 'Entendido. Estou pronto para ajudar.' }] });
+  // Converter histórico
+  for (const m of messages) {
+    geminiContents.push({
+      role: m.role === 'assistant' ? 'model' : 'user',
+      parts: [{ text: m.content }]
+    });
+  }
+
+  const res = await fetch(
+    `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_API_KEY}`,
+    {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        contents: geminiContents,
+        generationConfig: {
+          maxOutputTokens: 1200,
+          temperature: 0.4,
+          topP: 0.9
+        },
+        safetySettings: [
+          { category: 'HARM_CATEGORY_HARASSMENT', threshold: 'BLOCK_NONE' },
+          { category: 'HARM_CATEGORY_HATE_SPEECH', threshold: 'BLOCK_NONE' },
+          { category: 'HARM_CATEGORY_SEXUALLY_EXPLICIT', threshold: 'BLOCK_NONE' },
+          { category: 'HARM_CATEGORY_DANGEROUS_CONTENT', threshold: 'BLOCK_NONE' }
+        ]
+      })
+    }
+  );
+
   const data = await res.json();
   if (data.error) throw new Error(data.error.message || JSON.stringify(data.error));
-  const textBlock = (data.content || []).find(b => b.type === 'text');
-  return textBlock ? textBlock.text : '';
+  const text = data?.candidates?.[0]?.content?.parts?.[0]?.text;
+  if (!text) throw new Error('Resposta vazia da Gemini');
+  return text;
 }
 
 // ============================================================
@@ -2919,7 +3032,8 @@ async function openAI(subject, event) {
     );
     bodyEl.innerHTML = reply.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/\n/g, '<br>').replace(/• /g, '• ');
   } catch(e) {
-    bodyEl.innerHTML = '⚠️ Sem conexão com IA no momento.';
+    if (e.message === 'CHAVE_NAO_CONFIGURADA') { bodyEl.innerHTML = '🔑 Configure a chave Gemini clicando no botão laranja no topo.'; return; }
+    bodyEl.innerHTML = '⚠️ Erro ao conectar à IA: ' + e.message;
   }
 }
 
@@ -3015,7 +3129,8 @@ async function sendAIMsg(textOverride) {
     addAIMsg(reply.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/\*(.*?)\*/g, '<em>$1</em>').replace(/\n/g, '<br>'));
   } catch(e) {
     removeAILoading();
-    addAIMsg('⚠️ Não foi possível conectar à IA. Verifique sua conexão e tente novamente.');
+    if (e.message === 'CHAVE_NAO_CONFIGURADA') return; // modal já abriu
+    addAIMsg('⚠️ Erro ao conectar à IA: ' + e.message);
   }
   document.getElementById('ai-send').disabled = false;
   document.getElementById('ai-input').focus();
@@ -3405,24 +3520,24 @@ async function refazerQuestoes(ch) {
   btn.disabled = true;
   btn.innerHTML = '<div class="redo-loading"><div class="redo-dot"></div><div class="redo-dot"></div><div class="redo-dot"></div></div> Gerando questões com IA...';
 
-  const prompt = `Gere 6 questões de múltipla escolha sobre: ${chapterTopics[ch] || 'previdência social'}.
+  const prompt = `Gere 6 questoes de multipla escolha sobre: ${chapterTopics[ch] || 'previdencia social'}.
 
-RETORNE APENAS o JSON array abaixo, sem nenhum texto antes ou depois:
-[
-{"t":"Enunciado da questao sem aspas especiais","ops":["A) opcao1","B) opcao2","C) opcao3","D) opcao4"],"c":0,"exp":"Explicacao do gabarito"},
-{"t":"...","ops":["A) ...","B) ...","C) ...","D) ..."],"c":1,"exp":"..."}
-]
+RETORNE APENAS o JSON array, sem nenhum texto antes ou depois, sem markdown, sem backticks:
+[{"t":"Enunciado","ops":["A) op1","B) op2","C) op3","D) op4"],"c":0,"exp":"Explicacao do gabarito correto"},{"t":"...","ops":["A) ...","B) ...","C) ...","D) ..."],"c":1,"exp":"..."}]
 
-REGRAS CRITICAS:
-- Use apenas aspas duplas
-- Nao use apostrofos ou aspas simples dentro do texto
-- Nao use caracteres especiais ou quebras de linha dentro das strings
-- c deve ser 0, 1, 2 ou 3 (indice da opcao correta)
-- Gere questoes diferentes das basicas, com situacoes praticas`;
+REGRAS ABSOLUTAS:
+1. JSON puro — sem markdown, sem \`\`\`, sem texto fora do array
+2. Apenas aspas duplas — NUNCA aspas simples dentro de strings
+3. Substitua apostrofos por espaco ou reescreva sem apostrofo
+4. c = indice inteiro 0,1,2 ou 3 da opcao CORRETA
+5. Verifique: a opcao indicada por c deve ser realmente a correta
+6. Nao use quebras de linha dentro das strings JSON
+7. Questoes baseadas na legislacao vigente — sem invencoes
+8. Gabarito e explicacao devem ser 100% corretos e embasados na lei`;
 
   try {
     const rawText = await callAI(
-      'Você é um elaborador de questões de concurso público. Responda APENAS com JSON puro e válido, sem markdown, sem texto antes ou depois. Use apenas aspas duplas. Não use caracteres especiais dentro das strings. Escape aspas internas com barra invertida.',
+      'Voce e um elaborador expert de questoes de concurso publico brasileiro. Suas questoes sao baseadas EXCLUSIVAMENTE na legislacao vigente e corretas. Responda SOMENTE com JSON puro e valido, sem markdown, sem texto antes ou depois. Use apenas aspas duplas. Substitua apostrofos por espaco. O campo c deve apontar para a opcao CORRETA verificada contra a lei.',
       [{ role: 'user', content: prompt }]
     );
     
@@ -3481,7 +3596,12 @@ REGRAS CRITICAS:
       </div>`).join('')}`;
 
   } catch(e) {
+    const cont = document.getElementById('q-modal-content');
     const btn2 = document.getElementById('redo-btn');
+    if (e.message === 'CHAVE_NAO_CONFIGURADA') {
+      if (btn2) { btn2.disabled = false; btn2.innerHTML = '🔑 Configurar Chave IA'; btn2.style.background = '#d97706'; }
+      return;
+    }
     if (btn2) {
       btn2.disabled = false;
       btn2.innerHTML = '⚠️ Erro ao gerar. Tente novamente';
