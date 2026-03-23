@@ -494,17 +494,17 @@ tbody td:first-child{font-weight:600;color:var(--navy2);white-space:nowrap}
 <!-- MODAL: CONFIGURAR CHAVE GEMINI -->
 <div id="apikey-modal-overlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:10000;align-items:center;justify-content:center">
   <div style="background:#fff;border-radius:14px;padding:28px 28px 24px;max-width:480px;width:94%;box-shadow:0 12px 48px rgba(0,0,0,.3);position:relative">
-    <div style="font-size:20px;font-weight:800;color:#0f2744;margin-bottom:6px">🔑 Configurar IA (Gemini)</div>
-    <p style="font-size:13px;color:#6b7280;margin-bottom:18px;line-height:1.6">A chave fica salva <strong>só no seu navegador</strong> (localStorage). Nenhum dado sai do seu computador.</p>
+    <div style="font-size:20px;font-weight:800;color:#0f2744;margin-bottom:6px">🔑 Configurar IA (Groq — Gratuito)</div>
+    <p style="font-size:13px;color:#6b7280;margin-bottom:18px;line-height:1.6">A chave fica salva <strong>só no seu navegador</strong>. Nenhum dado sai do seu computador. Groq é gratuito e sem limite de cota.</p>
     <ol style="font-size:13px;color:#374151;line-height:2;margin-bottom:16px;padding-left:18px">
-      <li>Acesse <a href="https://aistudio.google.com/app/apikey" target="_blank" style="color:#2563eb;font-weight:600">aistudio.google.com/app/apikey</a></li>
-      <li>Clique em <strong>"Create API Key"</strong> (gratuito)</li>
+      <li>Acesse <a href="https://console.groq.com/keys" target="_blank" style="color:#2563eb;font-weight:600">console.groq.com/keys</a></li>
+      <li>Clique em <strong>"Create API Key"</strong> (gratuito, sem cartão)</li>
       <li>Cole a chave abaixo e clique em Salvar</li>
     </ol>
-    <input id="apikey-input" type="text" placeholder="Cole sua chave aqui: AIza..."
+    <input id="apikey-input" type="text" placeholder="Cole sua chave aqui: gsk_..."
       style="width:100%;border:1.5px solid #e2ddd6;border-radius:8px;padding:10px 12px;font-size:14px;font-family:monospace;outline:none;margin-bottom:6px;box-sizing:border-box"
       oninput="document.getElementById('apikey-err').style.display='none'">
-    <div id="apikey-err" style="display:none;color:#dc2626;font-size:12px;margin-bottom:8px">Cole uma chave valida (comeca com AIza...)</div>
+    <div id="apikey-err" style="display:none;color:#dc2626;font-size:12px;margin-bottom:8px">Cole uma chave valida do Groq (comeca com gsk_)</div>
     <div style="display:flex;gap:10px;margin-top:12px">
       <button onclick="saveApiKey()" style="flex:1;background:#0f2744;color:#fff;border:none;border-radius:8px;padding:11px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit">Salvar e Ativar IA</button>
       <button onclick="closeApiKeyModal()" style="background:#f3f4f6;color:#374151;border:none;border-radius:8px;padding:11px 16px;font-size:14px;font-weight:600;cursor:pointer;font-family:inherit">Fechar</button>
@@ -515,8 +515,8 @@ tbody td:first-child{font-weight:600;color:var(--navy2);white-space:nowrap}
 
 <!-- BANNER API KEY -->
 <div id="api-banner" style="display:none;position:fixed;top:0;left:0;right:0;z-index:9999;background:#d97706;color:#fff;text-align:center;padding:9px 20px;font-size:13px;font-weight:600">
-  IA nao configurada —
-  <button onclick="openApiKeyModal()" style="background:rgba(0,0,0,.25);border:none;color:#fff;border-radius:6px;padding:3px 12px;cursor:pointer;font-size:13px;font-weight:700;font-family:inherit;margin:0 6px">Configurar agora (gratis)</button>
+  IA Groq nao configurada —
+  <button onclick="openApiKeyModal()" style="background:rgba(0,0,0,.25);border:none;color:#fff;border-radius:6px;padding:3px 12px;cursor:pointer;font-size:13px;font-weight:700;font-family:inherit;margin:0 6px">Configurar Groq (gratis)</button>
   A chave fica salva no navegador, sem editar arquivos.
   <button onclick="this.parentElement.style.display='none'" style="margin-left:12px;background:rgba(0,0,0,.25);border:none;color:#fff;border-radius:4px;padding:2px 8px;cursor:pointer;font-size:12px">X</button>
 </div>
@@ -2805,15 +2805,17 @@ tbody td:first-child{font-weight:600;color:var(--navy2);white-space:nowrap}
 
 <script>
 // ============================================================
-// GEMINI 1.5 FLASH — CHAVE CONFIGURADA NA INTERFACE
-// A chave é salva no localStorage do navegador.
-// Não é necessário editar o HTML.
+// GROQ API — GRATUITO, SEM COTA, SEM CORS
+// 1. Acesse: https://console.groq.com/keys
+// 2. Crie uma API Key gratuita (sem cartão)
+// 3. Cole na interface clicando em "Configurar IA"
 // ============================================================
 
 function getApiKey() {
   return localStorage.getItem('funserv_gemini_key') || '';
 }
 
+// saveApiKey defined below with updateIAStatus
 // saveApiKey defined below with updateIAStatus
 
 function openApiKeyModal() {
@@ -2839,7 +2841,7 @@ function updateIAStatus() {
   const banner = document.getElementById('api-banner');
   const label = document.getElementById('sb-ia-label');
   if (banner) banner.style.display = hasKey ? 'none' : 'block';
-  if (label) label.textContent = hasKey ? '✅ IA Ativa (Gemini)' : '🔑 Configurar IA Gemini';
+  if (label) label.textContent = hasKey ? '✅ IA Ativa (Groq)' : '🔑 Configurar IA (Groq)';
 }
 
 document.addEventListener('DOMContentLoaded', updateIAStatus);
@@ -2847,7 +2849,7 @@ document.addEventListener('DOMContentLoaded', updateIAStatus);
 function saveApiKey() {
   const input = document.getElementById('apikey-input');
   const key = (input ? input.value : '').trim();
-  if (!key || !key.startsWith('AIza')) {
+  if (!key || key.length < 10) {
     const err = document.getElementById('apikey-err');
     if (err) err.style.display = 'block';
     return;
@@ -2860,54 +2862,38 @@ function saveApiKey() {
 }
 
 async function callAI(systemPrompt, messages) {
-  const GEMINI_API_KEY = getApiKey();
-  if (!GEMINI_API_KEY) {
+  const API_KEY = getApiKey();
+  if (!API_KEY) {
     openApiKeyModal();
     throw new Error('CHAVE_NAO_CONFIGURADA');
   }
 
-  // Montar histórico Gemini (system como primeiro user turn)
-  const geminiContents = [];
-  // System prompt como primeira mensagem user
-  geminiContents.push({ role: 'user', parts: [{ text: systemPrompt }] });
-  geminiContents.push({ role: 'model', parts: [{ text: 'Entendido. Estou pronto para ajudar.' }] });
-  // Converter histórico
-  for (const m of messages) {
-    geminiContents.push({
-      role: m.role === 'assistant' ? 'model' : 'user',
-      parts: [{ text: m.content }]
-    });
-  }
+  // Montar mensagens com system prompt
+  const groqMessages = [
+    { role: 'system', content: systemPrompt },
+    ...messages
+  ];
 
-  const res = await fetch(
-    `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${GEMINI_API_KEY}`,
-    {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        contents: geminiContents,
-        generationConfig: {
-          maxOutputTokens: 1200,
-          temperature: 0.4,
-          topP: 0.9
-        },
-        safetySettings: [
-          { category: 'HARM_CATEGORY_HARASSMENT', threshold: 'BLOCK_NONE' },
-          { category: 'HARM_CATEGORY_HATE_SPEECH', threshold: 'BLOCK_NONE' },
-          { category: 'HARM_CATEGORY_SEXUALLY_EXPLICIT', threshold: 'BLOCK_NONE' },
-          { category: 'HARM_CATEGORY_DANGEROUS_CONTENT', threshold: 'BLOCK_NONE' }
-        ]
-      })
-    }
-  );
+  const res = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${API_KEY}`
+    },
+    body: JSON.stringify({
+      model: 'llama-3.3-70b-versatile',
+      messages: groqMessages,
+      max_tokens: 1200,
+      temperature: 0.4
+    })
+  });
 
   const data = await res.json();
   if (data.error) throw new Error(data.error.message || JSON.stringify(data.error));
-  const text = data?.candidates?.[0]?.content?.parts?.[0]?.text;
-  if (!text) throw new Error('Resposta vazia da Gemini');
+  const text = data?.choices?.[0]?.message?.content;
+  if (!text) throw new Error('Resposta vazia da IA');
   return text;
 }
-
 // ============================================================
 // NAVIGATION & STATE
 // ============================================================
@@ -2939,8 +2925,17 @@ function goTo(n) {
   if (window.innerWidth <= 900) document.getElementById('sidebar').classList.remove('open');
 }
 
-function nextChapter() { if (currentChapter < TOTAL) goTo(currentChapter + 1); }
-function prevChapter() { if (currentChapter > 1) goTo(currentChapter - 1); }
+// Ordem real de navegação (seguindo a sidebar)
+const CHAPTER_ORDER = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,18,19,20,21,22,23,24,25,15,16,17];
+
+function nextChapter() {
+  const idx = CHAPTER_ORDER.indexOf(currentChapter);
+  if (idx >= 0 && idx < CHAPTER_ORDER.length - 1) goTo(CHAPTER_ORDER[idx + 1]);
+}
+function prevChapter() {
+  const idx = CHAPTER_ORDER.indexOf(currentChapter);
+  if (idx > 0) goTo(CHAPTER_ORDER[idx - 1]);
+}
 
 function markDone(n) {
   const btn = document.getElementById('check-' + n);
@@ -3520,24 +3515,53 @@ async function refazerQuestoes(ch) {
   btn.disabled = true;
   btn.innerHTML = '<div class="redo-loading"><div class="redo-dot"></div><div class="redo-dot"></div><div class="redo-dot"></div></div> Gerando questões com IA...';
 
-  const prompt = `Gere 6 questoes de multipla escolha sobre: ${chapterTopics[ch] || 'previdencia social'}.
+  // Fatos-âncora por capítulo: a IA não inventa, ela usa esses fatos como base
+  const chapterFacts = {
+    1:'RGPS=INSS trabalhadores privados; RPPS=servidores efetivos; RPC=complementar facultativa; PREVIC fiscaliza EFPCs; SUSEP fiscaliza EAPCs; município com até 100 servidores pode optar pelo RGPS (irrevogável); princípios seguridade: universalidade, uniformidade, seletividade, irredutibilidade, equidade, diversidade, caráter democrático',
+    2:'Aposentadoria voluntária: 65H/62M + 25 contrib + 10 serv público + 10 cargo efetivo + 5 cargo atual; compulsória 75 anos SEMPRE proporcional; incapacidade REGRA=proporcional EXCEÇÃO=integral apenas em acidente em serviço OU moléstia profissional OU doença grave incurável prevista em lei; proventos mínimos=60% com 25 anos +2%/ano adicional; 100%=35 anos mulher/40 anos homem; pensão cônjuge: <22=3anos 22-27=6anos 28-30=10anos 31-41=15anos 42-44=20anos 45+=vitalícia; filho inválido=vitalícia; abono permanência=valor da contribuição previdenciária pago pelo ENTE; contribuição inativo=sobre parcela acima do teto RGPS',
+    3:'EC 103 promulgada 13/11/2019; extinguiu aposentadoria por tempo sem idade mínima; alíquotas: até teto INSS=7,5% acima até R$10k=9% R$10k-R$20k=12% R$20k-R$39k=14% acima=16%; pontos progressivos 2026: H=103 M=93 (limite H=105 M=100); pedágio 50%=50% do tempo faltante+idade mínima progressiva; pedágio 100%=dobro do tempo faltante SEM idade mínima mas expirou nov/2021; professor educação básica=redução 5 anos na IDADE (60H/57M) com 25 anos exclusivos no magistério',
+    4:'Lei 9.717/98: unicidade=cada ente tem apenas 1 RPPS; avaliação atuarial ANUAL obrigatória; CADPREV=sistema envio MPS; DIPR=mensal; DRAA=anual; DAIR=anual; vedado operações de crédito com ente; vedado usar recursos para finalidade diversa do pagamento de benefícios; COMPREV=compensação entre RGPS e RPPS pelo tempo trabalhado em cada regime; Pró-Gestão=VOLUNTÁRIO 4 níveis; irregularidade CADPREV=impedido de receber transferências voluntárias',
+    5:'Portaria MTP 1.467/2022: UG deve ser autarquia/fundação/órgão com gestão EXCLUSIVA do RPPS; Política de Investimentos aprovada pelo Conselho Deliberativo ANTES do início do exercício; Fundo Financeiro=repartição simples inativos antigos; Fundo Previdenciário=capitalização ativos novos; segregação separa passivo; Conselho Deliberativo=50% ente+50% participantes; Conselho Fiscal=fiscalização das contas; Plano de Custeio=alíquotas baseadas na avaliação atuarial; déficit=Plano de Amortização máx 35 anos',
+    6:'CMN 4.963/2021: renda fixa=máx 100%; renda variável=máx 30%; exterior=máx 10%; FII=máx 8%; multimercado=máx 10%; PI aprovada pelo Conselho Deliberativo antes do exercício; vedado aplicar em títulos do próprio ente acima dos limites; títulos públicos federais=segmento mais utilizado',
+    7:'Reserva matemática=valor atual dos benefícios futuros; déficit atuarial=passivo>ativo; superávit=ativo>passivo; taxa de desconto=taxa juros usada para calcular valor presente; plano de amortização=prazo máx 35 anos para quitar déficit; alíquota normal=custeio do benefício futuro; alíquota suplementar=amortização do déficit; avaliação atuarial=obrigatória anual; DRAA=demonstrativo resultado avaliação atuarial',
+    8:'LC 109/2001 regula previdência complementar; LC 108/2001 regula EFPCs patrocinadas por entes públicos; BD=benefício definido (risco na entidade); CD=contribuição definida (risco no participante); CV=contribuição variável (misto); portabilidade=transferir reserva entre planos; resgate=retirada da reserva ao sair (vedado em alguns casos); BPD=benefício proporcional diferido; PREVIC fiscaliza EFPCs; contribuição patrocinador ≤ contribuição participante (LC 108)',
+    9:'Aposentadoria voluntária: 65H/62M + 25 contrib + 10 serv público + 10 cargo efetivo + 5 no cargo; compulsória=75 anos PROPORCIONAL; incapacidade permanente=PROPORCIONAL exceto acidente serviço/moléstia profissional/doença grave incurável=INTEGRAL; pensão cônjuge tabela de prazo por faixa etária; filho inválido=vitalícia; valor pensão=50% do que exceder teto RGPS + 100% até teto RGPS',
+    10:'Art 37 CF/88 LIMPE: Legalidade Impessoalidade Moralidade Publicidade Eficiência; acumulação vedada salvo: 2 cargos professor OU 1 professor+1 técnico-científico OU 2 cargos ou empregos de saúde com profissão regulamentada; concurso público obrigatório; cargos em comissão=livre nomeação/exoneração; teto=subsídio Ministros STF; nepotismo vedado (Súmula Vinculante 13)',
+    11:'Lei 9.784/99: recurso=10 dias; decisão recurso=30 dias prorrogável por igual período; decadência anulação ato favorável=5 anos boa-fé; processo deve ter ampla defesa e contraditório; autotutela=administração pode anular seus próprios atos (Súmula 473 STF); prazo cumprimento diligência=5 dias prorrogável; proibido exigir documentos não previstos em lei; processo gratuito',
+    12:'Juros simples: J=C*i*t M=C*(1+i*t); juros compostos: M=C*(1+i)^t; taxa equivalente compostos: (1+ia)=(1+im)^12; taxa proporcional simples: ia=12*im; desconto comercial: D=N*d*t Valor Atual=N*(1-d*t); desconto racional: D=N*i*t/(1+i*t); VPL>0 viável; TIR=taxa que zera VPL',
+    13:'Crase obrigatória: preposição A + artigo feminino A; nunca antes de pronomes pessoais (ele ela eles elas); nunca antes de palavras masculinas; nunca antes de verbos; facultativa antes de pronomes possessivos femininos; LIMPE mnemônico; obedecer A (rege preposição); assistir A (ver); visar AO; aspirar AO cargo; cujo=possessivo nunca seguido de artigo; concordância verbal: sujeito composto posposto=singular ou plural',
+    14:'LGPD aplica setor público e privado; controlador=decide sobre tratamento; operador=realiza em nome do controlador; titular=a quem pertencem os dados; DPO=encarregado; dados sensíveis=origem racial religião saúde genético biométrico; 10 princípios art6: finalidade adequação necessidade livre-acesso qualidade transparência segurança prevenção não-discriminação responsabilização; backup incremental=desde último backup qualquer tipo; diferencial=desde último COMPLETO; CID=Confidencialidade Integridade Disponibilidade; assinatura digital=chave PRIVADA gerada/chave PÚBLICA verificada',
+    18:'Lei 3.800/1991 Sorocaba: estabilidade=3 anos + avaliação desempenho; abandono=30 dias consecutivos injustificados=demissão; inassiduidade habitual=60 dias em 12 meses; reintegração=retorno por decisão judicial; reversão=retorno aposentado por invalidez; aproveitamento=retorno disponível; recondução=retorno ao cargo anterior por inabilitação no novo estágio; prescrição: demissão=5 anos suspensão=2 anos advertência=180 dias; licença interesses particulares=3 anos improrrogável sem remuneração; licença saúde=remunerada integralmente; triênio=5% a cada 3 anos até 35%; cargo extinto estável=disponibilidade remunerada proporcional; demissão=competência do Prefeito',
+    19:'FUNSERV=Fundação Pública de Direito Público Administração Indireta Sorocaba; administra RPPS servidores municipais efetivos; Diretoria Executiva nomeada pelo Prefeito; Conselho Deliberativo=50% ente+50% participantes; repasse contribuições=5º dia útil mês subsequente; atraso=correção monetária e juros; Lei 13.164/2025',
+    20:'LRF LC 101/2000: limite pessoal União=50% RCL estados=60% municípios=60%; RREO=bimestral; RGF=quadrimestral; excesso limite=suspender admissões; vedado fazer despesa pessoal últimos 180 dias do mandato acima da disponibilidade; contingenciamento quando não atingir meta fiscal',
+    21:'PPA=4 anos inicia 2º ano mandato; LDO=1 ano aprovada até 17/jul; LOA=1 ano aprovada até 22/dez; princípios orçamentários=unidade universalidade anualidade exclusividade publicidade; créditos adicionais=suplementares (reforço) especiais (finalidade nova) extraordinários (urgência guerra); superávit primário=receitas-despesas exceto juros',
+    22:'MCASP=Manual Contabilidade Aplicada Setor Público; PCASP=Plano de Contas; regime competência para despesas e receitas; VPA=Variações Patrimoniais Aumentativas (receitas); VPD=Variações Patrimoniais Diminutivas (despesas); estágios despesa=empenho liquidação pagamento; empenho=reserva dotação; liquidação=verifica direito do credor; pagamento=extinção obrigação',
+    23:'Proposição condicional: P→Q equivale a não-Q→não-P (contrapositiva); De Morgan: não(P e Q)=não-P ou não-Q; não(P ou Q)=não-P e não-Q; porcentagem: x% de N = x*N/100; regra três simples direta e inversa; PA: an=a1+(n-1)*r Sn=n*(a1+an)/2; PG: an=a1*q^(n-1) Sn=a1*(q^n-1)/(q-1); probabilidade=casos favoráveis/casos totais',
+    24:'Taylor=administração científica tempos e movimentos; Fayol=processo administrativo PODC (Planejar Organizar Dirigir Controlar) 14 princípios; Weber=burocracia racionalidade legal; Mayo=Escola Relações Humanas experiência Hawthorne; Maslow=pirâmide necessidades (fisiológicas segurança social estima autorrealização); Herzberg=fatores higiênicos vs motivacionais; patrimonialismo→burocracia→gerencialismo (PDRAE 1995)',
+    25:'Pró-Gestão=voluntário 4 níveis (I ao IV progressivo); 4 dimensões: governança controles-internos educação-previdenciária transparência; validade certificação=2 anos; candidatura pelo CADPREV; avaliação pelo MPS; nível IV=redução alíquota compensação ao RGPS; CADPREV=obrigatório (diferente do Pró-Gestão que é voluntário)'
+  };
 
-RETORNE APENAS o JSON array, sem nenhum texto antes ou depois, sem markdown, sem backticks:
-[{"t":"Enunciado","ops":["A) op1","B) op2","C) op3","D) op4"],"c":0,"exp":"Explicacao do gabarito correto"},{"t":"...","ops":["A) ...","B) ...","C) ...","D) ..."],"c":1,"exp":"..."}]
+  const facts = chapterFacts[ch] || chapterTopics[ch] || 'previdência social RPPS';
 
-REGRAS ABSOLUTAS:
-1. JSON puro — sem markdown, sem \`\`\`, sem texto fora do array
-2. Apenas aspas duplas — NUNCA aspas simples dentro de strings
-3. Substitua apostrofos por espaco ou reescreva sem apostrofo
-4. c = indice inteiro 0,1,2 ou 3 da opcao CORRETA
-5. Verifique: a opcao indicada por c deve ser realmente a correta
-6. Nao use quebras de linha dentro das strings JSON
-7. Questoes baseadas na legislacao vigente — sem invencoes
-8. Gabarito e explicacao devem ser 100% corretos e embasados na lei`;
+  const prompt = `Você é um elaborador de questões de concurso público. Use APENAS os fatos abaixo para criar 6 questões de múltipla escolha. NÃO invente nada além do que está nos fatos.
+
+FATOS BASE (use somente estes):
+${facts}
+
+FORMATO DE SAÍDA — retorne APENAS o JSON array, sem texto antes ou depois, sem markdown:
+[{"t":"Enunciado da questão","ops":["A) texto","B) texto","C) texto","D) texto"],"c":2,"exp":"Explicação baseada nos fatos acima"}]
+
+REGRAS CRÍTICAS:
+1. c = índice (0,1,2,3) da opção CORRETA — confira duas vezes contra os FATOS BASE
+2. A explicação deve citar o fundamento legal exato dos FATOS BASE
+3. As 3 opções erradas devem ser plausíveis mas claramente incorretas segundo os FATOS BASE
+4. Use apenas aspas duplas no JSON — substitua apóstrofos por espaço
+5. Sem quebras de linha dentro das strings JSON
+6. JSON puro — sem markdown, sem backticks, sem texto fora do array`;
 
   try {
     const rawText = await callAI(
-      'Voce e um elaborador expert de questoes de concurso publico brasileiro. Suas questoes sao baseadas EXCLUSIVAMENTE na legislacao vigente e corretas. Responda SOMENTE com JSON puro e valido, sem markdown, sem texto antes ou depois. Use apenas aspas duplas. Substitua apostrofos por espaco. O campo c deve apontar para a opcao CORRETA verificada contra a lei.',
+      'Você é um elaborador especialista em questões de concurso público brasileiro. Gera questões 100% corretas e verificadas. Responde APENAS com JSON puro e válido. Sem markdown. Sem texto fora do array JSON.',
       [{ role: 'user', content: prompt }]
     );
     
