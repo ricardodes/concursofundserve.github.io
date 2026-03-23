@@ -240,7 +240,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);line-
 .btn-countdown span{color:var(--gold2)}
 
 /* CONTENT */
-.content{flex:1;padding:36px 40px;max-width:900px;width:100%;margin:0 auto}
+.content{flex:1;padding:36px 40px;max-width:900px;width:100%;margin:0 auto;box-sizing:border-box}
 .chapter-eyebrow{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--blue);margin-bottom:8px}
 .chapter-title{font-size:32px;font-weight:800;color:var(--navy);line-height:1.2;margin-bottom:10px}
 .chapter-desc{font-size:15px;color:var(--text3);max-width:680px;margin-bottom:18px;line-height:1.7}
@@ -342,7 +342,7 @@ tbody td:first-child{font-weight:600;color:var(--navy2);white-space:nowrap}
 .prog-fill{height:100%;border-radius:3px;background:linear-gradient(to right,var(--teal),var(--teal2))}
 
 /* BOTTOM NAV */
-.bottom-nav{padding:28px 40px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;background:var(--white);gap:14px;flex-wrap:wrap;width:100%}
+.bottom-nav{padding:28px 40px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;background:var(--white);gap:14px;flex-wrap:wrap;width:100%;max-width:900px;margin:0 auto;box-sizing:border-box}
 .bottom-nav-inner{max-width:900px;width:100%;margin:0 auto;display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap}
 .btn-nav{padding:11px 22px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;transition:all .15s;display:flex;align-items:center;gap:8px}
 .btn-back{background:var(--bg2);border:1px solid var(--border);color:var(--text2)}
@@ -713,7 +713,7 @@ tbody td:first-child{font-weight:600;color:var(--navy2);white-space:nowrap}
 <!-- ============================================================
      CAPÍTULO 1 – SISTEMA PREVIDENCIÁRIO BRASILEIRO
      ============================================================ -->
-<div id="ch-1" class="chapter-page" style="display:flex;flex-direction:column;flex:1">
+<div id="ch-1" class="chapter-page">
   <div class="content">
     <div class="chapter-eyebrow">Capítulo 1 · Base Fundamental</div>
     <h1 class="chapter-title">Sistema Previdenciário Brasileiro<br><span style="color:var(--teal)">Visão Geral e Fundamentos</span></h1>
@@ -852,7 +852,7 @@ tbody td:first-child{font-weight:600;color:var(--navy2);white-space:nowrap}
 <!-- ============================================================
      CAPÍTULO 2 – CF/88 ART. 40
      ============================================================ -->
-<div id="ch-2" class="chapter-page" style="display:none;flex-direction:column;flex:1">
+<div id="ch-2" class="chapter-page" style="display:none">
   <div class="content">
     <div class="chapter-eyebrow">Capítulo 2 · RPPS na Constituição</div>
     <h1 class="chapter-title">CF/88 – Artigo 40<br><span style="color:var(--teal)">RPPS dos Servidores — Completo</span></h1>
@@ -965,7 +965,7 @@ tbody td:first-child{font-weight:600;color:var(--navy2);white-space:nowrap}
 <!-- Capítulos 3-17: mantém conteúdo original com adição de botões AI e extras -->
 
 
-<div id="ch-3" class="chapter-page" style="display:none;flex-direction:column;flex:1">
+<div id="ch-3" class="chapter-page" style="display:none">
   <div class="content">
     <div class="chapter-eyebrow">Capítulo 3 · Reforma da Previdência</div>
     <h1 class="chapter-title">EC 103/2019<br><span style="color:var(--teal)">Reforma da Previdência – Completa</span></h1>
@@ -1075,7 +1075,7 @@ tbody td:first-child{font-weight:600;color:var(--navy2);white-space:nowrap}
 </div>
 
 <!-- =================== CHAPTER 4 =================== -->
-  <div id="ch-4" class="chapter-page" style="display:none;flex-direction:column;flex:1">
+  <div id="ch-4" class="chapter-page" style="display:none">
     <div class="content">
       <div class="chapter-eyebrow">Capítulo 4 · Legislação RPPS</div>
       <h1 class="chapter-title">Lei 9.717/1998<br><span style="color:var(--teal)">Normas Gerais dos RPPS</span></h1>
@@ -1164,7 +1164,7 @@ tbody td:first-child{font-weight:600;color:var(--navy2);white-space:nowrap}
   </div>
 
   <!-- =================== CHAPTER 5 =================== -->
-  <div id="ch-5" class="chapter-page" style="display:none;flex-direction:column;flex:1">
+  <div id="ch-5" class="chapter-page" style="display:none">
     <div class="content">
       <div class="chapter-eyebrow">Capítulo 5 · Gestão do RPPS</div>
       <h1 class="chapter-title">Portaria MTP 1.467/2022<br><span style="color:var(--teal)">Administração e Gestão do RPPS</span></h1>
@@ -1297,7 +1297,7 @@ tbody td:first-child{font-weight:600;color:var(--navy2);white-space:nowrap}
   </div>
 
   <!-- =================== CHAPTER 6: CMN =================== -->
-  <div id="ch-6" class="chapter-page" style="display:none;flex-direction:column;flex:1">
+  <div id="ch-6" class="chapter-page" style="display:none">
     <div class="content">
       <div class="chapter-eyebrow">Capítulo 6 · Investimentos</div>
       <h1 class="chapter-title">Resolução CMN 4.963/2021<br><span style="color:var(--teal)">Investimentos dos RPPS</span></h1>
@@ -1340,7 +1340,7 @@ tbody td:first-child{font-weight:600;color:var(--navy2);white-space:nowrap}
   </div>
 
   <!-- =================== CHAPTER 7: ATUARIAL =================== -->
-  <div id="ch-7" class="chapter-page" style="display:none;flex-direction:column;flex:1">
+  <div id="ch-7" class="chapter-page" style="display:none">
     <div class="content">
       <div class="chapter-eyebrow">Capítulo 7 · Atuária</div>
       <h1 class="chapter-title">Avaliação Atuarial<br><span style="color:var(--teal)">Equilíbrio Financeiro do RPPS</span></h1>
@@ -1387,7 +1387,7 @@ tbody td:first-child{font-weight:600;color:var(--navy2);white-space:nowrap}
   </div>
 
   <!-- =================== CHAPTER 8: LC 108/109 =================== -->
-  <div id="ch-8" class="chapter-page" style="display:none;flex-direction:column;flex:1">
+  <div id="ch-8" class="chapter-page" style="display:none">
     <div class="content">
       <div class="chapter-eyebrow">Capítulo 8 · Previdência Complementar</div>
       <h1 class="chapter-title">LC 108 e LC 109/2001<br><span style="color:var(--teal)">Previdência Complementar – Completo</span></h1>
@@ -1474,7 +1474,7 @@ tbody td:first-child{font-weight:600;color:var(--navy2);white-space:nowrap}
   </div>
 
   <!-- =================== CHAPTER 9: BENEFÍCIOS =================== -->
-  <div id="ch-9" class="chapter-page" style="display:none;flex-direction:column;flex:1">
+  <div id="ch-9" class="chapter-page" style="display:none">
     <div class="content">
       <div class="chapter-eyebrow">Capítulo 9 · Benefícios</div>
       <h1 class="chapter-title">Benefícios do RPPS<br><span style="color:var(--teal)">Todos os Tipos – Requisitos Completos</span></h1>
@@ -1510,7 +1510,7 @@ tbody td:first-child{font-weight:600;color:var(--navy2);white-space:nowrap}
   </div>
 
   <!-- =================== CHAPTER 10: ADM PÚBLICA =================== -->
-  <div id="ch-10" class="chapter-page" style="display:none;flex-direction:column;flex:1">
+  <div id="ch-10" class="chapter-page" style="display:none">
     <div class="content">
       <div class="chapter-eyebrow">Capítulo 10 · Administração Pública</div>
       <h1 class="chapter-title">CF/88 – Art. 37<br><span style="color:var(--teal)">Princípios da Administração Pública</span></h1>
@@ -1554,7 +1554,7 @@ tbody td:first-child{font-weight:600;color:var(--navy2);white-space:nowrap}
   </div>
 
   <!-- =================== CHAPTER 11: LEI 9784 =================== -->
-  <div id="ch-11" class="chapter-page" style="display:none;flex-direction:column;flex:1">
+  <div id="ch-11" class="chapter-page" style="display:none">
     <div class="content">
       <div class="chapter-eyebrow">Capítulo 11 · Processo Administrativo</div>
       <h1 class="chapter-title">Lei 9.784/1999<br><span style="color:var(--teal)">Processo Administrativo Federal</span></h1>
@@ -1598,7 +1598,7 @@ tbody td:first-child{font-weight:600;color:var(--navy2);white-space:nowrap}
   </div>
 
   <!-- =================== CHAPTER 12: MAT FIN =================== -->
-  <div id="ch-12" class="chapter-page" style="display:none;flex-direction:column;flex:1">
+  <div id="ch-12" class="chapter-page" style="display:none">
     <div class="content">
       <div class="chapter-eyebrow">Capítulo 12 · Matemática Financeira</div>
       <h1 class="chapter-title">Matemática Financeira<br><span style="color:var(--teal)">Completa para o Concurso</span></h1>
@@ -1667,7 +1667,7 @@ tbody td:first-child{font-weight:600;color:var(--navy2);white-space:nowrap}
   </div>
 
   <!-- =================== CHAPTER 13: PORTUGUES =================== -->
-  <div id="ch-13" class="chapter-page" style="display:none;flex-direction:column;flex:1">
+  <div id="ch-13" class="chapter-page" style="display:none">
     <div class="content">
       <div class="chapter-eyebrow">Capítulo 13 · Língua Portuguesa</div>
       <h1 class="chapter-title">Língua Portuguesa<br><span style="color:var(--teal)">Completa para o Concurso</span></h1>
@@ -1723,7 +1723,7 @@ tbody td:first-child{font-weight:600;color:var(--navy2);white-space:nowrap}
   </div>
 
   <!-- =================== CHAPTER 14: TI =================== -->
-  <div id="ch-14" class="chapter-page" style="display:none;flex-direction:column;flex:1">
+  <div id="ch-14" class="chapter-page" style="display:none">
     <div class="content">
       <div class="chapter-eyebrow">Capítulo 14 · Tecnologia da Informação</div>
       <h1 class="chapter-title">Tecnologia da Informação<br><span style="color:var(--teal)">LGPD, Segurança, Redes e Planilhas</span></h1>
@@ -1776,7 +1776,7 @@ tbody td:first-child{font-weight:600;color:var(--navy2);white-space:nowrap}
   </div>
 
   <!-- =================== CHAPTER 15: SIMULADO =================== -->
-  <div id="ch-15" class="chapter-page" style="display:none;flex-direction:column;flex:1">
+  <div id="ch-15" class="chapter-page" style="display:none">
     <div class="content">
       <div class="chapter-eyebrow">Capítulo 15 · Prática</div>
       <h1 class="chapter-title">Questões Simuladas<br><span style="color:var(--teal)">60+ Questões Comentadas</span></h1>
@@ -1798,7 +1798,7 @@ tbody td:first-child{font-weight:600;color:var(--navy2);white-space:nowrap}
   </div>
 
   <!-- =================== CHAPTER 16: CRONOGRAMA =================== -->
-  <div id="ch-16" class="chapter-page" style="display:none;flex-direction:column;flex:1">
+  <div id="ch-16" class="chapter-page" style="display:none">
     <div class="content">
       <div class="chapter-eyebrow">Capítulo 16 · Planejamento</div>
       <h1 class="chapter-title">Cronograma de Estudos<br><span style="color:var(--teal)">9 Semanas até 24/05/2026</span></h1>
@@ -1813,7 +1813,7 @@ tbody td:first-child{font-weight:600;color:var(--navy2);white-space:nowrap}
   </div>
 
   <!-- =================== CHAPTER 17: ESTRATEGIA =================== -->
-  <div id="ch-17" class="chapter-page" style="display:none;flex-direction:column;flex:1">
+  <div id="ch-17" class="chapter-page" style="display:none">
     <div class="content">
       <div class="chapter-eyebrow">Capítulo 17 · Estratégia Final</div>
       <h1 class="chapter-title">Estratégia e Dicas Finais<br><span style="color:var(--teal)">Como Garantir sua Aprovação</span></h1>
@@ -1903,7 +1903,7 @@ tbody td:first-child{font-weight:600;color:var(--navy2);white-space:nowrap}
 
 
 <!-- =================== CHAPTER 18: LEI 3.800/1991 =================== -->
-<div id="ch-18" class="chapter-page" style="display:none;flex-direction:column;flex:1">
+<div id="ch-18" class="chapter-page" style="display:none">
   <div class="content">
     <div class="chapter-eyebrow">Capítulo 18 · Legislação Municipal</div>
     <h1 class="chapter-title">Lei Municipal 3.800/1991<br><span style="color:var(--teal)">Estatuto dos Servidores de Sorocaba</span></h1>
@@ -2071,7 +2071,7 @@ tbody td:first-child{font-weight:600;color:var(--navy2);white-space:nowrap}
 </div>
 
 <!-- =================== CHAPTER 19: FUNSERV Lei 13.164/2025 =================== -->
-<div id="ch-19" class="chapter-page" style="display:none;flex-direction:column;flex:1">
+<div id="ch-19" class="chapter-page" style="display:none">
   <div class="content">
     <div class="chapter-eyebrow">Capítulo 19 · FUNSERV</div>
     <h1 class="chapter-title">Lei 13.164/2025<br><span style="color:var(--teal)">Estrutura Administrativa da FUNSERV</span></h1>
@@ -2193,7 +2193,7 @@ tbody td:first-child{font-weight:600;color:var(--navy2);white-space:nowrap}
 </div>
 
 <!-- =================== CHAPTER 20: LRF =================== -->
-<div id="ch-20" class="chapter-page" style="display:none;flex-direction:column;flex:1">
+<div id="ch-20" class="chapter-page" style="display:none">
   <div class="content">
     <div class="chapter-eyebrow">Capítulo 20 · Finanças Públicas</div>
     <h1 class="chapter-title">Lei de Responsabilidade Fiscal<br><span style="color:var(--teal)">LC 101/2000 — Completa</span></h1>
@@ -2307,7 +2307,7 @@ tbody td:first-child{font-weight:600;color:var(--navy2);white-space:nowrap}
 </div>
 
 <!-- =================== CHAPTER 21: PPA LDO LOA =================== -->
-<div id="ch-21" class="chapter-page" style="display:none;flex-direction:column;flex:1">
+<div id="ch-21" class="chapter-page" style="display:none">
   <div class="content">
     <div class="chapter-eyebrow">Capítulo 21 · Orçamento Público</div>
     <h1 class="chapter-title">PPA, LDO e LOA<br><span style="color:var(--teal)">Ciclo Orçamentário Completo</span></h1>
@@ -2404,7 +2404,7 @@ tbody td:first-child{font-weight:600;color:var(--navy2);white-space:nowrap}
 </div>
 
 <!-- =================== CHAPTER 22: MCASP =================== -->
-<div id="ch-22" class="chapter-page" style="display:none;flex-direction:column;flex:1">
+<div id="ch-22" class="chapter-page" style="display:none">
   <div class="content">
     <div class="chapter-eyebrow">Capítulo 22 · Contabilidade Pública</div>
     <h1 class="chapter-title">MCASP<br><span style="color:var(--teal)">Manual de Contabilidade Aplicada ao Setor Público</span></h1>
@@ -2530,7 +2530,7 @@ tbody td:first-child{font-weight:600;color:var(--navy2);white-space:nowrap}
 </div>
 
 <!-- =================== CHAPTER 23: RACIOCÍNIO LÓGICO =================== -->
-<div id="ch-23" class="chapter-page" style="display:none;flex-direction:column;flex:1">
+<div id="ch-23" class="chapter-page" style="display:none">
   <div class="content">
     <div class="chapter-eyebrow">Capítulo 23 · Raciocínio Lógico</div>
     <h1 class="chapter-title">Raciocínio Lógico e Matemático<br><span style="color:var(--teal)">Completo para o Concurso</span></h1>
@@ -2612,7 +2612,7 @@ tbody td:first-child{font-weight:600;color:var(--navy2);white-space:nowrap}
 </div>
 
 <!-- =================== CHAPTER 24: ADM GERAL =================== -->
-<div id="ch-24" class="chapter-page" style="display:none;flex-direction:column;flex:1">
+<div id="ch-24" class="chapter-page" style="display:none">
   <div class="content">
     <div class="chapter-eyebrow">Capítulo 24 · Administração</div>
     <h1 class="chapter-title">Administração Geral, Pública<br><span style="color:var(--teal)">e Teorias Organizacionais</span></h1>
@@ -2707,7 +2707,7 @@ tbody td:first-child{font-weight:600;color:var(--navy2);white-space:nowrap}
 </div>
 
 <!-- =================== CHAPTER 25: PRÓ-GESTÃO =================== -->
-<div id="ch-25" class="chapter-page" style="display:none;flex-direction:column;flex:1">
+<div id="ch-25" class="chapter-page" style="display:none">
   <div class="content">
     <div class="chapter-eyebrow">Capítulo 25 · Certificação</div>
     <h1 class="chapter-title">Pró-Gestão RPPS<br><span style="color:var(--teal)">Certificação Institucional e Modernização</span></h1>
