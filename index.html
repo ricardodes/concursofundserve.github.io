@@ -229,9 +229,9 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);line-
 .sb-badge.low{background:rgba(16,185,129,.2);color:#6ee7b7}
 
 /* MAIN */
-.main{margin-left:var(--sidebar-w);flex:1;min-height:100vh;display:flex;flex-direction:column;padding-top:57px}
 .topbar{background:var(--white);border-bottom:1px solid var(--border);padding:12px 28px;display:flex;align-items:center;justify-content:space-between;position:fixed;top:0;left:var(--sidebar-w);right:0;z-index:100;box-shadow:0 1px 6px rgba(0,0,0,.05)}
-.chapter-page{display:flex;flex-direction:column;flex:1;width:100%}
+.main{margin-left:var(--sidebar-w);padding-top:57px;min-height:calc(100vh - 57px);display:block}
+.chapter-page{display:flex;flex-direction:column;min-height:calc(100vh - 57px)}
 .topbar-left{display:flex;align-items:center;gap:12px}
 .topbar-chapter{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--blue);background:#eff6ff;padding:4px 10px;border-radius:20px}
 .topbar-title{font-size:14px;font-weight:600;color:var(--text2)}
@@ -240,7 +240,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);line-
 .btn-countdown span{color:var(--gold2)}
 
 /* CONTENT */
-.content{flex:1;padding:36px 40px;max-width:900px;width:100%;margin:0 auto;box-sizing:border-box}
+.content{padding:36px 48px;max-width:860px;width:100%;margin:0 auto;box-sizing:border-box}
 .chapter-eyebrow{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--blue);margin-bottom:8px}
 .chapter-title{font-size:32px;font-weight:800;color:var(--navy);line-height:1.2;margin-bottom:10px}
 .chapter-desc{font-size:15px;color:var(--text3);max-width:680px;margin-bottom:18px;line-height:1.7}
@@ -342,8 +342,8 @@ tbody td:first-child{font-weight:600;color:var(--navy2);white-space:nowrap}
 .prog-fill{height:100%;border-radius:3px;background:linear-gradient(to right,var(--teal),var(--teal2))}
 
 /* BOTTOM NAV */
-.bottom-nav{padding:28px 40px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;background:var(--white);gap:14px;flex-wrap:wrap;width:100%;max-width:900px;margin:0 auto;box-sizing:border-box}
-.bottom-nav-inner{max-width:900px;width:100%;margin:0 auto;display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap}
+.bottom-nav{padding:20px 48px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;background:var(--white);gap:14px;flex-wrap:wrap;max-width:860px;width:100%;margin:0 auto;box-sizing:border-box}
+.bottom-nav-inner{max-width:860px;width:100%;margin:0 auto;display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap}
 .btn-nav{padding:11px 22px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;transition:all .15s;display:flex;align-items:center;gap:8px}
 .btn-back{background:var(--bg2);border:1px solid var(--border);color:var(--text2)}
 .btn-back:hover{background:var(--border);color:var(--navy)}
@@ -428,14 +428,11 @@ tbody td:first-child{font-weight:600;color:var(--navy2);white-space:nowrap}
   .sidebar{transform:translateX(-100%);transition:transform .3s}
   .sidebar.open{transform:translateX(0)}
   .main{margin-left:0}
-  .content{padding:24px 18px}
+  .topbar{left:0;padding:10px 16px}
+  .content{padding:24px 20px}
+  .bottom-nav{padding:16px 20px}
   .pillars{grid-template-columns:1fr}
   .trans-grid{grid-template-columns:1fr}
-  .bottom-nav{padding:18px}
-  .topbar{padding:10px 16px;left:0}
-}
-@media(min-width:1400px){
-  .content{max-width:960px}
 }
 .mobile-menu-btn{display:none;background:var(--navy);color:#fff;border:none;padding:8px 12px;border-radius:8px;cursor:pointer;font-size:16px}
 @media(max-width:900px){.mobile-menu-btn{display:flex;align-items:center}}
@@ -651,6 +648,16 @@ tbody td:first-child{font-weight:600;color:var(--navy2);white-space:nowrap}
     <div class="sb-text">Pró-Gestão e Certificação</div>
     <span class="sb-badge med">Méd</span>
   </div>
+  <div class="sb-item" data-ch="26" onclick="goTo(26)">
+    <div class="sb-num sb-indicator" data-ch="26">26</div>
+    <div class="sb-text">Direito Administrativo</div>
+    <span class="sb-badge hot">Alto</span>
+  </div>
+  <div class="sb-item" data-ch="27" onclick="goTo(27)">
+    <div class="sb-num sb-indicator" data-ch="27">27</div>
+    <div class="sb-text">Direito Previdenciário e Seguridade Social</div>
+    <span class="sb-badge hot">Alto</span>
+  </div>
 
   <div class="sb-divider"></div>
   <div class="sb-section">⚡ Ferramentas</div>
@@ -692,9 +699,7 @@ tbody td:first-child{font-weight:600;color:var(--navy2);white-space:nowrap}
     <span class="sb-badge low">—</span>
   </div>
 </nav>
-<!-- MAIN -->
-<div class="main">
-  <div class="topbar">
+<div class="topbar">
     <div class="topbar-left">
       <button class="mobile-menu-btn" onclick="document.getElementById('sidebar').classList.toggle('open')">☰</button>
       <span class="topbar-chapter" id="topbar-chapter">Capítulo 1</span>
@@ -709,7 +714,8 @@ tbody td:first-child{font-weight:600;color:var(--navy2);white-space:nowrap}
       <div class="btn-countdown">⏰ <span id="cdw">–</span> dias</div>
     </div>
   </div>
-
+<!-- MAIN -->
+<div class="main">
 <!-- ============================================================
      CAPÍTULO 1 – SISTEMA PREVIDENCIÁRIO BRASILEIRO
      ============================================================ -->
@@ -895,7 +901,7 @@ tbody td:first-child{font-weight:600;color:var(--navy2);white-space:nowrap}
           </tbody>
         </table>
       </div>
-      <div class="box box-blue"><div class="box-title">📌 Fórmula do Cálculo</div>Proventos = <strong>Média das contribuições × Percentual</strong>. O percentual começa em 60% (com 25 anos) e cresce 2 pontos por ano adicional acima de 20 anos (mulher) / 25 anos (homem). Para atingir 100%: mulher precisa de 35 anos total; homem precisa de 40 anos total.</div>
+      <div class="box box-blue"><div class="box-title">📌 Fórmula do Cálculo</div>Proventos = <strong>Média das contribuições × Percentual</strong>. O percentual começa em 60% (com 25 anos) e cresce 2 pontos por ano adicional acima de 20 anos (mulher) / 27 anos (homem). Para atingir 100%: mulher precisa de 35 anos total; homem precisa de 40 anos total.</div>
     </div>
 
     <div class="section-block">
@@ -1841,6 +1847,261 @@ tbody td:first-child{font-weight:600;color:var(--navy2);white-space:nowrap}
       <div style="opacity:.3;padding:11px 22px;font-size:13px;color:var(--text3)">Fim do guia 🎉</div>
     </div>
   </div>
+
+
+<!-- ============================================================
+     CAPÍTULO 26 – DIREITO ADMINISTRATIVO
+     ============================================================ -->
+<div id="ch-26" class="chapter-page" style="display:none">
+  <div class="content">
+    <div class="chapter-eyebrow">Capítulo 26 · Direito Público</div>
+    <h1 class="chapter-title">Direito Administrativo<br><span style="color:var(--teal)">Princípios, Atos, Poderes e Controle</span></h1>
+    <p class="chapter-desc">Direito Administrativo é matéria de peso médio-alto no concurso FUNSERV. Abrange princípios constitucionais, atos administrativos, poderes da administração, licitações e contratos, agentes públicos e controle da administração.</p>
+    <div class="chapter-meta">
+      <span class="meta-pill">⏱ 3h de estudo</span>
+      <span class="meta-pill">🎯 Peso: Alto</span>
+      <span class="meta-pill">📄 CF/88 art. 37; Lei 14.133/2021</span>
+    </div>
+
+    <div class="section-block">
+      <div class="section-h2-wrap">
+        <div class="section-h2">🏛️ Princípios da Administração Pública (LIMPE)</div>
+        <button class="ai-section-btn" onclick="openAI('Princípios da Administração Pública: LIMPE — Legalidade, Impessoalidade, Moralidade, Publicidade, Eficiência. Explique cada um com exemplos práticos para o concurso FUNSERV')">🤖 Explicar</button>
+      </div>
+      <div class="law-card">
+        <div class="law-title">Art. 37 CF/88 — Princípios Expressos (LIMPE)</div>
+        <ul class="law-list">
+          <li class="law-list-item"><span class="item-text"><strong>Legalidade</strong> — o agente público só pode fazer o que a lei permite (diferente do particular, que pode fazer tudo o que a lei não proíbe)</span><button class="ai-inline" onclick="openAI('Princípio da legalidade na Administração Pública: diferença entre a legalidade do particular e do agente público')"> ?</button></li>
+          <li class="law-list-item"><span class="item-text"><strong>Impessoalidade</strong> — a Administração age sem favorecer ou prejudicar pessoas; os atos são da Administração, não do agente</span></li>
+          <li class="law-list-item"><span class="item-text"><strong>Moralidade</strong> — exige ética, boa-fé e honestidade. A imoralidade pode tornar o ato anulável</span></li>
+          <li class="law-list-item"><span class="item-text"><strong>Publicidade</strong> — os atos administrativos devem ser divulgados. É condição de eficácia (não de validade)</span><button class="ai-inline" onclick="openAI('Publicidade como condição de eficácia e não de validade: o que isso significa na prática?')"> ?</button></li>
+          <li class="law-list-item"><span class="item-text"><strong>Eficiência</strong> — inserida pela EC 19/1998. Exige resultado ótimo com uso racional dos recursos públicos</span></li>
+        </ul>
+      </div>
+      <div class="box-blue" style="border-radius:10px;padding:14px 16px;margin-top:12px;border:1px solid #bfdbfe;background:#eff6ff">
+        <div class="box-title" style="font-size:12px;font-weight:800;text-transform:uppercase;color:var(--blue2);margin-bottom:8px">💡 Princípios Implícitos (Doutrina)</div>
+        <div style="font-size:13px;color:var(--text2);line-height:1.7">Supremacia do interesse público · Indisponibilidade do interesse público · Razoabilidade · Proporcionalidade · Autotutela · Continuidade do serviço público · Motivação</div>
+      </div>
+    </div>
+
+    <div class="section-block">
+      <div class="section-h2-wrap">
+        <div class="section-h2">📋 Atos Administrativos</div>
+        <button class="ai-section-btn" onclick="openAI('Atos administrativos: conceito, elementos (competência, finalidade, forma, motivo, objeto), atributos (presunção de legitimidade, imperatividade, autoexecutoriedade, tipicidade) e classificações para provas')">🤖 Explicar</button>
+      </div>
+      <div class="pillars" style="grid-template-columns:repeat(2,1fr)">
+        <div class="pillar-card p1">
+          <div class="pillar-label">Elementos do Ato (COMFOMO)</div>
+          <div class="pillar-title">5 Requisitos de Validade</div>
+          <div class="pillar-desc"><strong>CO</strong>mpetência · <strong>F</strong>inalidade · F<strong>O</strong>rma · <strong>MO</strong>tivo · Objeto. Vício em qualquer elemento = nulidade ou anulabilidade.</div>
+        </div>
+        <div class="pillar-card p2">
+          <div class="pillar-label">Atributos do Ato</div>
+          <div class="pillar-title">4 Características</div>
+          <div class="pillar-desc">Presunção de legitimidade · Imperatividade · Autoexecutoriedade · Tipicidade. Nem todo ato tem todos os atributos.</div>
+        </div>
+      </div>
+      <div class="law-card" style="margin-top:14px">
+        <div class="law-title">Espécies de Atos Administrativos</div>
+        <ul class="law-list">
+          <li class="law-list-item"><span class="item-text"><strong>Normativos</strong>: Decretos, Regulamentos, Resoluções, Portarias — criam normas gerais</span></li>
+          <li class="law-list-item"><span class="item-text"><strong>Ordinatórios</strong>: Instruções, Circulares, Ordens de Serviço — organizam internamente</span></li>
+          <li class="law-list-item"><span class="item-text"><strong>Negociais</strong>: Licença, Autorização, Permissão — expandem direitos do particular</span><button class="ai-inline" onclick="openAI('Diferença entre Licença, Autorização e Permissão no Direito Administrativo: vinculação, discricionariedade, revogabilidade')"> ?</button></li>
+          <li class="law-list-item"><span class="item-text"><strong>Enunciativos</strong>: Certidão, Atestado, Parecer — declaram situações preexistentes</span></li>
+          <li class="law-list-item"><span class="item-text"><strong>Punitivos</strong>: Multa, Interdição, Cassação — sanções administrativas</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="section-block">
+      <div class="section-h2-wrap">
+        <div class="section-h2">⚡ Poderes da Administração</div>
+        <button class="ai-section-btn" onclick="openAI('Poderes da Administração Pública: vinculado, discricionário, hierárquico, disciplinar, regulamentar, de polícia. Diferenças e limites de cada um')">🤖 Explicar</button>
+      </div>
+      <div class="benefit-grid">
+        <div class="benefit-card"><span class="benefit-icon">🔒</span><div class="benefit-title">Poder Vinculado</div><ul class="benefit-list"><li>Sem margem de escolha</li><li>Lei define todos os elementos</li><li>Ex.: aposentadoria compulsória aos 75 anos</li></ul></div>
+        <div class="benefit-card"><span class="benefit-icon">⚖️</span><div class="benefit-title">Poder Discricionário</div><ul class="benefit-list"><li>Liberdade de escolha (conveniência e oportunidade)</li><li>Limite: lei e princípios</li><li>Mérito administrativo</li></ul></div>
+        <div class="benefit-card"><span class="benefit-icon">📊</span><div class="benefit-title">Poder Hierárquico</div><ul class="benefit-list"><li>Ordenar, coordenar, controlar</li><li>Avocar e delegar atribuições</li><li>Revisar atos de subordinados</li></ul></div>
+        <div class="benefit-card"><span class="benefit-icon">⚠️</span><div class="benefit-title">Poder Disciplinar</div><ul class="benefit-list"><li>Punir servidores e contratados</li><li>PAD — Processo Administrativo Disciplinar</li><li>Requer contraditório e ampla defesa</li></ul></div>
+        <div class="benefit-card"><span class="benefit-icon">📜</span><div class="benefit-title">Poder Regulamentar</div><ul class="benefit-list"><li>Decretos e regulamentos</li><li>Complementar a lei, não criar direitos</li><li>Exclusivo do Chefe do Executivo</li></ul></div>
+        <div class="benefit-card"><span class="benefit-icon">🚔</span><div class="benefit-title">Poder de Polícia</div><ul class="benefit-list"><li>Limitar direitos individuais</li><li>Fiscalizar atividades privadas</li><li>Ex.: vigilância sanitária, trânsito</li></ul></div>
+      </div>
+    </div>
+
+    <div class="section-block">
+      <div class="section-h2-wrap">
+        <div class="section-h2">📑 Licitações e Contratos (Lei 14.133/2021)</div>
+        <button class="ai-section-btn" onclick="openAI('Nova Lei de Licitações 14.133/2021: modalidades (pregão, concorrência, concurso, leilão, diálogo competitivo), fases, dispensa e inexigibilidade, o que mudou em relação à 8.666/1993')">🤖 Explicar</button>
+      </div>
+      <div class="law-card">
+        <div class="law-title">Modalidades de Licitação — Nova Lei (14.133/2021)</div>
+        <ul class="law-list">
+          <li class="law-list-item"><span class="item-text"><strong>Pregão</strong> — bens e serviços comuns; obrigatoriamente eletrônico; critério: menor preço ou maior desconto</span></li>
+          <li class="law-list-item"><span class="item-text"><strong>Concorrência</strong> — obras, serviços especiais e concessões; qualquer critério de julgamento</span></li>
+          <li class="law-list-item"><span class="item-text"><strong>Concurso</strong> — trabalho técnico, científico ou artístico; prêmio ou remuneração</span></li>
+          <li class="law-list-item"><span class="item-text"><strong>Leilão</strong> — venda de bens imóveis e alienação de bens móveis inservíveis</span></li>
+          <li class="law-list-item"><span class="item-text"><strong>Diálogo Competitivo</strong> — novo! Para soluções inovadoras sem solução de mercado definida</span><button class="ai-inline" onclick="openAI('Diálogo Competitivo na Lei 14.133/2021: o que é, quando usar, como funciona')"> ?</button></li>
+        </ul>
+      </div>
+      <div class="box-gold" style="border-radius:10px;padding:14px 16px;margin-top:12px;border:1px solid #fde68a;background:#fffbeb">
+        <div class="box-title" style="font-size:12px;font-weight:800;text-transform:uppercase;color:var(--gold);margin-bottom:8px">⚠️ Dispensa e Inexigibilidade</div>
+        <div style="font-size:13px;color:var(--text2);line-height:1.7"><strong>Dispensa</strong>: licitação é possível mas dispensada (ex.: emergência, valor baixo — até R$ 50k serviços, R$ 100k obras). <strong>Inexigibilidade</strong>: licitação é inviável (fornecedor exclusivo, notória especialização, artista consagrado).</div>
+      </div>
+    </div>
+
+    <div class="section-block">
+      <div class="section-h2-wrap">
+        <div class="section-h2">👥 Agentes Públicos e Responsabilidade</div>
+        <button class="ai-section-btn" onclick="openAI('Agentes públicos: classificação (agentes políticos, servidores públicos, militares, particulares em colaboração). Responsabilidade civil do Estado: teoria objetiva, risco administrativo, risco integral')">🤖 Explicar</button>
+      </div>
+      <div class="trans-grid">
+        <div class="trans-card t1"><div class="trans-num">Agentes Políticos</div><div class="trans-title">Mandato Eletivo</div><div class="trans-desc">Presidente, governadores, prefeitos, parlamentares, magistrados. Investidura por eleição ou nomeação constitucional.</div></div>
+        <div class="trans-card t2"><div class="trans-num">Servidores Estatutários</div><div class="trans-title">Regime Próprio (RPPS)</div><div class="trans-desc">Cargo efetivo mediante concurso. Vínculo legal com o Estado. Estabilidade após estágio probatório de 3 anos.</div></div>
+        <div class="trans-card t3"><div class="trans-num">Empregados Públicos</div><div class="trans-title">Regime CLT</div><div class="trans-desc">Empresas públicas e SEM. Concurso obrigatório. RGPS (não RPPS). Sem estabilidade, mas com proteção relativa.</div></div>
+        <div class="trans-card t4"><div class="trans-num">Responsabilidade Civil</div><div class="trans-title">Teoria Objetiva</div><div class="trans-desc">Art. 37 §6º CF/88: Estado responde independentemente de culpa (risco administrativo). Direito de regresso contra o agente culposo.</div></div>
+      </div>
+    </div>
+
+    <div class="section-block">
+      <div class="section-h2-wrap">
+        <div class="section-h2">🔍 Controle da Administração</div>
+        <button class="ai-section-btn" onclick="openAI('Controle da Administração Pública: controle interno (autotutela), externo (Legislativo + TCU/TCM), judicial (atos vinculados e discricionários), controle social. Súmula vinculante 3 do STF.')">🤖 Explicar</button>
+      </div>
+      <div class="law-card">
+        <div class="law-title">Formas de Controle</div>
+        <ul class="law-list">
+          <li class="law-list-item"><span class="item-text"><strong>Controle Interno</strong>: a própria Administração controla seus atos (autotutela — Súmula 473 STF: pode anular atos ilegais e revogar por conveniência)</span></li>
+          <li class="law-list-item"><span class="item-text"><strong>Controle Externo</strong>: Legislativo com auxílio do TCU/TCM — fiscalização contábil, financeira, orçamentária e patrimonial</span></li>
+          <li class="law-list-item"><span class="item-text"><strong>Controle Judicial</strong>: aprecia legalidade; não pode substituir o mérito administrativo nos atos discricionários</span></li>
+          <li class="law-list-item"><span class="item-text"><strong>Controle Social</strong>: participação popular; portais de transparência (LAI — Lei 12.527/2011)</span></li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+  <div class="bottom-nav">
+    <button class="btn-nav btn-back" onclick="prevChapter()">← Anterior</button>
+    <button class="btn-nav btn-check" id="check-26" onclick="markDone(26)">✓ Marcar como Estudado</button>
+    <button class="btn-nav btn-next" onclick="nextChapter()">Próximo →</button>
+  </div>
+</div>
+
+<!-- ============================================================
+     CAPÍTULO 27 – DIREITO PREVIDENCIÁRIO E SEGURIDADE SOCIAL
+     ============================================================ -->
+<div id="ch-27" class="chapter-page" style="display:none">
+  <div class="content">
+    <div class="chapter-eyebrow">Capítulo 27 · Direito Previdenciário</div>
+    <h1 class="chapter-title">Direito Previdenciário<br><span style="color:var(--teal)">Seguridade Social, RGPS e Legislação Previdenciária</span></h1>
+    <p class="chapter-desc">Direito Previdenciário abrange a Seguridade Social como um todo (Saúde, Previdência e Assistência), com foco no RGPS, benefícios previdenciários, custeio, e legislação aplicável. Matéria de alta relevância para o concurso FUNSERV.</p>
+    <div class="chapter-meta">
+      <span class="meta-pill">⏱ 3–4h de estudo</span>
+      <span class="meta-pill">🎯 Peso: Alto</span>
+      <span class="meta-pill">📄 CF/88 arts. 194–204; Lei 8.212/1991; Lei 8.213/1991</span>
+    </div>
+
+    <div class="section-block">
+      <div class="section-h2-wrap">
+        <div class="section-h2">🏥 Seguridade Social — CF/88 Arts. 194–204</div>
+        <button class="ai-section-btn" onclick="openAI('Seguridade Social na CF/88: conceito completo, tripé (saúde, previdência, assistência), princípios dos arts. 194 a 204, diferenças entre os três ramos, financiamento e custeio')">🤖 Explicar</button>
+      </div>
+      <div class="pillars">
+        <div class="pillar-card p1">
+          <div class="pillar-label">Saúde — Art. 196</div>
+          <div class="pillar-title">Direito Universal</div>
+          <div class="pillar-desc">Direito de todos, dever do Estado. <strong>Sem contribuição</strong>. Universal e igualitário. SUS é gratuito.</div>
+        </div>
+        <div class="pillar-card p2">
+          <div class="pillar-label">Previdência — Art. 201/40</div>
+          <div class="pillar-title">Caráter Contributivo</div>
+          <div class="pillar-desc"><strong>Exige contribuição</strong>. RGPS (INSS) e RPPS (servidores). Cobertura de riscos sociais específicos.</div>
+        </div>
+        <div class="pillar-card p3">
+          <div class="pillar-label">Assistência — Art. 203</div>
+          <div class="pillar-title">Independe de Contribuição</div>
+          <div class="pillar-desc">Para quem <strong>precisa</strong>, sem contrapartida contributiva. BPC/LOAS: R$ 1.412 para idosos +65 e deficientes.</div>
+        </div>
+      </div>
+      <div class="law-card" style="margin-top:14px">
+        <div class="law-title">Princípios da Seguridade Social — Art. 194 Parágrafo Único</div>
+        <ul class="law-list">
+          <li class="law-list-item"><span class="item-text"><strong>Universalidade</strong> da cobertura e atendimento — protege todos os riscos sociais</span></li>
+          <li class="law-list-item"><span class="item-text"><strong>Uniformidade e equivalência</strong> de benefícios urbanos e rurais</span></li>
+          <li class="law-list-item"><span class="item-text"><strong>Seletividade e distributividade</strong> na prestação dos benefícios — prioriza os mais necessitados</span><button class="ai-inline" onclick="openAI('Princípio da seletividade e distributividade na Seguridade Social: como funciona na prática e como cai em prova')"> ?</button></li>
+          <li class="law-list-item"><span class="item-text"><strong>Irredutibilidade</strong> do valor dos benefícios — o valor nominal não pode ser reduzido</span></li>
+          <li class="law-list-item"><span class="item-text"><strong>Equidade</strong> na forma de participação no custeio — quem ganha mais contribui mais</span></li>
+          <li class="law-list-item"><span class="item-text"><strong>Diversidade</strong> da base de financiamento — impostos, contribuições, concursos de prognósticos</span></li>
+          <li class="law-list-item"><span class="item-text"><strong>Caráter democrático e descentralizado</strong> da gestão — participação dos trabalhadores, empregadores e governo</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="section-block">
+      <div class="section-h2-wrap">
+        <div class="section-h2">💰 Custeio da Seguridade Social</div>
+        <button class="ai-section-btn" onclick="openAI('Custeio da Seguridade Social: contribuições do empregado, empregador, governo, COFINS, CSLL, PIS/PASEP, concursos de prognósticos. Princípio da contrapartida. Imunidade de entidades beneficentes.')">🤖 Explicar</button>
+      </div>
+      <div class="law-card">
+        <div class="law-title">Fontes de Financiamento — Art. 195 CF/88 e Lei 8.212/1991</div>
+        <ul class="law-list">
+          <li class="law-list-item"><span class="item-text"><strong>Empregador/empresa</strong>: sobre folha de salários (20% regra geral), receita/faturamento (COFINS), lucro (CSLL)</span></li>
+          <li class="law-list-item"><span class="item-text"><strong>Trabalhador</strong>: sobre salário de contribuição. Tabela progressiva: 7,5% a 14% (2023+)</span></li>
+          <li class="law-list-item"><span class="item-text"><strong>Concursos de prognósticos</strong>: parte da arrecadação de loterias</span></li>
+          <li class="law-list-item"><span class="item-text"><strong>Importador</strong>: sobre importação de bens e serviços — fonte acrescida pela EC 42/2003</span></li>
+          <li class="law-list-item"><span class="item-text"><strong>União</strong>: aportes conforme necessidade, além de contribuições próprias</span></li>
+        </ul>
+      </div>
+      <div class="box-red" style="border-radius:10px;padding:14px 16px;margin-top:12px;border:1px solid #fecaca;background:#fef2f2">
+        <div class="box-title" style="font-size:12px;font-weight:800;text-transform:uppercase;color:var(--red);margin-bottom:8px">🎯 PEGADINHA — Princípio da Contrapartida</div>
+        <div style="font-size:13px;color:var(--text2);line-height:1.7">Nenhum benefício ou serviço da Seguridade Social pode ser criado, majorado ou estendido <strong>sem a correspondente fonte de custeio</strong> (art. 195 §5º CF/88). Qualquer lei que crie benefício sem indicar fonte = inconstitucional.</div>
+      </div>
+    </div>
+
+    <div class="section-block">
+      <div class="section-h2-wrap">
+        <div class="section-h2">📋 Benefícios do RGPS — Lei 8.213/1991</div>
+        <button class="ai-section-btn" onclick="openAI('Benefícios do RGPS pela Lei 8.213/1991: aposentadorias (programada, por incapacidade permanente, especial), auxílios (por incapacidade, acidente), salário-maternidade, salário-família, pensão por morte, BPC. Requisitos após EC 103/2019.')">🤖 Explicar</button>
+      </div>
+      <div class="benefit-grid">
+        <div class="benefit-card"><span class="benefit-icon">🏖️</span><div class="benefit-title">Aposentadoria Programada</div><ul class="benefit-list"><li>65 anos (H) / 62 anos (M)</li><li>Mínimo 20 anos (H) / 15 anos (M) de contribuição</li><li>RMI: 60% + 2% por ano acima do mínimo</li></ul></div>
+        <div class="benefit-card"><span class="benefit-icon">🏥</span><div class="benefit-title">Aposent. por Incapacidade</div><ul class="benefit-list"><li>Incapacidade permanente para trabalho</li><li>Carência: 12 meses (salvo acidente)</li><li>100% do salário de benefício</li></ul></div>
+        <div class="benefit-card"><span class="benefit-icon">🛡️</span><div class="benefit-title">Aposentadoria Especial</div><ul class="benefit-list"><li>Atividade prejudicial à saúde</li><li>15, 20 ou 25 anos conforme risco</li><li>100% do salário de benefício</li></ul></div>
+        <div class="benefit-card"><span class="benefit-icon">🤕</span><div class="benefit-title">Auxílio por Incapacidade</div><ul class="benefit-list"><li>Incapacidade temporária</li><li>Carência 12 meses (salvo acidente)</li><li>91% do salário de benefício</li></ul></div>
+        <div class="benefit-card"><span class="benefit-icon">👶</span><div class="benefit-title">Salário-Maternidade</div><ul class="benefit-list"><li>120 dias (adoção: varia pela idade)</li><li>Empregada: sem carência</li><li>Contribuinte individual: 10 meses</li></ul></div>
+        <div class="benefit-card"><span class="benefit-icon">🕊️</span><div class="benefit-title">Pensão por Morte</div><ul class="benefit-list"><li>Dependentes do segurado falecido</li><li>Sem carência (desde que qualidade de segurado)</li><li>50% + 10% por dependente, até 100%</li></ul></div>
+      </div>
+    </div>
+
+    <div class="section-block">
+      <div class="section-h2-wrap">
+        <div class="section-h2">🔄 RGPS vs RPPS — Diferenças Fundamentais</div>
+        <button class="ai-section-btn" onclick="openAI('Diferenças completas entre RGPS e RPPS: quem filia, quem administra, regime financeiro, teto do benefício, aposentadoria especial, pensão por morte, EC 103/2019')">🤖 Explicar</button>
+      </div>
+      <div class="law-card">
+        <table style="width:100%;border-collapse:collapse;font-size:13px">
+          <thead><tr style="background:var(--navy)">
+            <th style="color:#fff;padding:10px 12px;text-align:left;border-radius:6px 0 0 0">Critério</th>
+            <th style="color:#fff;padding:10px 12px;text-align:left">RGPS</th>
+            <th style="color:#fff;padding:10px 12px;text-align:left;border-radius:0 6px 0 0">RPPS</th>
+          </tr></thead>
+          <tbody>
+            <tr><td style="padding:9px 12px;border-bottom:1px solid var(--border)"><strong>Quem fillia</strong></td><td style="padding:9px 12px;border-bottom:1px solid var(--border)">Trabalhadores da iniciativa privada, autônomos</td><td style="padding:9px 12px;border-bottom:1px solid var(--border)">Servidores com cargo efetivo</td></tr>
+            <tr><td style="padding:9px 12px;border-bottom:1px solid var(--border)"><strong>Gestão</strong></td><td style="padding:9px 12px;border-bottom:1px solid var(--border)">INSS (autarquia federal)</td><td style="padding:9px 12px;border-bottom:1px solid var(--border)">Entidade gestora do ente (ex.: FUNSERV)</td></tr>
+            <tr><td style="padding:9px 12px;border-bottom:1px solid var(--border)"><strong>Regime financeiro</strong></td><td style="padding:9px 12px;border-bottom:1px solid var(--border)">Repartição simples</td><td style="padding:9px 12px;border-bottom:1px solid var(--border)">Capitalização (obrigatória para novos)</td></tr>
+            <tr><td style="padding:9px 12px;border-bottom:1px solid var(--border)"><strong>Teto do benefício</strong></td><td style="padding:9px 12px;border-bottom:1px solid var(--border)">Teto do RGPS (~R$ 7.786)</td><td style="padding:9px 12px;border-bottom:1px solid var(--border)">Teto do RGPS (se houver previdência complementar) ou integralidade</td></tr>
+            <tr><td style="padding:9px 12px"><strong>Base legal</strong></td><td style="padding:9px 12px">Art. 201 CF/88; Lei 8.213/91</td><td style="padding:9px 12px">Art. 40 CF/88; EC 103/2019</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+  <div class="bottom-nav">
+    <button class="btn-nav btn-back" onclick="prevChapter()">← Anterior</button>
+    <button class="btn-nav btn-check" id="check-27" onclick="markDone(27)">✓ Marcar como Estudado</button>
+    <button class="btn-nav btn-next" onclick="nextChapter()">Próximo →</button>
+  </div>
+</div>
 
 </div><!-- end .main -->
 
@@ -2931,7 +3192,7 @@ function goTo(n) {
 }
 
 // Ordem real de navegação (seguindo a sidebar)
-const CHAPTER_ORDER = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,18,19,20,21,22,23,24,25,15,16,17];
+const CHAPTER_ORDER = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,18,19,20,21,22,23,24,25,26,27,15,16,17];
 
 function nextChapter() {
   const idx = CHAPTER_ORDER.indexOf(currentChapter);
@@ -3836,7 +4097,7 @@ function getWinrate(sessions) {
 function getWinrateByChapter() {
   const s = getStats();
   const byChap = {};
-  const chapNames = {1:'Sist. Prev.',2:'CF Art.40',3:'EC 103',4:'Lei 9.717',5:'Port.1467',6:'CMN 4963',7:'Atuarial',8:'LC 108/9',9:'Benefícios',10:'Art.37',11:'Lei 9784',12:'Mat.Fin.',13:'Português',14:'TI'};
+  const chapNames = {1:'Sist. Prev.',2:'CF Art.40',3:'EC 103',4:'Lei 9.717',5:'Port.1467',6:'CMN 4963',7:'Atuarial',8:'LC 108/9',9:'Benefícios',10:'Art.37',11:'Lei 9784',12:'Mat.Fin.',13:'Português',14:'TI',15:'Simulados',16:'Cronograma',17:'Estratégia',18:'Estatuto',19:'FUNSERV',20:'LRF',21:'Orçamento',22:'MCASP',23:'R.Lógico',24:'Adm.Geral',25:'Pró-Gestão',26:'Dir.Admin.',27:'Dir.Prev.'};
   Object.entries(s.errors).forEach(([key, v]) => {
     const ch = v.ch;
     if (!byChap[ch]) byChap[ch] = {ch, name:chapNames[ch]||`Cap ${ch}`, erros:0};
