@@ -2356,30 +2356,62 @@ async function refazerQuestoes(ch) {
   btn.disabled = true;
   btn.innerHTML = '<div class="redo-loading"><div class="redo-dot"></div><div class="redo-dot"></div><div class="redo-dot"></div></div> Gerando questões com IA...';
 
-  const prompt = `Você é um elaborador de questões de concurso público para o cargo de Analista Previdenciário. 
-Gere EXATAMENTE 8 questões de múltipla escolha sobre: ${chapterTopics[ch] || 'previdência social'}.
+  const prompt = `Gere 6 questões de múltipla escolha sobre: ${chapterTopics[ch] || 'previdência social'}.
 
-REGRAS OBRIGATÓRIAS:
-1. Formato JSON puro, sem markdown, sem explicações fora do JSON
-2. Cada questão deve ter: "t" (enunciado), "ops" (array com 4 alternativas A/B/C/D como strings), "c" (índice 0-3 da correta), "exp" (explicação detalhada)
-3. Questões DIFERENTES das questões básicas, com novas situações-problema
-4. Nível adequado para concurso público municipal
-5. Inclua questões de situação-problema (caso concreto)
+RETORNE APENAS o JSON array abaixo, sem nenhum texto antes ou depois:
+[
+{"t":"Enunciado da questao sem aspas especiais","ops":["A) opcao1","B) opcao2","C) opcao3","D) opcao4"],"c":0,"exp":"Explicacao do gabarito"},
+{"t":"...","ops":["A) ...","B) ...","C) ...","D) ..."],"c":1,"exp":"..."}
+]
 
-Responda APENAS com o JSON array, exemplo:
-[{"t":"Enunciado?","ops":["A) op1","B) op2","C) op3","D) op4"],"c":0,"exp":"Explicação."}]`;
+REGRAS CRITICAS:
+- Use apenas aspas duplas
+- Nao use apostrofos ou aspas simples dentro do texto
+- Nao use caracteres especiais ou quebras de linha dentro das strings
+- c deve ser 0, 1, 2 ou 3 (indice da opcao correta)
+- Gere questoes diferentes das basicas, com situacoes praticas`;
 
   try {
     const rawText = await callAI(
-      'Você é um elaborador de questões de concurso público. Responda APENAS com JSON puro, sem markdown, sem texto antes ou depois do array JSON.',
+      'Você é um elaborador de questões de concurso público. Responda APENAS com JSON puro e válido, sem markdown, sem texto antes ou depois. Use apenas aspas duplas. Não use caracteres especiais dentro das strings. Escape aspas internas com barra invertida.',
       [{ role: 'user', content: prompt }]
     );
     
-    // Clean and parse JSON
-    const cleaned = rawText.replace(/```json|```/g, '').trim();
-    const newQs = JSON.parse(cleaned);
+    // Robust JSON cleaning and parsing
+    let cleaned = rawText
+      .replace(/```json\s*/gi, '')
+      .replace(/```\s*/g, '')
+      .trim();
     
-    if (!Array.isArray(newQs) || newQs.length === 0) throw new Error('Invalid response');
+    // Extract JSON array if wrapped in other text
+    const arrMatch = cleaned.match(/\[\s*\{[\s\S]*\}\s*\]/);
+    if (arrMatch) cleaned = arrMatch[0];
+    
+    // Fix common JSON issues from LLMs
+    cleaned = cleaned
+      .replace(/,\s*]/g, ']')           // trailing commas in arrays
+      .replace(/,\s*}/g, '}')           // trailing commas in objects
+      .replace(/([^\\])\n/g, '$1 ')    // newlines inside strings
+      .replace(/\t/g, ' ');             // tabs
+    
+    let newQs;
+    try {
+      newQs = JSON.parse(cleaned);
+    } catch(parseErr) {
+      // Try to extract individual question objects
+      const objMatches = cleaned.match(/\{[^{}]*"t"[^{}]*"ops"[^{}]*"c"[^{}]*"exp"[^{}]*\}/g);
+      if (objMatches && objMatches.length > 0) {
+        newQs = objMatches.map(obj => {
+          try { return JSON.parse(obj); } catch(e) { return null; }
+        }).filter(Boolean);
+      }
+      if (!newQs || newQs.length === 0) throw new Error('JSON inválido: ' + parseErr.message);
+    }
+    
+    if (!Array.isArray(newQs) || newQs.length === 0) throw new Error('Resposta inválida da IA');
+    
+    // Validate each question has required fields
+    newQs = newQs.filter(q => q && q.t && Array.isArray(q.ops) && q.ops.length >= 2 && q.c !== undefined && q.exp);
 
     // Reset state for new questions
     mqState = {total:0, certas:0, erradas:0, respostas:{}, currentCh:ch};
