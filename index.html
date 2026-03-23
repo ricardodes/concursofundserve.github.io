@@ -13,7 +13,134 @@
   --bg:#f8f7f4;--bg2:#eeecea;--white:#fff;--border:#e2ddd6;
   --text:#1a1a1a;--text2:#374151;--text3:#6b7280;
   --sidebar-w:260px;
+
 }
+
+/* DARK MODE */
+body.dark-mode {
+  --bg:#0d1117;--bg2:#161b22;--white:#1c2128;--border:#30363d;
+  --text:#e6edf3;--text2:#c9d1d9;--text3:#8b949e;--navy:#161b22;--navy2:#21262d;
+}
+body.dark-mode .topbar{background:#1c2128;border-color:#30363d}
+body.dark-mode .bottom-nav{background:#1c2128;border-color:#30363d}
+body.dark-mode .law-card{background:#21262d;border-color:#30363d}
+body.dark-mode .q-card{background:#21262d;border-color:#30363d}
+body.dark-mode .option{background:#21262d;border-color:#30363d;color:#c9d1d9}
+body.dark-mode .option:hover{background:#2d333b;border-color:#58a6ff}
+body.dark-mode .option.correct{background:#1a3a2a;border-color:#3fb950;color:#3fb950}
+body.dark-mode .option.wrong{background:#3a1a1a;border-color:#f85149;color:#f85149}
+body.dark-mode .modal{background:#1c2128}
+body.dark-mode .modal-header{border-color:#30363d}
+body.dark-mode .modal-body{background:#1c2128}
+body.dark-mode .tip-card{background:#21262d;border-color:#30363d}
+body.dark-mode .week-card{background:#21262d;border-color:#30363d}
+body.dark-mode .benefit-card{background:#21262d;border-color:#30363d}
+body.dark-mode .invest-card{background:#21262d;border-color:#30363d}
+body.dark-mode .trans-card{background:#21262d;border-color:#30363d}
+body.dark-mode table tbody tr:nth-child(even){background:#1c2128}
+body.dark-mode .pillar-card.p1{background:#0d1f3c}
+body.dark-mode .pillar-card.p2{background:#0d2318}
+body.dark-mode .pillar-card.p3{background:#2a1f00}
+body.dark-mode .formula-box{background:linear-gradient(135deg,#1a1030,#0d1f3c)}
+body.dark-mode .extra-content{background:linear-gradient(135deg,#0d2318,#0d1f3c)}
+body.dark-mode .redo-section{background:#21262d;border-color:#30363d}
+body.dark-mode .modal-score .score-item{background:#21262d}
+body.dark-mode .score-bar{background:#21262d}
+body.dark-mode .chapter-title{color:#e6edf3}
+body.dark-mode .section-h2{color:#e6edf3;border-color:#30363d}
+body.dark-mode .section-h3{color:#c9d1d9}
+body.dark-mode .sigla::after{background:#21262d}
+
+/* DASHBOARD PANEL */
+.dashboard-panel{background:var(--white);border-bottom:1px solid var(--border);padding:0}
+.dash-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:1px;background:var(--border)}
+.dash-card{background:var(--white);padding:14px 16px;text-align:center}
+.dash-num{font-size:24px;font-weight:800;font-family:'JetBrains Mono',monospace}
+.dash-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--text3);margin-top:2px}
+.dash-sub{font-size:11px;color:var(--text3);margin-top:2px}
+
+/* PROVA MODE */
+.prova-overlay{position:fixed;inset:0;background:var(--white);z-index:8000;display:none;flex-direction:column}
+.prova-overlay.active{display:flex}
+.prova-header{background:var(--navy);padding:14px 24px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.prova-title{color:#fff;font-size:14px;font-weight:700}
+.prova-timer{font-family:'JetBrains Mono',monospace;font-size:22px;font-weight:800;color:var(--gold2)}
+.prova-timer.warning{color:#ef4444;animation:pulse 1s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
+.prova-progress-bar{height:4px;background:rgba(255,255,255,.2)}
+.prova-progress-fill{height:100%;background:var(--teal2);transition:width .3s}
+.prova-body{flex:1;overflow-y:auto;padding:20px 24px;max-width:760px;margin:0 auto;width:100%}
+.prova-q-num{font-size:11px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px}
+.prova-result{background:var(--white);padding:32px;text-align:center;max-width:500px;margin:40px auto}
+.prova-result-num{font-size:64px;font-weight:800;font-family:'JetBrains Mono',monospace}
+.prova-result-label{font-size:16px;color:var(--text3);margin-top:8px}
+.prova-result-stars{font-size:32px;margin:12px 0}
+
+/* ERROS PANEL */
+.erros-empty{text-align:center;padding:40px;color:var(--text3)}
+
+/* EVOLUCAO CHART */
+.chart-container{background:var(--white);border:1px solid var(--border);border-radius:10px;padding:16px;margin-bottom:20px}
+.chart-title{font-size:13px;font-weight:700;color:var(--navy);margin-bottom:12px}
+.chart-bars{display:flex;align-items:flex-end;gap:4px;height:100px;padding:0 4px}
+.chart-bar-wrap{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px}
+.chart-bar{width:100%;border-radius:4px 4px 0 0;min-height:4px;transition:height .3s}
+.chart-bar.good{background:var(--teal)}
+.chart-bar.bad{background:var(--red)}
+.chart-bar.ok{background:var(--gold)}
+.chart-date{font-size:9px;color:var(--text3);text-align:center}
+.chart-pct{font-size:9px;font-weight:700;text-align:center}
+
+/* FRAQUEZA RADAR */
+.fraqueza-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin-bottom:20px}
+.fraqueza-card{background:var(--white);border:1px solid var(--border);border-radius:10px;padding:14px}
+.fraqueza-label{font-size:12px;font-weight:700;color:var(--text2);margin-bottom:8px;display:flex;justify-content:space-between}
+.fraqueza-bar-bg{height:8px;background:var(--bg2);border-radius:4px;overflow:hidden}
+.fraqueza-bar-fill{height:100%;border-radius:4px;transition:width .4s}
+
+/* STREAK BADGE */
+.streak-badge{display:inline-flex;align-items:center;gap:5px;background:linear-gradient(135deg,#f59e0b,#ef4444);color:#fff;border-radius:20px;padding:4px 12px;font-size:12px;font-weight:700}
+
+/* SIDEBAR EXTRA ITEMS */
+.sb-divider{height:1px;background:rgba(255,255,255,.08);margin:8px 14px}
+
+/* REVISAO CARD */
+.revisao-card{background:var(--white);border:1.5px solid var(--gold);border-radius:10px;padding:16px;margin-bottom:12px}
+.revisao-badge{font-size:10px;font-weight:700;padding:2px 8px;border-radius:20px;display:inline-block;margin-bottom:8px}
+.revisao-badge.hot{background:#fef2f2;color:#dc2626}
+.revisao-badge.warm{background:#fff7ed;color:#d97706}
+.revisao-badge.cool{background:#eff6ff;color:#2563eb}
+
+/* TOPBAR BUTTONS */
+.topbar-btn{background:transparent;border:1.5px solid var(--border);border-radius:8px;padding:6px 10px;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;color:var(--text2);transition:all .15s;display:flex;align-items:center;gap:5px}
+.topbar-btn:hover{background:var(--bg2);border-color:var(--navy)}
+.topbar-btn.active{background:var(--navy);color:#fff;border-color:var(--navy)}
+
+/* DARK MODE TOPBAR */
+body.dark-mode .topbar-btn{border-color:#30363d;color:#c9d1d9}
+body.dark-mode .topbar-btn:hover{background:#21262d}
+body.dark-mode .topbar-btn.active{background:#58a6ff;border-color:#58a6ff;color:#0d1117}
+body.dark-mode .btn-countdown{background:#21262d}
+body.dark-mode .sidebar{background:#161b22}
+body.dark-mode .chapter-desc{color:#8b949e}
+body.dark-mode .chapter-eyebrow{color:#58a6ff}
+body.dark-mode .box-gold{background:#2a1f00;border-color:#7c5200}
+body.dark-mode .box-red{background:#3a0f0f;border-color:#7c1f1f}
+body.dark-mode .box-green{background:#0d2318;border-color:#1a5c30}
+body.dark-mode .box-blue{background:#0d1f3c;border-color:#1a3a6b}
+body.dark-mode .box-purple{background:#1a0d3a;border-color:#4a2080}
+body.dark-mode .dash-card{background:#1c2128}
+body.dark-mode .dash-grid{background:#30363d}
+body.dark-mode .chart-container{background:#1c2128;border-color:#30363d}
+body.dark-mode .fraqueza-card{background:#21262d;border-color:#30363d}
+body.dark-mode .revisao-card{background:#21262d;border-color:#7c5200}
+body.dark-mode .ai-chat{background:#161b22}
+body.dark-mode .msg-ai{background:#21262d;border-color:#30363d;color:#c9d1d9}
+body.dark-mode .ai-input-area{background:#1c2128;border-color:#30363d}
+body.dark-mode .ai-input{background:#21262d;border-color:#30363d;color:#c9d1d9}
+body.dark-mode .quick-btns{background:#161b22}
+
+
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);line-height:1.65;display:flex;min-height:100vh;font-size:15px}
@@ -395,6 +522,25 @@ tbody td:first-child{font-weight:600;color:var(--navy2);white-space:nowrap}
     <span class="sb-badge low">Baixo</span>
   </div>
 
+  <div class="sb-divider"></div>
+  <div class="sb-section">⚡ Ferramentas</div>
+  <div class="sb-item" onclick="openPainel()">
+    <div style="width:22px;height:22px;border-radius:50%;background:rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0">📊</div>
+    <div class="sb-text">Painel de Desempenho</div>
+  </div>
+  <div class="sb-item" onclick="openModoProva()">
+    <div style="width:22px;height:22px;border-radius:50%;background:rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0">🎯</div>
+    <div class="sb-text">Modo Prova</div>
+  </div>
+  <div class="sb-item" onclick="openErros()">
+    <div style="width:22px;height:22px;border-radius:50%;background:rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0">❌</div>
+    <div class="sb-text">Central de Erros</div>
+  </div>
+  <div class="sb-item" onclick="openRevisao()">
+    <div style="width:22px;height:22px;border-radius:50%;background:rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0">🔁</div>
+    <div class="sb-text">Revisão Inteligente</div>
+  </div>
+  <div class="sb-divider"></div>
   <div class="sb-section">🏆 Prática e Estratégia</div>
   <div class="sb-item" data-ch="15" onclick="goTo(15)">
     <div class="sb-num sb-indicator" data-ch="15">15</div>
@@ -420,8 +566,13 @@ tbody td:first-child{font-weight:600;color:var(--navy2);white-space:nowrap}
       <span class="topbar-chapter" id="topbar-chapter">Capítulo 1</span>
       <span class="topbar-title" id="topbar-title">Sistema Previdenciário Brasileiro</span>
     </div>
-    <div class="topbar-right">
-      <div class="btn-countdown">⏰ <span id="cdw">–</span> dias para a prova</div>
+    <div class="topbar-right" style="gap:8px">
+      <button class="topbar-btn" onclick="openPainel()" title="Painel de Desempenho">📊 Painel</button>
+      <button class="topbar-btn" onclick="openModoProva()" title="Modo Prova Cronometrado">🎯 Modo Prova</button>
+      <button class="topbar-btn" onclick="openErros()" title="Central de Erros">❌ Erros</button>
+      <button class="topbar-btn" onclick="openRevisao()" title="Revisão Inteligente">🔁 Revisão</button>
+      <button class="topbar-btn" id="dark-btn" onclick="toggleDark()" title="Modo Escuro">🌙</button>
+      <div class="btn-countdown">⏰ <span id="cdw">–</span> dias</div>
     </div>
   </div>
 
@@ -1623,34 +1774,32 @@ tbody td:first-child{font-weight:600;color:var(--navy2);white-space:nowrap}
 // 2. Clique em "Create API Key"
 // 3. Cole a chave abaixo entre as aspas
 // ============================================================
-// NÃO COMMITAR CHAVE REAL AQUI!
-// Cole sua chave Groq no console do navegador ou use prompt para inserir
-let GROQ_API_KEY = prompt("Cole sua Groq API Key aqui (não commitar!):") || '';
+// ============================================================
+// GROQ API — GRATUITO E RÁPIDO
+// Chave inserida via prompt ao abrir o site (não fica exposta no código)
+// ============================================================
+let GROQ_API_KEY = sessionStorage.getItem('groq_key') || '';
+if (!GROQ_API_KEY) {
+  GROQ_API_KEY = prompt('🔑 Cole sua Groq API Key para ativar a IA:\n(Obtenha gratuitamente em console.groq.com)') || '';
+  if (GROQ_API_KEY) sessionStorage.setItem('groq_key', GROQ_API_KEY);
+}
 const GROQ_URL = 'https://api.groq.com/openai/v1/chat/completions';
 
 async function callAI(systemPrompt, messages) {
+  if (!GROQ_API_KEY) throw new Error('Chave API não configurada');
   const res = await fetch(GROQ_URL, {
     method: 'POST',
-    headers: {
-      'Authorization': `Bearer ${GROQ_API_KEY}`,
-      'Content-Type': 'application/json'
-    },
+    headers: { 'Authorization': `Bearer ${GROQ_API_KEY}`, 'Content-Type': 'application/json' },
     body: JSON.stringify({
-      model: "llama-3.3-70b-versatile",   // ou "mixtral-8x7b-32768" se quiser mais leve
-      messages: [
-        { role: "system", content: systemPrompt },
-        ...messages
-      ],
-      max_tokens: 800,
-      temperature: 0.7
+      model: 'llama-3.3-70b-versatile',
+      messages: [{ role: 'system', content: systemPrompt }, ...messages],
+      max_tokens: 1000, temperature: 0.7
     })
   });
-
   const data = await res.json();
   if (data.error) throw new Error(data.error.message);
   return data.choices?.[0]?.message?.content || '';
 }
-
 
 // ============================================================
 // NAVIGATION & STATE
@@ -2293,17 +2442,581 @@ function buildTimeline() {
     </div>`).join('');
 }
 
+
+// ============================================================
+// DARK MODE
+// ============================================================
+function toggleDark() {
+  document.body.classList.toggle('dark-mode');
+  const isDark = document.body.classList.contains('dark-mode');
+  localStorage.setItem('funserv_dark', isDark ? '1' : '0');
+  document.getElementById('dark-btn').textContent = isDark ? '☀️' : '🌙';
+}
+function restoreDark() {
+  if (localStorage.getItem('funserv_dark') === '1') {
+    document.body.classList.add('dark-mode');
+    const btn = document.getElementById('dark-btn');
+    if (btn) btn.textContent = '☀️';
+  }
+}
+
+// ============================================================
+// PERFORMANCE TRACKING (localStorage)
+// ============================================================
+function getStats() {
+  return JSON.parse(localStorage.getItem('funserv_stats') || '{"sessions":[],"errors":{}}');
+}
+function saveStats(s) {
+  localStorage.setItem('funserv_stats', JSON.stringify(s));
+}
+function recordAnswer(ch, qi, correct, isCorrect) {
+  const s = getStats();
+  const today = new Date().toISOString().slice(0,10);
+  // Find or create today's session
+  let sess = s.sessions.find(x => x.date === today);
+  if (!sess) { sess = {date:today, total:0, certas:0}; s.sessions.push(sess); }
+  sess.total++;
+  if (isCorrect) sess.certas++;
+  // Track errors per chapter
+  if (!isCorrect) {
+    const key = `${ch}-${qi}`;
+    if (!s.errors[key]) s.errors[key] = {ch, qi, count:0, lastWrong:today, due:today};
+    s.errors[key].count++;
+    s.errors[key].lastWrong = today;
+    // Spaced repetition: wrong = review in 1 day, count>=3 = 3 days, count>=6 = 7 days
+    const days = s.errors[key].count <= 2 ? 1 : s.errors[key].count <= 5 ? 3 : 7;
+    const due = new Date(); due.setDate(due.getDate() + days);
+    s.errors[key].due = due.toISOString().slice(0,10);
+  } else {
+    // Correct = extend review interval
+    const key = `${ch}-${qi}`;
+    if (s.errors[key]) {
+      const due = new Date(); due.setDate(due.getDate() + 7);
+      s.errors[key].due = due.toISOString().slice(0,10);
+    }
+  }
+  saveStats(s);
+}
+
+// Patch answerMQ and answerGS to record stats
+const _origAnswerMQ = answerMQ;
+answerMQ = function(ch, qi, chosen, correct) {
+  _origAnswerMQ(ch, qi, chosen, correct);
+  const key = `${ch}-${qi}`;
+  if (!mqState.respostas[key]) return; // already answered before patch
+  recordAnswer(ch, qi, correct, chosen === correct);
+};
+
+const _origAnswerGS = answerGS;
+answerGS = function(ch, qi, chosen, correct) {
+  _origAnswerGS(ch, qi, chosen, correct);
+  recordAnswer(ch, qi, correct, chosen === correct);
+};
+
+// ============================================================
+// STREAK CALCULATION
+// ============================================================
+function getStreak() {
+  const s = getStats();
+  if (!s.sessions.length) return 0;
+  const dates = s.sessions.map(x => x.date).sort().reverse();
+  const today = new Date().toISOString().slice(0,10);
+  const yesterday = new Date(Date.now()-86400000).toISOString().slice(0,10);
+  if (dates[0] !== today && dates[0] !== yesterday) return 0;
+  let streak = 1, prev = new Date(dates[0]);
+  for (let i=1; i<dates.length; i++) {
+    const d = new Date(dates[i]);
+    const diff = Math.round((prev - d) / 86400000);
+    if (diff === 1) { streak++; prev = d; } else break;
+  }
+  return streak;
+}
+
+function getTodayStats() {
+  const today = new Date().toISOString().slice(0,10);
+  const s = getStats();
+  const sess = s.sessions.find(x => x.date === today);
+  return sess || {total:0, certas:0};
+}
+
+function getWinrate(sessions) {
+  if (!sessions || !sessions.length) return 0;
+  const total = sessions.reduce((a,b)=>a+b.total,0);
+  const certas = sessions.reduce((a,b)=>a+b.certas,0);
+  return total > 0 ? Math.round(certas/total*100) : 0;
+}
+
+function getWinrateByChapter() {
+  const s = getStats();
+  const byChap = {};
+  const chapNames = {1:'Sist. Prev.',2:'CF Art.40',3:'EC 103',4:'Lei 9.717',5:'Port.1467',6:'CMN 4963',7:'Atuarial',8:'LC 108/9',9:'Benefícios',10:'Art.37',11:'Lei 9784',12:'Mat.Fin.',13:'Português',14:'TI'};
+  Object.entries(s.errors).forEach(([key, v]) => {
+    const ch = v.ch;
+    if (!byChap[ch]) byChap[ch] = {ch, name:chapNames[ch]||`Cap ${ch}`, erros:0};
+    byChap[ch].erros += v.count;
+  });
+  return Object.values(byChap).sort((a,b) => b.erros-a.erros);
+}
+
+// ============================================================
+// PAINEL DE DESEMPENHO
+// ============================================================
+function openPainel() {
+  const s = getStats();
+  const today = getTodayStats();
+  const streak = getStreak();
+  const winrateGeral = getWinrate(s.sessions);
+  const winrateHoje = today.total > 0 ? Math.round(today.certas/today.total*100) : 0;
+  const totalErros = Object.keys(s.errors).length;
+  const chapStats = getWinrateByChapter();
+  const last14 = [...s.sessions].sort((a,b)=>a.date.localeCompare(b.date)).slice(-14);
+
+  const content = document.getElementById('painel-content');
+  content.innerHTML = `
+    <!-- STATS GRID -->
+    <div class="dash-grid" style="border-radius:10px;overflow:hidden;margin-bottom:20px;border:1px solid var(--border)">
+      <div class="dash-card">
+        <div class="dash-num" style="color:var(--teal)">${winrateGeral}%</div>
+        <div class="dash-label">Winrate Geral</div>
+        <div class="dash-sub">${s.sessions.reduce((a,b)=>a+b.total,0)} questões</div>
+      </div>
+      <div class="dash-card">
+        <div class="dash-num" style="color:var(--blue)">${winrateHoje}%</div>
+        <div class="dash-label">Winrate Hoje</div>
+        <div class="dash-sub">${today.total} questões</div>
+      </div>
+      <div class="dash-card">
+        <div class="dash-num" style="color:var(--gold)">🔥 ${streak}</div>
+        <div class="dash-label">Streak Dias</div>
+        <div class="dash-sub">dias seguidos</div>
+      </div>
+      <div class="dash-card">
+        <div class="dash-num" style="color:var(--red)">${totalErros}</div>
+        <div class="dash-label">Para Revisar</div>
+        <div class="dash-sub">questões erradas</div>
+      </div>
+      <div class="dash-card">
+        <div class="dash-num" style="color:var(--purple)">${s.sessions.length}</div>
+        <div class="dash-label">Dias Estudados</div>
+        <div class="dash-sub">desde o início</div>
+      </div>
+    </div>
+
+    <!-- GRÁFICO DE EVOLUÇÃO -->
+    <div class="chart-container">
+      <div class="chart-title">📈 Evolução dos Últimos 14 Dias</div>
+      ${last14.length === 0 ? '<p style="color:var(--text3);font-size:13px;text-align:center;padding:20px">Responda questões para ver sua evolução</p>' : `
+      <div class="chart-bars">
+        ${last14.map(sess => {
+          const pct = sess.total > 0 ? Math.round(sess.certas/sess.total*100) : 0;
+          const cls = pct >= 70 ? 'good' : pct >= 50 ? 'ok' : 'bad';
+          const h = Math.max(4, pct);
+          return `<div class="chart-bar-wrap">
+            <div class="chart-pct" style="color:${pct>=70?'var(--teal)':pct>=50?'var(--gold)':'var(--red)'}">${pct}%</div>
+            <div style="flex:1;display:flex;align-items:flex-end;width:100%">
+              <div class="chart-bar ${cls}" style="height:${h}%"></div>
+            </div>
+            <div class="chart-date">${sess.date.slice(5)}</div>
+          </div>`;
+        }).join('')}
+      </div>`}
+    </div>
+
+    <!-- FRAQUEZAS POR MATÉRIA -->
+    <div class="chart-title" style="font-size:13px;font-weight:700;color:var(--navy);margin-bottom:12px">🎯 Matérias com Mais Erros</div>
+    ${chapStats.length === 0 ? '<p style="color:var(--text3);font-size:13px">Nenhum erro registrado ainda — continue estudando!</p>' : `
+    <div class="fraqueza-grid">
+      ${chapStats.slice(0,8).map(c => {
+        const maxErros = chapStats[0].erros || 1;
+        const pct = Math.round(c.erros/maxErros*100);
+        const color = pct > 66 ? 'var(--red)' : pct > 33 ? 'var(--gold)' : 'var(--teal)';
+        return `<div class="fraqueza-card">
+          <div class="fraqueza-label"><span>${c.name}</span><span style="color:${color}">${c.erros} erros</span></div>
+          <div class="fraqueza-bar-bg"><div class="fraqueza-bar-fill" style="width:${pct}%;background:${color}"></div></div>
+        </div>`;
+      }).join('')}
+    </div>`}
+
+    <div style="margin-top:16px;display:flex;gap:10px;flex-wrap:wrap">
+      <button onclick="clearStats()" style="background:#fef2f2;border:1px solid #fecaca;color:#991b1b;border-radius:8px;padding:8px 16px;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit">🗑️ Zerar Estatísticas</button>
+    </div>
+  `;
+  openModal('painel-modal');
+}
+
+function clearStats() {
+  if (confirm('Zerar TODAS as estatísticas? Isso apagará seu histórico de erros e progresso.')) {
+    localStorage.removeItem('funserv_stats');
+    closeModal('painel-modal');
+  }
+}
+
+// ============================================================
+// CENTRAL DE ERROS
+// ============================================================
+function openErros() {
+  const s = getStats();
+  const erros = Object.entries(s.errors).sort((a,b) => b[1].count - a[1].count);
+  const cont = document.getElementById('erros-content');
+  const chapNames = {1:'Sistema Prev.',2:'CF Art.40',3:'EC 103/2019',4:'Lei 9.717/98',5:'Port.MTP 1467',6:'CMN 4963',7:'Atuarial',8:'LC 108/109',9:'Benefícios',10:'Art.37 CF/88',11:'Lei 9784',12:'Matemática',13:'Português',14:'TI'};
+  
+  if (erros.length === 0) {
+    cont.innerHTML = '<div class="erros-empty"><div style="font-size:48px">🎉</div><div style="font-size:16px;font-weight:700;margin:12px 0">Nenhum erro registrado!</div><p style="color:var(--text3)">Continue respondendo questões e os erros aparecerão aqui para revisão.</p></div>';
+  } else {
+    // Group by chapter
+    const byChap = {};
+    erros.forEach(([key, v]) => {
+      if (!byChap[v.ch]) byChap[v.ch] = [];
+      byChap[v.ch].push(v);
+    });
+    
+    cont.innerHTML = `
+      <div class="box box-red" style="margin-bottom:16px"><div class="box-title">⚠️ Foco Aqui!</div>
+        Você tem <strong>${erros.length} questões</strong> para revisar. As mais erradas aparecem primeiro. Clique em "Praticar" para focar nos seus pontos fracos.
+      </div>
+      ${Object.entries(byChap).sort((a,b) => b[1].reduce((s,v)=>s+v.count,0)-a[1].reduce((s,v)=>s+v.count,0)).map(([ch, qs]) => `
+        <div style="margin-bottom:16px">
+          <div style="font-size:13px;font-weight:700;color:var(--navy);margin-bottom:8px;display:flex;justify-content:space-between">
+            <span>Cap. ${ch} — ${chapNames[ch]||''}</span>
+            <span style="color:var(--red)">${qs.length} questões erradas</span>
+          </div>
+          ${qs.map(v => {
+            const q = (QUESTOES_BASE[v.ch]||[])[v.qi];
+            if (!q) return '';
+            return `<div class="q-card" style="margin-bottom:10px">
+              <div class="q-header">
+                <span class="q-num">Errada ${v.count}x</span>
+                <span class="q-disc" style="background:#fef2f2;color:#dc2626">${chapNames[v.ch]||'Cap '+v.ch}</span>
+              </div>
+              <div class="q-text" style="font-size:13px">${q.t}</div>
+              <div style="font-size:12px;color:var(--text3);margin-top:4px">✅ Resposta correta: <strong>${q.ops[q.c]}</strong></div>
+              <div style="font-size:12px;color:var(--text3);margin-top:4px;padding:8px;background:var(--bg2);border-radius:6px">${q.exp}</div>
+            </div>`;
+          }).join('')}
+        </div>
+      `).join('')}
+    `;
+  }
+  openModal('erros-modal');
+}
+
+// ============================================================
+// REVISÃO INTELIGENTE (SPACED REPETITION)
+// ============================================================
+function openRevisao() {
+  const s = getStats();
+  const today = new Date().toISOString().slice(0,10);
+  const chapNames = {1:'Sistema Prev.',2:'CF Art.40',3:'EC 103',4:'Lei 9.717',5:'Portaria',6:'CMN 4963',7:'Atuarial',8:'LC 108/9',9:'Benefícios',10:'Art.37',11:'Lei 9784',12:'Mat.Fin.',13:'Português',14:'TI'};
+  
+  // Get due items
+  const due = Object.entries(s.errors)
+    .filter(([,v]) => v.due <= today)
+    .sort((a,b) => a[1].due.localeCompare(b[1].due));
+  
+  // Upcoming
+  const upcoming = Object.entries(s.errors)
+    .filter(([,v]) => v.due > today)
+    .sort((a,b) => a[1].due.localeCompare(b[1].due));
+  
+  const cont = document.getElementById('revisao-content');
+  
+  if (Object.keys(s.errors).length === 0) {
+    cont.innerHTML = '<div class="erros-empty"><div style="font-size:48px">📚</div><div style="font-size:16px;font-weight:700;margin:12px 0">Comece a responder questões!</div><p style="color:var(--text3)">O sistema de revisão inteligente aprenderá seus pontos fracos e agendará revisões automáticas.</p></div>';
+  } else {
+    cont.innerHTML = `
+      <div class="box box-blue" style="margin-bottom:16px">
+        <div class="box-title">📅 Como Funciona</div>
+        Questões erradas → revisão em <strong>1 dia</strong>. Erradas múltiplas vezes → <strong>3 dias</strong>. Acertos frequentes → <strong>7 dias</strong>. O sistema prioriza o que você mais precisa!
+      </div>
+      
+      ${due.length > 0 ? `
+      <div style="margin-bottom:20px">
+        <div style="font-size:14px;font-weight:700;color:var(--red);margin-bottom:10px">🔴 Para Revisar Hoje (${due.length})</div>
+        ${due.map(([key, v]) => {
+          const q = (QUESTOES_BASE[v.ch]||[])[v.qi];
+          if (!q) return '';
+          const days = v.count <= 2 ? 1 : v.count <= 5 ? 3 : 7;
+          return `<div class="revisao-card">
+            <span class="revisao-badge hot">Revisar Agora • ${v.count}x errada</span>
+            <div style="font-size:13px;font-weight:600;color:var(--text2);margin-bottom:8px">${q.t}</div>
+            <div style="font-size:12px;color:var(--text3)">📚 ${chapNames[v.ch]||'Cap '+v.ch}</div>
+            <div style="font-size:12px;color:var(--green);margin-top:6px">✅ ${q.ops[q.c]}</div>
+          </div>`;
+        }).join('')}
+      </div>` : '<div class="box box-green" style="margin-bottom:16px"><div class="box-title">✅ Em Dia!</div>Nenhuma revisão pendente para hoje. Continue estudando!</div>'}
+      
+      ${upcoming.length > 0 ? `
+      <div>
+        <div style="font-size:14px;font-weight:700;color:var(--text2);margin-bottom:10px">📅 Próximas Revisões (${upcoming.length})</div>
+        ${upcoming.slice(0,6).map(([key, v]) => {
+          const q = (QUESTOES_BASE[v.ch]||[])[v.qi];
+          if (!q) return '';
+          const daysLeft = Math.ceil((new Date(v.due)-new Date())/(1000*60*60*24));
+          const cls = daysLeft <= 2 ? 'warm' : 'cool';
+          return `<div class="revisao-card" style="border-color:var(--border)">
+            <span class="revisao-badge ${cls}">Em ${daysLeft} dia${daysLeft>1?'s':''} • ${chapNames[v.ch]||'Cap '+v.ch}</span>
+            <div style="font-size:13px;color:var(--text2)">${q.t.substring(0,80)}...</div>
+          </div>`;
+        }).join('')}
+      </div>` : ''}
+    `;
+  }
+  openModal('revisao-modal');
+}
+
+// ============================================================
+// MODO PROVA CRONOMETRADO
+// ============================================================
+let provaTimer = null;
+let provaSecondsLeft = 7200; // 2 hours
+let provaAnswers = {};
+let provaQuestions = [];
+
+function openModoProva() {
+  if (confirm('🎯 Iniciar Modo Prova?\n\nVocê terá 2 horas para responder 40 questões sortidas de todas as matérias.\n\nBoa prova!')) {
+    startProva();
+  }
+}
+
+function startProva() {
+  // Pick 40 random questions from all chapters
+  provaQuestions = [];
+  provaAnswers = {};
+  provaSecondsLeft = 7200;
+  
+  Object.entries(QUESTOES_BASE).forEach(([ch, qs]) => {
+    qs.forEach((q, qi) => provaQuestions.push({...q, ch:parseInt(ch), qi}));
+  });
+  
+  // Shuffle and pick 40
+  provaQuestions = provaQuestions.sort(() => Math.random() - 0.5).slice(0, 40);
+  
+  renderProva();
+  document.getElementById('prova-overlay').classList.add('active');
+  startProvaTimer();
+}
+
+function renderProva() {
+  const body = document.getElementById('prova-body');
+  const chapNames = {1:'Sist.Prev.',2:'CF/88 Art.40',3:'EC 103',4:'Lei 9.717',5:'Portaria',6:'CMN 4963',7:'Atuarial',8:'LC 108/9',9:'Benefícios',10:'Art.37',11:'Lei 9784',12:'Mat.Fin.',13:'Português',14:'TI'};
+  
+  body.innerHTML = provaQuestions.map((q,i) => `
+    <div class="q-card" id="pq-${i}" style="margin-bottom:16px">
+      <div class="q-header">
+        <span class="q-num">Questão ${i+1} de ${provaQuestions.length}</span>
+        <span class="q-disc">${chapNames[q.ch]||'Cap '+q.ch}</span>
+      </div>
+      <div class="q-text">${q.t}</div>
+      <div class="options" id="pq-opts-${i}">
+        ${q.ops.map((op,j) => `<div class="option" id="pq-opt-${i}-${j}" onclick="answerProva(${i},${j})">${op}</div>`).join('')}
+      </div>
+    </div>
+  `).join('') + `
+    <div style="text-align:center;padding:20px 0">
+      <button onclick="encerrarProva(true)" style="background:var(--navy);color:#fff;border:none;border-radius:10px;padding:14px 32px;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit">
+        ✅ Finalizar Prova
+      </button>
+    </div>
+  `;
+}
+
+function answerProva(qi, chosen) {
+  if (provaAnswers[qi] !== undefined) return;
+  provaAnswers[qi] = chosen;
+  
+  const q = provaQuestions[qi];
+  const opts = document.getElementById(`pq-opts-${qi}`);
+  if (!opts) return;
+  
+  opts.querySelectorAll('.option').forEach((el,j) => {
+    if (j === q.c) el.classList.add('correct');
+    else if (j === chosen && chosen !== q.c) el.classList.add('wrong');
+  });
+  
+  // Record for stats
+  recordAnswer(q.ch, q.qi, q.c, chosen === q.c);
+  
+  // Update progress
+  const answered = Object.keys(provaAnswers).length;
+  document.getElementById('prova-prog').style.width = (answered/provaQuestions.length*100) + '%';
+  document.getElementById('prova-status').textContent = `${answered}/${provaQuestions.length} respondidas`;
+}
+
+function startProvaTimer() {
+  if (provaTimer) clearInterval(provaTimer);
+  provaTimer = setInterval(() => {
+    provaSecondsLeft--;
+    const h = Math.floor(provaSecondsLeft/3600);
+    const m = Math.floor((provaSecondsLeft%3600)/60);
+    const s = provaSecondsLeft % 60;
+    const timerEl = document.getElementById('prova-timer');
+    if (timerEl) {
+      timerEl.textContent = `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+      if (provaSecondsLeft <= 300) timerEl.classList.add('warning');
+    }
+    if (provaSecondsLeft <= 0) encerrarProva(true);
+  }, 1000);
+}
+
+function encerrarProva(showResult) {
+  clearInterval(provaTimer);
+  provaTimer = null;
+  
+  if (showResult && provaQuestions.length > 0) {
+    const certas = provaQuestions.filter((q,i) => provaAnswers[i] === q.c).length;
+    const total = provaQuestions.length;
+    const pct = Math.round(certas/total*100);
+    const stars = pct >= 90 ? '⭐⭐⭐⭐⭐' : pct >= 70 ? '⭐⭐⭐⭐' : pct >= 60 ? '⭐⭐⭐' : pct >= 40 ? '⭐⭐' : '⭐';
+    const msg = pct >= 70 ? '🎉 Parabéns! Aprovado!' : pct >= 50 ? '📚 Continue estudando!' : '💪 Foque nos seus pontos fracos!';
+    
+    document.getElementById('prova-body').innerHTML = `
+      <div class="prova-result">
+        <div class="prova-result-stars">${stars}</div>
+        <div class="prova-result-num" style="color:${pct>=70?'var(--teal)':pct>=50?'var(--gold)':'var(--red)'}">${pct}%</div>
+        <div class="prova-result-label">${certas} de ${total} questões corretas</div>
+        <div style="margin:16px 0;font-size:18px;font-weight:700;color:var(--navy)">${msg}</div>
+        <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:20px">
+          <button onclick="document.getElementById('prova-overlay').classList.remove('active')" style="background:var(--navy);color:#fff;border:none;border-radius:8px;padding:10px 20px;cursor:pointer;font-size:13px;font-weight:600;font-family:inherit">Fechar</button>
+          <button onclick="openPainel();document.getElementById('prova-overlay').classList.remove('active')" style="background:var(--teal);color:#fff;border:none;border-radius:8px;padding:10px 20px;cursor:pointer;font-size:13px;font-weight:600;font-family:inherit">Ver Painel</button>
+        </div>
+      </div>
+    `;
+  } else {
+    document.getElementById('prova-overlay').classList.remove('active');
+  }
+}
+
 // ============================================================
 // INIT
 // ============================================================
 restoreDone();
+restoreDark();
 goTo(currentChapter);
+
+// Patch answerMQ after it's defined
+setTimeout(() => {
+  const _omq = window.answerMQ;
+  if (_omq && !_omq._patched) {
+    window.answerMQ = function(ch, qi, chosen, correct) {
+      const already = mqState.respostas[`${ch}-${qi}`] !== undefined;
+      _omq(ch, qi, chosen, correct);
+      if (!already) recordAnswer(ch, qi, correct, chosen === correct);
+    };
+    window.answerMQ._patched = true;
+  }
+  const _ogs = window.answerGS;
+  if (_ogs && !_ogs._patched) {
+    window.answerGS = function(ch, qi, chosen, correct) {
+      const already = gsState.respostas[`${ch}-${qi}`] !== undefined;
+      _ogs(ch, qi, chosen, correct);
+      if (!already) recordAnswer(ch, qi, correct, chosen === correct);
+    };
+    window.answerGS._patched = true;
+  }
+}, 100);
 
 function sendAI() { sendAIMsg(); }
 </script>
-</body>
-</html>
+<!-- ========== MODAL: PAINEL DE DESEMPENHO ========== -->
+<div class="modal-overlay" id="painel-modal" onclick="if(event.target===this)closeModal('painel-modal')">
+  <div class="modal" style="max-width:800px">
+    <div class="modal-header">
+      <h3>📊 Painel de Desempenho</h3>
+      <button class="modal-close" onclick="closeModal('painel-modal')">✕</button>
+    </div>
+    <div class="modal-body" id="painel-content"></div>
+  </div>
+</div>
+
+<!-- ========== MODAL: CENTRAL DE ERROS ========== -->
+<div class="modal-overlay" id="erros-modal" onclick="if(event.target===this)closeModal('erros-modal')">
+  <div class="modal" style="max-width:760px">
+    <div class="modal-header">
+      <h3>❌ Central de Erros — Suas Fraquezas</h3>
+      <button class="modal-close" onclick="closeModal('erros-modal')">✕</button>
+    </div>
+    <div class="modal-body" id="erros-content"></div>
+  </div>
+</div>
+
+<!-- ========== MODAL: REVISÃO INTELIGENTE ========== -->
+<div class="modal-overlay" id="revisao-modal" onclick="if(event.target===this)closeModal('revisao-modal')">
+  <div class="modal" style="max-width:760px">
+    <div class="modal-header">
+      <h3>🔁 Revisão Inteligente (Spaced Repetition)</h3>
+      <button class="modal-close" onclick="closeModal('revisao-modal')">✕</button>
+    </div>
+    <div class="modal-body" id="revisao-content"></div>
+  </div>
+</div>
+
+<!-- ========== MODO PROVA ========== -->
+<div class="prova-overlay" id="prova-overlay">
+  <div class="prova-header">
+    <div class="prova-title">🎯 Modo Prova — FUNSERV 2026</div>
+    <div>
+      <div class="prova-timer" id="prova-timer">2:00:00</div>
+    </div>
+    <div style="display:flex;gap:8px">
+      <div id="prova-status" style="color:rgba(255,255,255,.7);font-size:12px;align-self:center"></div>
+      <button onclick="encerrarProva()" style="background:rgba(255,255,255,.2);color:#fff;border:none;border-radius:8px;padding:7px 14px;cursor:pointer;font-size:12px;font-weight:700;font-family:inherit">✕ Encerrar</button>
+    </div>
+  </div>
+  <div class="prova-progress-bar"><div class="prova-progress-fill" id="prova-prog"></div></div>
+  <div class="prova-body" id="prova-body"></div>
+</div>
 
 </body>
 </html>
-aaa
+
+<!-- ========== MODAL: PAINEL DE DESEMPENHO ========== -->
+<div class="modal-overlay" id="painel-modal" onclick="if(event.target===this)closeModal('painel-modal')">
+  <div class="modal" style="max-width:800px">
+    <div class="modal-header">
+      <h3>📊 Painel de Desempenho</h3>
+      <button class="modal-close" onclick="closeModal('painel-modal')">✕</button>
+    </div>
+    <div class="modal-body" id="painel-content"></div>
+  </div>
+</div>
+
+<!-- ========== MODAL: CENTRAL DE ERROS ========== -->
+<div class="modal-overlay" id="erros-modal" onclick="if(event.target===this)closeModal('erros-modal')">
+  <div class="modal" style="max-width:760px">
+    <div class="modal-header">
+      <h3>❌ Central de Erros — Suas Fraquezas</h3>
+      <button class="modal-close" onclick="closeModal('erros-modal')">✕</button>
+    </div>
+    <div class="modal-body" id="erros-content"></div>
+  </div>
+</div>
+
+<!-- ========== MODAL: REVISÃO INTELIGENTE ========== -->
+<div class="modal-overlay" id="revisao-modal" onclick="if(event.target===this)closeModal('revisao-modal')">
+  <div class="modal" style="max-width:760px">
+    <div class="modal-header">
+      <h3>🔁 Revisão Inteligente (Spaced Repetition)</h3>
+      <button class="modal-close" onclick="closeModal('revisao-modal')">✕</button>
+    </div>
+    <div class="modal-body" id="revisao-content"></div>
+  </div>
+</div>
+
+<!-- ========== MODO PROVA ========== -->
+<div class="prova-overlay" id="prova-overlay">
+  <div class="prova-header">
+    <div class="prova-title">🎯 Modo Prova — FUNSERV 2026</div>
+    <div>
+      <div class="prova-timer" id="prova-timer">2:00:00</div>
+    </div>
+    <div style="display:flex;gap:8px">
+      <div id="prova-status" style="color:rgba(255,255,255,.7);font-size:12px;align-self:center"></div>
+      <button onclick="encerrarProva()" style="background:rgba(255,255,255,.2);color:#fff;border:none;border-radius:8px;padding:7px 14px;cursor:pointer;font-size:12px;font-weight:700;font-family:inherit">✕ Encerrar</button>
+    </div>
+  </div>
+  <div class="prova-progress-bar"><div class="prova-progress-fill" id="prova-prog"></div></div>
+  <div class="prova-body" id="prova-body"></div>
+</div>
+
+</body>
+</html>
