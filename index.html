@@ -2770,106 +2770,29 @@ tbody td:first-child{font-weight:600;color:var(--navy2);white-space:nowrap}
 
 <script>
 // ============================================================
-// CONFIGURAÇÃO DO GEMINI 1.5 FLASH (Substitua esta parte no seu index.html)
+// GEMINI API — TOTALMENTE GRATUITO
+// 1. Acesse: https://aistudio.google.com/app/apikey
+// 2. Clique em "Create API Key"
+// 3. Cole a chave abaixo entre as aspas
 // ============================================================
-let GEMINI_API_KEY = ""; // A chave será pedida ao iniciar
-
-async function getApiKey() {
-    if (!GEMINI_API_KEY) {
-        GEMINI_API_KEY = prompt("🔑 Insira sua API KEY do Gemini para começar:\n(Obtenha em: aistudio.google.com)");
-    }
-    return GEMINI_API_KEY;
-}
-
+// ============================================================
+// CLAUDE API — INTEGRADO, SEM CHAVE NECESSÁRIA
+// ============================================================
 async function callAI(systemPrompt, messages) {
-    const key = await getApiKey();
-    if (!key) return null;
-
-    // Usando o modelo gemini-1.5-flash que é estável e rápido
-    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${key}`;
-
-    const contents = messages.map(m => ({
-        role: m.role === 'assistant' ? 'model' : 'user',
-        parts: [{ text: m.content }]
-    }));
-
-    const requestBody = {
-        contents: contents,
-        system_instruction: {
-            parts: [{ text: systemPrompt }]
-        },
-        generationConfig: {
-            temperature: 0.7,
-            maxOutputTokens: 2048,
-        }
-    };
-
-    try {
-        const response = await fetch(url, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(requestBody)
-        });
-
-        if (!response.ok) {
-            const errorData = await response.json();
-            if (response.status === 401) GEMINI_API_KEY = ""; // Limpa chave se estiver errada
-            throw new Error(errorData.error?.message || "Erro na API");
-        }
-
-        const data = await response.json();
-        return data.candidates[0].content.parts[0].text;
-
-    } catch (err) {
-        console.error("AI Error:", err);
-        return "❌ Erro: " + err.message;
-    }
-}
-
-// ============================================================
-// LÓGICA DO CHAT (Ajustada para o seu Modal)
-// ============================================================
-async function sendAIMsg() {
-    const input = document.getElementById('ai-input');
-    const text = input.value.trim();
-    if (!text) return;
-
-    addChatMessage('user', text);
-    input.value = '';
-    
-    // Mostra indicador de carregamento
-    const loadingId = addChatMessage('assistant', '<i>Pensando...</i>');
-    
-    const system = `Você é um professor especialista em Direito Previdenciário para o concurso FUNSERV 2026. 
-    O tema atual é: ${aiSubject}. Responda de forma didática e foque no que cai em prova.`;
-    
-    aiHistory.push({role: 'user', content: text});
-    
-    const response = await callAI(system, aiHistory);
-    
-    // Atualiza a mensagem do assistente com a resposta real
-    if (response) {
-        updateChatMessage(loadingId, response);
-        aiHistory.push({role: 'assistant', content: response});
-    }
-}
-
-// Funções auxiliares para o chat (certifique-se de que existem no seu código)
-function addChatMessage(role, text) {
-    const chat = document.getElementById('ai-chat');
-    const id = 'msg-' + Date.now();
-    const div = document.createElement('div');
-    div.id = id;
-    div.className = role === 'user' ? 'msg-user' : 'msg-ai';
-    div.innerHTML = text;
-    chat.appendChild(div);
-    chat.scrollTop = chat.scrollHeight;
-    return id;
-}
-
-function updateChatMessage(id, text) {
-    const div = document.getElementById(id);
-    if (div) div.innerHTML = text;
+  const res = await fetch('https://api.anthropic.com/v1/messages', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      model: 'claude-sonnet-4-20250514',
+      max_tokens: 1000,
+      system: systemPrompt,
+      messages: messages
+    })
+  });
+  const data = await res.json();
+  if (data.error) throw new Error(data.error.message || JSON.stringify(data.error));
+  const textBlock = (data.content || []).find(b => b.type === 'text');
+  return textBlock ? textBlock.text : '';
 }
 
 // ============================================================
