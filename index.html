@@ -487,6 +487,63 @@ tbody td:first-child{font-weight:600;color:var(--navy2);white-space:nowrap}
 .proxy-banner{display:none;background:#ef4444;color:#fff;text-align:center;padding:12px 20px;font-size:13px;font-weight:600;position:sticky;top:0;z-index:9999}
 .proxy-banner a{color:#fff;text-decoration:underline;margin-left:8px}
 
+/* ESTUDO AMPLO */
+.btn-estudo{background:linear-gradient(135deg,#7c3aed,#2563eb);color:#fff;border:none}
+.btn-estudo:hover{opacity:.88}
+.estudo-modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:9999;display:flex;align-items:center;justify-content:center;padding:16px;opacity:0;pointer-events:none;transition:opacity .25s}
+.estudo-modal-overlay.open{opacity:1;pointer-events:all}
+.estudo-modal{background:var(--white);border-radius:16px;width:100%;max-width:800px;max-height:90vh;display:flex;flex-direction:column;box-shadow:0 24px 64px rgba(0,0,0,.35);transform:scale(.95);transition:transform .25s;overflow:hidden}
+.estudo-modal-overlay.open .estudo-modal{transform:scale(1)}
+.estudo-modal-header{background:linear-gradient(135deg,#5b21b6,#1d4ed8);padding:20px 24px;display:flex;justify-content:space-between;align-items:center}
+.estudo-modal-header h3{color:#fff;font-size:16px;font-weight:800;display:flex;align-items:center;gap:8px}
+.estudo-modal-close{background:rgba(255,255,255,.2);border:none;color:#fff;width:32px;height:32px;border-radius:50%;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center}
+.estudo-modal-close:hover{background:rgba(255,255,255,.3)}
+.estudo-modal-body{flex:1;overflow-y:auto;padding:0}
+.estudo-loading{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:60px 24px;gap:16px}
+.estudo-loading-dots{display:flex;gap:8px}
+.estudo-ldot{width:12px;height:12px;background:linear-gradient(135deg,#7c3aed,#2563eb);border-radius:50%;animation:bounce 1.2s infinite}
+.estudo-ldot:nth-child(2){animation-delay:.2s}.estudo-ldot:nth-child(3){animation-delay:.4s}
+.estudo-loading-text{font-size:14px;color:var(--text3);font-weight:500}
+.estudo-content{padding:24px}
+.estudo-section{margin-bottom:28px}
+.estudo-section-title{font-size:15px;font-weight:800;color:var(--navy);margin-bottom:12px;display:flex;align-items:center;gap:8px;padding-bottom:8px;border-bottom:2px solid var(--border)}
+.estudo-text{font-size:13.5px;color:var(--text2);line-height:1.8}
+.estudo-highlight{background:linear-gradient(135deg,#eff6ff,#f5f3ff);border:1.5px solid #c4b5fd;border-radius:10px;padding:14px 16px;margin:12px 0;font-size:13px;line-height:1.7}
+.estudo-highlight strong{color:var(--purple)}
+.estudo-alerta{background:#fef2f2;border:1.5px solid #fecaca;border-left:4px solid #dc2626;border-radius:8px;padding:12px 14px;margin:12px 0;font-size:13px;line-height:1.7;color:#7f1d1d}
+.estudo-dica{background:#f0fdf4;border:1.5px solid #bbf7d0;border-left:4px solid #16a34a;border-radius:8px;padding:12px 14px;margin:12px 0;font-size:13px;line-height:1.7;color:#14532d}
+.estudo-tabs{display:flex;gap:0;border-bottom:2px solid var(--border);background:var(--bg2)}
+.estudo-tab{padding:12px 20px;font-size:13px;font-weight:700;color:var(--text3);cursor:pointer;border:none;background:transparent;font-family:inherit;transition:all .15s;border-bottom:2px solid transparent;margin-bottom:-2px}
+.estudo-tab.active{color:var(--purple);border-bottom-color:var(--purple);background:var(--white)}
+.estudo-tab:hover:not(.active){color:var(--text2);background:var(--border)}
+.estudo-panel{display:none}
+.estudo-panel.active{display:block}
+.estudo-ask-area{padding:16px 24px;border-top:1px solid var(--border);background:var(--bg2);display:flex;gap:10px}
+.estudo-ask-input{flex:1;border:1.5px solid var(--border);border-radius:8px;padding:10px 14px;font-size:13px;font-family:inherit;outline:none;background:var(--white);color:var(--text)}
+.estudo-ask-input:focus{border-color:var(--purple)}
+.estudo-ask-btn{background:linear-gradient(135deg,#7c3aed,#2563eb);color:#fff;border:none;border-radius:8px;padding:10px 18px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;white-space:nowrap}
+.estudo-ask-btn:disabled{opacity:.5;cursor:default}
+.estudo-qa-item{background:var(--white);border:1px solid var(--border);border-radius:10px;padding:14px;margin-bottom:12px}
+.estudo-qa-q{font-size:12px;font-weight:700;color:var(--purple);margin-bottom:8px}
+.estudo-qa-a{font-size:13px;color:var(--text2);line-height:1.7}
+body.dark-mode .estudo-modal{background:#1c2128}
+body.dark-mode .estudo-modal-body{background:#1c2128}
+body.dark-mode .estudo-tabs{background:#161b22}
+body.dark-mode .estudo-tab.active{background:#1c2128;color:#d2a8ff;border-bottom-color:#d2a8ff}
+body.dark-mode .estudo-tab{color:#8b949e}
+body.dark-mode .estudo-content{color:#c9d1d9}
+body.dark-mode .estudo-section-title{color:#e6edf3;border-color:#30363d}
+body.dark-mode .estudo-text{color:#c9d1d9}
+body.dark-mode .estudo-highlight{background:#1a0d3a;border-color:#4a2080;color:#c9d1d9}
+body.dark-mode .estudo-highlight strong{color:#d2a8ff}
+body.dark-mode .estudo-alerta{background:#3a0f0f;border-color:#7c1f1f;color:#fca5a5}
+body.dark-mode .estudo-dica{background:#0d2318;border-color:#1a5c30;color:#7ee787}
+body.dark-mode .estudo-ask-area{background:#161b22;border-color:#30363d}
+body.dark-mode .estudo-ask-input{background:#21262d;border-color:#30363d;color:#c9d1d9}
+body.dark-mode .estudo-qa-item{background:#21262d;border-color:#30363d}
+body.dark-mode .estudo-qa-q{color:#d2a8ff}
+body.dark-mode .estudo-qa-a{color:#c9d1d9}
+
 </style>
 </head>
 <body>
@@ -849,6 +906,7 @@ tbody td:first-child{font-weight:600;color:var(--navy2);white-space:nowrap}
     <div style="display:flex;gap:10px;flex-wrap:wrap">
       <button class="btn-nav btn-q" onclick="openQuestions(1)">❓ Questões (10)</button>
       <button class="btn-nav btn-tips" onclick="openTips(1)">⚡ Dicas &amp; Pegadinhas</button>
+      <button class="btn-nav btn-estudo" onclick="openEstudoAmplo(1)">📚 Estudo Amplo</button>
       <button class="btn-nav btn-check" id="check-1" onclick="markDone(1)">✓ Marcar como Estudado</button>
     </div>
     <button class="btn-nav btn-next" onclick="nextChapter()">Próximo →</button>
@@ -962,6 +1020,7 @@ tbody td:first-child{font-weight:600;color:var(--navy2);white-space:nowrap}
     <div style="display:flex;gap:10px;flex-wrap:wrap">
       <button class="btn-nav btn-q" onclick="openQuestions(2)">❓ Questões (10)</button>
       <button class="btn-nav btn-tips" onclick="openTips(2)">⚡ Dicas &amp; Pegadinhas</button>
+      <button class="btn-nav btn-estudo" onclick="openEstudoAmplo(2)">📚 Estudo Amplo</button>
       <button class="btn-nav btn-check" id="check-2" onclick="markDone(2)">✓ Marcar como Estudado</button>
     </div>
     <button class="btn-nav btn-next" onclick="nextChapter()">Próximo →</button>
@@ -1074,6 +1133,7 @@ tbody td:first-child{font-weight:600;color:var(--navy2);white-space:nowrap}
     <div style="display:flex;gap:10px;flex-wrap:wrap">
       <button class="btn-nav btn-q" onclick="openQuestions(3)">❓ Questões (10)</button>
       <button class="btn-nav btn-tips" onclick="openTips(3)">⚡ Dicas &amp; Pegadinhas</button>
+      <button class="btn-nav btn-estudo" onclick="openEstudoAmplo(3)">📚 Estudo Amplo</button>
       <button class="btn-nav btn-check" id="check-3" onclick="markDone(3)">✓ Marcar como Estudado</button>
     </div>
     <button class="btn-nav btn-next" onclick="nextChapter()">Próximo →</button>
@@ -1172,6 +1232,7 @@ tbody td:first-child{font-weight:600;color:var(--navy2);white-space:nowrap}
       <div style="display:flex;gap:10px;flex-wrap:wrap">
         <button class="btn-nav btn-q" onclick="openQuestions(4)">❓ Questões (10)</button>
         <button class="btn-nav btn-tips" onclick="openTips(4)">⚡ Dicas &amp; Pegadinhas</button>
+      <button class="btn-nav btn-estudo" onclick="openEstudoAmplo(4)">📚 Estudo Amplo</button>
         <button class="btn-nav btn-check" id="check-4" onclick="markDone(4)">✓ Marcar como Estudado</button>
       </div>
       <button class="btn-nav btn-next" onclick="nextChapter()">Próximo →</button>
@@ -1317,6 +1378,7 @@ tbody td:first-child{font-weight:600;color:var(--navy2);white-space:nowrap}
       <div style="display:flex;gap:10px;flex-wrap:wrap">
         <button class="btn-nav btn-q" onclick="openQuestions(5)">❓ Questões (10)</button>
         <button class="btn-nav btn-tips" onclick="openTips(5)">⚡ Dicas &amp; Pegadinhas</button>
+      <button class="btn-nav btn-estudo" onclick="openEstudoAmplo(5)">📚 Estudo Amplo</button>
         <button class="btn-nav btn-check" id="check-5" onclick="markDone(5)">✓ Marcar como Estudado</button>
       </div>
       <button class="btn-nav btn-next" onclick="nextChapter()">Próximo →</button>
@@ -1363,6 +1425,7 @@ tbody td:first-child{font-weight:600;color:var(--navy2);white-space:nowrap}
       <div style="display:flex;gap:10px;flex-wrap:wrap">
         <button class="btn-nav btn-q" onclick="openQuestions(6)">❓ Questões (10)</button>
         <button class="btn-nav btn-tips" onclick="openTips(6)">⚡ Dicas &amp; Pegadinhas</button>
+      <button class="btn-nav btn-estudo" onclick="openEstudoAmplo(6)">📚 Estudo Amplo</button>
         <button class="btn-nav btn-check" id="check-6" onclick="markDone(6)">✓ Marcar como Estudado</button>
       </div>
       <button class="btn-nav btn-next" onclick="nextChapter()">Próximo →</button>
@@ -1413,6 +1476,7 @@ tbody td:first-child{font-weight:600;color:var(--navy2);white-space:nowrap}
       <div style="display:flex;gap:10px;flex-wrap:wrap">
         <button class="btn-nav btn-q" onclick="openQuestions(7)">❓ Questões (10)</button>
         <button class="btn-nav btn-tips" onclick="openTips(7)">⚡ Dicas &amp; Pegadinhas</button>
+      <button class="btn-nav btn-estudo" onclick="openEstudoAmplo(7)">📚 Estudo Amplo</button>
         <button class="btn-nav btn-check" id="check-7" onclick="markDone(7)">✓ Marcar como Estudado</button>
       </div>
       <button class="btn-nav btn-next" onclick="nextChapter()">Próximo →</button>
@@ -1509,6 +1573,7 @@ tbody td:first-child{font-weight:600;color:var(--navy2);white-space:nowrap}
       <div style="display:flex;gap:10px;flex-wrap:wrap">
         <button class="btn-nav btn-q" onclick="openQuestions(8)">❓ Questões (10)</button>
         <button class="btn-nav btn-tips" onclick="openTips(8)">⚡ Dicas &amp; Pegadinhas</button>
+      <button class="btn-nav btn-estudo" onclick="openEstudoAmplo(8)">📚 Estudo Amplo</button>
         <button class="btn-nav btn-check" id="check-8" onclick="markDone(8)">✓ Marcar como Estudado</button>
       </div>
       <button class="btn-nav btn-next" onclick="nextChapter()">Próximo →</button>
@@ -1548,6 +1613,7 @@ tbody td:first-child{font-weight:600;color:var(--navy2);white-space:nowrap}
       <div style="display:flex;gap:10px;flex-wrap:wrap">
         <button class="btn-nav btn-q" onclick="openQuestions(9)">❓ Questões (10)</button>
         <button class="btn-nav btn-tips" onclick="openTips(9)">⚡ Dicas &amp; Pegadinhas</button>
+      <button class="btn-nav btn-estudo" onclick="openEstudoAmplo(9)">📚 Estudo Amplo</button>
         <button class="btn-nav btn-check" id="check-9" onclick="markDone(9)">✓ Marcar como Estudado</button>
       </div>
       <button class="btn-nav btn-next" onclick="nextChapter()">Próximo →</button>
@@ -1595,6 +1661,7 @@ tbody td:first-child{font-weight:600;color:var(--navy2);white-space:nowrap}
       <div style="display:flex;gap:10px;flex-wrap:wrap">
         <button class="btn-nav btn-q" onclick="openQuestions(10)">❓ Questões (10)</button>
         <button class="btn-nav btn-tips" onclick="openTips(10)">⚡ Dicas &amp; Pegadinhas</button>
+      <button class="btn-nav btn-estudo" onclick="openEstudoAmplo(10)">📚 Estudo Amplo</button>
         <button class="btn-nav btn-check" id="check-10" onclick="markDone(10)">✓ Marcar como Estudado</button>
       </div>
       <button class="btn-nav btn-next" onclick="nextChapter()">Próximo →</button>
@@ -1642,6 +1709,7 @@ tbody td:first-child{font-weight:600;color:var(--navy2);white-space:nowrap}
       <div style="display:flex;gap:10px;flex-wrap:wrap">
         <button class="btn-nav btn-q" onclick="openQuestions(11)">❓ Questões (10)</button>
         <button class="btn-nav btn-tips" onclick="openTips(11)">⚡ Dicas &amp; Pegadinhas</button>
+      <button class="btn-nav btn-estudo" onclick="openEstudoAmplo(11)">📚 Estudo Amplo</button>
         <button class="btn-nav btn-check" id="check-11" onclick="markDone(11)">✓ Marcar como Estudado</button>
       </div>
       <button class="btn-nav btn-next" onclick="nextChapter()">Próximo →</button>
@@ -1723,6 +1791,7 @@ tbody td:first-child{font-weight:600;color:var(--navy2);white-space:nowrap}
       <div style="display:flex;gap:10px;flex-wrap:wrap">
         <button class="btn-nav btn-q" onclick="openQuestions(12)">❓ Questões (10)</button>
         <button class="btn-nav btn-tips" onclick="openTips(12)">⚡ Dicas &amp; Pegadinhas</button>
+      <button class="btn-nav btn-estudo" onclick="openEstudoAmplo(12)">📚 Estudo Amplo</button>
         <button class="btn-nav btn-check" id="check-12" onclick="markDone(12)">✓ Marcar como Estudado</button>
       </div>
       <button class="btn-nav btn-next" onclick="nextChapter()">Próximo →</button>
@@ -1782,6 +1851,7 @@ tbody td:first-child{font-weight:600;color:var(--navy2);white-space:nowrap}
       <div style="display:flex;gap:10px;flex-wrap:wrap">
         <button class="btn-nav btn-q" onclick="openQuestions(13)">❓ Questões (10)</button>
         <button class="btn-nav btn-tips" onclick="openTips(13)">⚡ Dicas &amp; Pegadinhas</button>
+      <button class="btn-nav btn-estudo" onclick="openEstudoAmplo(13)">📚 Estudo Amplo</button>
         <button class="btn-nav btn-check" id="check-13" onclick="markDone(13)">✓ Marcar como Estudado</button>
       </div>
       <button class="btn-nav btn-next" onclick="nextChapter()">Próximo →</button>
@@ -1844,6 +1914,7 @@ tbody td:first-child{font-weight:600;color:var(--navy2);white-space:nowrap}
       <div style="display:flex;gap:10px;flex-wrap:wrap">
         <button class="btn-nav btn-q" onclick="openQuestions(14)">❓ Questões (10)</button>
         <button class="btn-nav btn-tips" onclick="openTips(14)">⚡ Dicas &amp; Pegadinhas</button>
+      <button class="btn-nav btn-estudo" onclick="openEstudoAmplo(14)">📚 Estudo Amplo</button>
         <button class="btn-nav btn-check" id="check-14" onclick="markDone(14)">✓ Marcar como Estudado</button>
       </div>
       <button class="btn-nav btn-next" onclick="nextChapter()">Próximo →</button>
@@ -2400,6 +2471,7 @@ tbody td:first-child{font-weight:600;color:var(--navy2);white-space:nowrap}
     <div style="display:flex;gap:10px;flex-wrap:wrap">
       <button class="btn-nav btn-q" onclick="openQuestions(18)">❓ Questões (10)</button>
       <button class="btn-nav btn-tips" onclick="openTips(18)">⚡ Dicas &amp; Pegadinhas</button>
+      <button class="btn-nav btn-estudo" onclick="openEstudoAmplo(18)">📚 Estudo Amplo</button>
       <button class="btn-nav btn-check" id="check-18" onclick="markDone(18)">✓ Marcar como Estudado</button>
     </div>
     <button class="btn-nav btn-next" onclick="nextChapter()">Próximo →</button>
@@ -2522,6 +2594,7 @@ tbody td:first-child{font-weight:600;color:var(--navy2);white-space:nowrap}
     <div style="display:flex;gap:10px;flex-wrap:wrap">
       <button class="btn-nav btn-q" onclick="openQuestions(19)">❓ Questões (10)</button>
       <button class="btn-nav btn-tips" onclick="openTips(19)">⚡ Dicas &amp; Pegadinhas</button>
+      <button class="btn-nav btn-estudo" onclick="openEstudoAmplo(19)">📚 Estudo Amplo</button>
       <button class="btn-nav btn-check" id="check-19" onclick="markDone(19)">✓ Marcar como Estudado</button>
     </div>
     <button class="btn-nav btn-next" onclick="nextChapter()">Próximo →</button>
@@ -2636,6 +2709,7 @@ tbody td:first-child{font-weight:600;color:var(--navy2);white-space:nowrap}
     <div style="display:flex;gap:10px;flex-wrap:wrap">
       <button class="btn-nav btn-q" onclick="openQuestions(20)">❓ Questões (10)</button>
       <button class="btn-nav btn-tips" onclick="openTips(20)">⚡ Dicas &amp; Pegadinhas</button>
+      <button class="btn-nav btn-estudo" onclick="openEstudoAmplo(20)">📚 Estudo Amplo</button>
       <button class="btn-nav btn-check" id="check-20" onclick="markDone(20)">✓ Marcar como Estudado</button>
     </div>
     <button class="btn-nav btn-next" onclick="nextChapter()">Próximo →</button>
@@ -2733,6 +2807,7 @@ tbody td:first-child{font-weight:600;color:var(--navy2);white-space:nowrap}
     <div style="display:flex;gap:10px;flex-wrap:wrap">
       <button class="btn-nav btn-q" onclick="openQuestions(21)">❓ Questões (10)</button>
       <button class="btn-nav btn-tips" onclick="openTips(21)">⚡ Dicas &amp; Pegadinhas</button>
+      <button class="btn-nav btn-estudo" onclick="openEstudoAmplo(21)">📚 Estudo Amplo</button>
       <button class="btn-nav btn-check" id="check-21" onclick="markDone(21)">✓ Marcar como Estudado</button>
     </div>
     <button class="btn-nav btn-next" onclick="nextChapter()">Próximo →</button>
@@ -2859,6 +2934,7 @@ tbody td:first-child{font-weight:600;color:var(--navy2);white-space:nowrap}
     <div style="display:flex;gap:10px;flex-wrap:wrap">
       <button class="btn-nav btn-q" onclick="openQuestions(22)">❓ Questões (10)</button>
       <button class="btn-nav btn-tips" onclick="openTips(22)">⚡ Dicas &amp; Pegadinhas</button>
+      <button class="btn-nav btn-estudo" onclick="openEstudoAmplo(22)">📚 Estudo Amplo</button>
       <button class="btn-nav btn-check" id="check-22" onclick="markDone(22)">✓ Marcar como Estudado</button>
     </div>
     <button class="btn-nav btn-next" onclick="nextChapter()">Próximo →</button>
@@ -2941,6 +3017,7 @@ tbody td:first-child{font-weight:600;color:var(--navy2);white-space:nowrap}
     <div style="display:flex;gap:10px;flex-wrap:wrap">
       <button class="btn-nav btn-q" onclick="openQuestions(23)">❓ Questões (10)</button>
       <button class="btn-nav btn-tips" onclick="openTips(23)">⚡ Dicas &amp; Pegadinhas</button>
+      <button class="btn-nav btn-estudo" onclick="openEstudoAmplo(23)">📚 Estudo Amplo</button>
       <button class="btn-nav btn-check" id="check-23" onclick="markDone(23)">✓ Marcar como Estudado</button>
     </div>
     <button class="btn-nav btn-next" onclick="nextChapter()">Próximo →</button>
@@ -3036,6 +3113,7 @@ tbody td:first-child{font-weight:600;color:var(--navy2);white-space:nowrap}
     <div style="display:flex;gap:10px;flex-wrap:wrap">
       <button class="btn-nav btn-q" onclick="openQuestions(24)">❓ Questões (10)</button>
       <button class="btn-nav btn-tips" onclick="openTips(24)">⚡ Dicas &amp; Pegadinhas</button>
+      <button class="btn-nav btn-estudo" onclick="openEstudoAmplo(24)">📚 Estudo Amplo</button>
       <button class="btn-nav btn-check" id="check-24" onclick="markDone(24)">✓ Marcar como Estudado</button>
     </div>
     <button class="btn-nav btn-next" onclick="nextChapter()">Próximo →</button>
@@ -3138,6 +3216,7 @@ tbody td:first-child{font-weight:600;color:var(--navy2);white-space:nowrap}
     <div style="display:flex;gap:10px;flex-wrap:wrap">
       <button class="btn-nav btn-q" onclick="openQuestions(25)">❓ Questões (10)</button>
       <button class="btn-nav btn-tips" onclick="openTips(25)">⚡ Dicas &amp; Pegadinhas</button>
+      <button class="btn-nav btn-estudo" onclick="openEstudoAmplo(25)">📚 Estudo Amplo</button>
       <button class="btn-nav btn-check" id="check-25" onclick="markDone(25)">✓ Marcar como Estudado</button>
     </div>
     <button class="btn-nav btn-back" onclick="prevChapter()" style="opacity:.5">Fim dos Capítulos</button>
@@ -4509,6 +4588,206 @@ function encerrarProva(showResult) {
   }
 }
 
+
+// ============================================================
+// ESTUDO AMPLO — MODAL COM IA
+// ============================================================
+let estudoCurrentCh = 1;
+let estudoActiveTab = 'resumo';
+let estudoLoaded = false;
+let estudoData = {};
+
+const ESTUDO_TEMAS = {
+  1:'Sistema Previdenciário Brasileiro: RGPS vs RPPS vs Previdência Complementar (RPC). Três pilares. Seguridade Social CF/88 arts.194-204: saúde, previdência, assistência social. Princípios: universalidade, uniformidade, seletividade, irredutibilidade, equidade, diversidade, caráter democrático. Regimes financeiros: repartição simples, capitalização. Unicidade do RPPS. Município até 100 servidores pode optar pelo RGPS (irrevogável). Servidores comissionados = RGPS. Militares = regime próprio diferente.',
+  2:'CF/88 Art.40 RPPS completo. Aposentadoria voluntária: 65H/62M + 25 contrib + 10 serv público + 10 cargo efetivo + 5 no cargo atual. Proventos: 60% com 25 anos +2%/ano, 100% = 35F/40H anos. Aposentadoria compulsória: 75 anos, SEMPRE proporcional. Incapacidade: regra=proporcional, exceção=integral apenas em acidente em serviço, moléstia profissional ou doença grave/incurável em lei. Pensão cônjuge: <22=3anos, 22-27=6, 28-30=10, 31-41=15, 42-44=20, 45+=vitalícia. Filho inválido=vitalícia. Abono permanência = pago pelo ente. Contribuição inativo sobre parcela acima do teto RGPS.',
+  3:'EC 103/2019 Reforma da Previdência: promulgada 13/11/2019. Extinguiu aposentadoria por tempo sem idade mínima. Regra geral: 65H/62M + 25 contrib + 10 serv público + 10 cargo efetivo + 5 cargo atual. Alíquotas progressivas: até teto INSS=7,5%, acima até R$10k=9%, R$10k-R$20k=12%, R$20k-R$39k=14%, acima R$39k=16%. Regras de transição: pedágio 50% (50% do tempo faltante + idade mínima progressiva), pedágio 100% (dobro do tempo, sem idade mínima, expirou nov/2021), pontos progressivos (H=103 em 2026, M=93 em 2026, limite H=105/M=100), idade mínima progressiva. Professores educação básica: -5 anos na IDADE (60H/57M), 25 anos exclusivos no magistério. Professores universitários: sem redução.',
+  4:'Lei 9.717/98 Normas Gerais RPPS: unicidade (1 RPPS por ente), avaliação atuarial anual obrigatória via DRAA no CADPREV, DIPR mensal, DAIR anual. Vedações: operações de crédito com o ente, usar recursos para finalidade diversa. Irregularidade CADPREV = impedido de receber transferências voluntárias da União. COMPREV = compensação proporcional entre RGPS e RPPS pelo tempo trabalhado em cada regime. Pró-Gestão = VOLUNTÁRIO, 4 níveis progressivos, 4 dimensões.',
+  5:'Portaria MTP 1.467/2022: Unidade Gestora deve ser autarquia/fundação/órgão com gestão EXCLUSIVA do RPPS. Estrutura: Conselho Deliberativo (50% ente + 50% participantes), Conselho Fiscal, Diretoria Executiva. Política de Investimentos aprovada pelo Conselho Deliberativo ANTES do início do exercício. Segregação de massas: Fundo Financeiro (repartição simples, inativos antigos) e Fundo Previdenciário (capitalização, ativos novos). Plano de Custeio baseado na avaliação atuarial. Déficit = Plano de Amortização máx 35 anos.',
+  6:'Resolução CMN 4.963/2021 Investimentos RPPS: Renda Fixa=máx 100%, Renda Variável=máx 30%, Exterior=máx 10%, FII=máx 8%, Multimercado=máx 10%. Política de Investimentos aprovada antes do exercício pelo Conselho Deliberativo. Vedado aplicar acima dos limites em títulos do próprio ente. Títulos públicos federais = segmento mais seguro e mais utilizado. Gestor responde pessoalmente por desvios.',
+  7:'Avaliação Atuarial RPPS: reserva matemática = valor atual dos benefícios futuros descontados. Déficit atuarial = passivo > ativo. Superávit = ativo > passivo. Taxa de desconto: alta=passivo menor, baixa=passivo maior. Alíquota normal = custeio do benefício futuro. Alíquota suplementar = amortização do déficit. Prazo máximo plano de amortização = 35 anos. DRAA = Demonstrativo do Resultado da Avaliação Atuarial, enviado anualmente ao CADPREV.',
+  8:'LC 108 e 109/2001 Previdência Complementar: LC 109 = geral (todas as EFPCs). LC 108 = EFPCs patrocinadas por entes públicos (contribuição patrocinador ≤ participante). Planos: BD (benefício definido - risco na entidade), CD (contribuição definida - risco no participante), CV (contribuição variável - misto). Portabilidade = transfere reserva entre planos sem tributação. Resgate = recebe com tributação, encerra participação. BPD = benefício proporcional diferido (nem portabilidade nem resgate). PREVIC fiscaliza EFPCs. SUSEP fiscaliza EAPCs (PGBL, VGBL).',
+  9:'Benefícios RPPS detalhados: Aposentadoria voluntária (65H/62M + 25+10+10+5). Compulsória (75 anos, PROPORCIONAL sempre). Incapacidade (proporcional; INTEGRAL somente acidente serviço/moléstia profissional/doença grave incurável em lei). Pensão por morte: tabela de prazos por faixa etária do cônjuge (vitalícia se 45+). Valor da pensão: 50% do que exceder o teto RGPS + 100% até o teto RGPS. Filho inválido = vitalícia. Abono permanência = pago pelo ente, valor igual à contribuição previdenciária.',
+  10:'Art.37 CF/88 Administração Pública: princípios LIMPE (Legalidade, Impessoalidade, Moralidade, Publicidade, Eficiência). Eficiência incluída pela EC 19/1998. Acumulação vedada, exceto: 2 cargos de professor, professor+técnico-científico, 2 profissionais de saúde com profissão regulamentada (jornada compatível). Concurso público obrigatório. Cargos em comissão = livre nomeação/exoneração. Teto = subsídio Ministros STF. Nepotismo vedado (Súmula Vinculante 13). Agentes públicos: agentes políticos, servidores estatutários, empregados públicos, agentes colaboradores.',
+  11:'Lei 9.784/99 Processo Administrativo: prazos fundamentais 10-30-5 (recurso=10 dias, decisão=30 dias prorrogável, decadência anulação ato favorável de boa-fé=5 anos). Princípios: legalidade, finalidade, motivação, razoabilidade, proporcionalidade, moralidade, ampla defesa, contraditório, segurança jurídica, interesse público, eficiência. Autotutela: REVOGAR atos discricionários (conveniência), ANULAR atos ilegais. Processo gratuito, proibido exigir documentos não previstos em lei. Prazo cumprimento diligência = 5 dias prorrogável.',
+  12:'Matemática Financeira: juros simples J=C×i×t, M=C×(1+i×t). Juros compostos M=C×(1+i)^t. Taxa equivalente compostos: (1+ia)=(1+im)^12. Taxa proporcional simples: ia=12×im. Desconto comercial: D=N×d×t, valor atual=N×(1-d×t). Desconto racional: D=N×i×t/(1+i×t). VPL>0 viável. TIR = taxa que zera o VPL. Aumentos/descontos sucessivos: multiplica fatores, nunca soma percentuais. Anuidades, PA, PG.',
+  13:'Língua Portuguesa: crase obrigatória (preposição A + artigo feminino A), nunca antes de pronomes pessoais, verbos ou palavras masculinas. Facultativa antes de pronomes possessivos femininos. Concordância verbal e nominal. Regência: obedecer A, assistir A (ver), visar AO, aspirar AO. Cujo = possessivo, nunca seguido de artigo. Conectivos: adversativos (porém/contudo/todavia), conclusivos (portanto/logo/pois posposto), explicativos (pois anteposto/porque). Interpretação textual: resposta sempre no texto.',
+  14:'Tecnologia da Informação: LGPD aplica setor público e privado. Controlador=decide sobre o tratamento, operador=realiza em nome do controlador, titular=a quem pertencem os dados. DPO=encarregado de dados. Dados sensíveis=origem racial, religião, saúde, genético, biométrico. 10 princípios art.6º LGPD: finalidade, adequação, necessidade, livre acesso, qualidade, transparência, segurança, prevenção, não discriminação, responsabilização. Backup: incremental=desde último backup qualquer tipo; diferencial=desde último COMPLETO. CID=Confidencialidade, Integridade, Disponibilidade. Assinatura digital=chave PRIVADA assina/chave PÚBLICA verifica.',
+  18:'Lei Municipal 3.800/1991 Estatuto Sorocaba: estabilidade=3 anos + avaliação de desempenho favorável. Abandono de cargo=30 dias consecutivos injustificados=demissão. Inassiduidade habitual=60 dias em 12 meses. Reintegração=retorno por decisão judicial. Reversão=retorno aposentado por invalidez. Aproveitamento=retorno do disponível. Recondução=retorno ao cargo anterior por inabilitação. Prescrição: demissão=5 anos, suspensão=2 anos, advertência=180 dias. Licença interesses particulares=3 anos improrrogável sem remuneração. Triênio=5% a cada 3 anos até 35%.',
+  19:'FUNSERV Lei 13.164/2025: Fundação Pública de Direito Público, Administração Indireta de Sorocaba. Administra o RPPS dos servidores municipais efetivos. Diretoria Executiva nomeada pelo Prefeito. Conselho Deliberativo=50% ente + 50% participantes. Repasse das contribuições=até o 5º dia útil do mês subsequente. Atraso=correção monetária e juros. Recursos do RPPS ≠ Tesouro Municipal, patrimônios separados.',
+  20:'LRF Lei Complementar 101/2000: limites pessoal=União 50% RCL, Estados/Municípios 60% RCL. Municípios: 54% Executivo + 6% Legislativo. Alerta=90%, Prudencial=95% do limite. RREO=bimestral, RGF=quadrimestral. Vedado fazer despesa de pessoal nos 180 dias finais do mandato acima da disponibilidade. Contribuição patronal ao RPPS entra no gasto com pessoal. Contingenciamento quando não atingir meta fiscal.',
+  21:'PPA, LDO e LOA: PPA=4 anos, vigora do 2º ao 1º do próximo mandato, prazo 31/08 do 1º ano. LDO=1 ano, aprovada 15/04, orienta a LOA. LOA=1 ano, aprovada 22/dez, 3 orçamentos (Fiscal, Seguridade Social, Investimentos Estatais). Princípios orçamentários: unidade, universalidade, anualidade, exclusividade, publicidade. Créditos adicionais: suplementar=reforça existente, especial=cria nova dotação (decreto), extraordinário=urgência (MP). Superávit primário=receitas-despesas exceto juros.',
+  22:'MCASP Contabilidade Pública: PCASP com 8 classes (1=Ativo, 2=Passivo/PL, 3=VPD, 4=VPA, 5-6=orçamento, 7-8=compensação). Regime de competência para patrimônio. Regime de caixa para orçamento. VPA=receitas patrimoniais, VPD=despesas patrimoniais. Demonstrações: Balanço Patrimonial, Balanço Orçamentário, Balanço Financeiro, DVPA, DFC. Estágios despesa: empenho (reserva dotação) > liquidação (verifica direito do credor) > pagamento. Empenho: ordinário=valor certo, estimativo=valor incerto, global=contratos parcelados.',
+  23:'Raciocínio Lógico: condicional P→Q falso APENAS quando P=V e Q=F. Contrapositiva ¬Q→¬P equivale à original. De Morgan: ¬(P∧Q)=¬P∨¬Q, ¬(P∨Q)=¬P∧¬Q. Quantificadores: negação de TODOS os A são B = EXISTE ALGUM A que não é B. Porcentagem P% de X=(P/100)×X. Descontos/aumentos compostos: multiplica fatores. PA: an=a1+(n-1)r. PG: an=a1×q^(n-1). Probabilidade=favoráveis/totais. Combinação C(n,p)=n!/[p!(n-p)!] sem ordem, Arranjo com ordem.',
+  24:'Administração Geral e Pública: Taylor=ORT tempos e movimentos. Fayol=PODC (Planejar Organizar Dirigir Controlar) + 14 princípios. Weber=burocracia racional-legal. Mayo=Hawthorne relações humanas. Maslow=pirâmide (fisiológicas>segurança>social>estima>autorrealização). Herzberg=higiênicos evitam insatisfação (não motivam), motivadores geram satisfação. McGregor: X=trabalhador preguiçoso, Y=trabalhador pró-ativo. Modelos AdmPública: patrimonialismo→burocracia→gerencialismo (PDRAE 1995/Bresser)→governança. Liderança situacional Hersey-Blanchard: 4 estilos conforme maturidade.',
+  25:'Pró-Gestão RPPS: programa VOLUNTÁRIO de certificação institucional, 4 níveis progressivos (I ao IV, não pula). 4 dimensões: I=Controles Internos e Gestão de Risco, II=Governança Corporativa, III=Educação Previdenciária, IV=Transparência. Validade=2 anos. Candidatura e avaliação pelo MPS via CADPREV. Nível IV=redução da alíquota de compensação ao RGPS. CADPREV é OBRIGATÓRIO para todos. Pró-Gestão não isenta do CADPREV nem da avaliação atuarial.',
+  26:'Direito Administrativo: atos administrativos (competência, finalidade, forma, motivo, objeto). Vinculados vs discricionários. Atributos: presunção de legitimidade, imperatividade, autoexecutoriedade, tipicidade. Controle: interno (autotutela), externo (Legislativo + TCU), social. Licitação: Lei 14.133/2021 - modalidades (pregão, concorrência, concurso, leilão, diálogo competitivo). Concessão, permissão, autorização de serviços públicos. Responsabilidade civil do Estado: teoria objetiva (risco administrativo).',
+  27:'Direito Previdenciário e Seguridade Social: conceito de seguridade (saúde+previdência+assistência). Custeio: CF art.195, contribuições sociais. Benefícios RGPS: aposentadoria por idade, tempo de contribuição, especial, invalidez; auxílio-doença, acidente; salário-maternidade; pensão por morte; salário-família. Carência. Qualidade de segurado. Beneficiários: segurados e dependentes. Regras de cálculo: média dos salários de contribuição, fator previdenciário (opcional pós-reform). RPPS vs RGPS: diferenças fundamentais aplicadas ao concurso.'
+};
+
+async function openEstudoAmplo(ch) {
+  estudoCurrentCh = ch;
+  estudoLoaded = false;
+  estudoData = {};
+
+  // Reset UI
+  const overlay = document.getElementById('estudo-modal-overlay');
+  overlay.classList.add('open');
+  document.getElementById('estudo-loading').style.display = 'flex';
+  document.getElementById('estudo-panels').style.display = 'none';
+  document.getElementById('estudo-ask-area').style.display = 'none';
+  document.getElementById('estudo-qa-list').innerHTML = '';
+
+  // Set title
+  const sbText = document.querySelector(`.sb-item[data-ch="${ch}"] .sb-text`);
+  const chapName = sbText ? sbText.textContent.trim() : 'Capítulo ' + ch;
+  document.getElementById('estudo-modal-title').textContent = '📚 Estudo Amplo — ' + chapName;
+
+  // Switch to resumo tab
+  switchEstudoTab('resumo', false);
+
+  // Load AI content
+  const tema = ESTUDO_TEMAS[ch] || 'previdência social RPPS concurso público';
+  try {
+    const apiKey = getApiKey();
+    if (!apiKey) { openApiKeyModal(); closeEstudoAmplo(); return; }
+
+    const systemPrompt = `Você é um professor especializado em concursos públicos brasileiros, especialmente na área de previdência social e RPPS. Seu aluno está se preparando para o concurso de Analista Previdenciário da FUNSERV Sorocaba 2026. Responda sempre em português do Brasil com linguagem clara, didática e objetiva. Use exemplos práticos quando possível.`;
+
+    const userPrompt = `Gere um estudo COMPLETO e DIDÁTICO sobre o seguinte tema para concurso público, retornando APENAS um JSON válido no formato especificado abaixo. NÃO use markdown, NÃO use backticks, retorne APENAS o JSON.
+
+TEMA: ${chapName}
+CONTEÚDO BASE: ${tema}
+
+FORMATO JSON EXATO (sem quebras de linha nas strings, use \\n para pular linha dentro das strings):
+{"resumo":"Explicação completa e detalhada do tema com pelo menos 8 parágrafos. Inclua conceitos fundamentais, diferenças importantes, exemplos práticos e o que mais cai em prova. Use \\n\\n para separar parágrafos.","pegadinhas":["Pegadinha 1 completa explicando o erro e a resposta correta","Pegadinha 2 completa","Pegadinha 3 completa","Pegadinha 4 completa","Pegadinha 5 completa","Pegadinha 6 completa"],"mnemonicos":["MNEMÔNICO 1: sigla ou truque de memória + explicação do que cada letra/parte representa","MNEMÔNICO 2 completo","MNEMÔNICO 3 completo","MNEMÔNICO 4 completo","MNEMÔNICO 5 completo"]}`;
+
+    const raw = await callAI(systemPrompt, [{ role: 'user', content: userPrompt }]);
+    let clean = raw.replace(/```json|```/g, '').trim();
+    // Find JSON object
+    const start = clean.indexOf('{');
+    const end = clean.lastIndexOf('}');
+    if (start !== -1 && end !== -1) clean = clean.slice(start, end + 1);
+
+    estudoData = JSON.parse(clean);
+    estudoLoaded = true;
+
+    // Render content
+    renderEstudoResumo();
+    renderEstudoPegadinhas();
+    renderEstudoMnemonicos();
+
+    document.getElementById('estudo-loading').style.display = 'none';
+    document.getElementById('estudo-panels').style.display = 'block';
+    document.getElementById('estudo-ask-area').style.display = 'flex';
+
+  } catch(e) {
+    document.getElementById('estudo-loading').innerHTML = `
+      <div style="text-align:center;padding:20px">
+        <div style="font-size:32px;margin-bottom:12px">⚠️</div>
+        <div style="font-size:14px;font-weight:700;color:var(--red);margin-bottom:8px">Erro ao carregar</div>
+        <div style="font-size:13px;color:var(--text3);margin-bottom:16px">${e.message || 'Verifique sua chave de API Groq.'}</div>
+        <button onclick="openEstudoAmplo(${ch})" style="background:var(--navy);color:#fff;border:none;border-radius:8px;padding:10px 20px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit">🔄 Tentar novamente</button>
+      </div>`;
+  }
+}
+
+function renderEstudoResumo() {
+  const cont = document.getElementById('estudo-resumo-content');
+  if (!estudoData.resumo) { cont.innerHTML = '<p style="color:var(--text3)">Sem conteúdo.</p>'; return; }
+  const paragraphs = estudoData.resumo.split(/\n\n+/);
+  cont.innerHTML = `
+    <div class="estudo-section">
+      <div class="estudo-section-title">📖 Explicação Completa do Tema</div>
+      <div class="estudo-text">
+        ${paragraphs.map(p => `<p style="margin-bottom:14px">${p.replace(/\n/g,'<br>')}</p>`).join('')}
+      </div>
+    </div>`;
+}
+
+function renderEstudoPegadinhas() {
+  const cont = document.getElementById('estudo-pegadinhas-content');
+  if (!estudoData.pegadinhas || !estudoData.pegadinhas.length) { cont.innerHTML = '<p style="color:var(--text3)">Sem conteúdo.</p>'; return; }
+  cont.innerHTML = `
+    <div class="estudo-section">
+      <div class="estudo-section-title">⚠️ Principais Pegadinhas de Prova</div>
+      ${estudoData.pegadinhas.map((p,i) => `
+        <div class="estudo-alerta">
+          <strong style="display:block;margin-bottom:4px;font-size:11px;text-transform:uppercase;letter-spacing:.5px">Pegadinha ${i+1}</strong>
+          ${p}
+        </div>`).join('')}
+    </div>`;
+}
+
+function renderEstudoMnemonicos() {
+  const cont = document.getElementById('estudo-mnemonicos-content');
+  if (!estudoData.mnemonicos || !estudoData.mnemonicos.length) { cont.innerHTML = '<p style="color:var(--text3)">Sem conteúdo.</p>'; return; }
+  cont.innerHTML = `
+    <div class="estudo-section">
+      <div class="estudo-section-title">💡 Mnemônicos e Macetes para Memorizar</div>
+      ${estudoData.mnemonicos.map((m,i) => `
+        <div class="estudo-dica">
+          <strong style="display:block;margin-bottom:4px;font-size:11px;text-transform:uppercase;letter-spacing:.5px">Macete ${i+1}</strong>
+          ${m}
+        </div>`).join('')}
+    </div>`;
+}
+
+function switchEstudoTab(tab, animate=true) {
+  estudoActiveTab = tab;
+  document.querySelectorAll('.estudo-tab').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.estudo-panel').forEach(el => el.classList.remove('active'));
+  const tabs = document.querySelectorAll('.estudo-tab');
+  const tabMap = {resumo:0, pegadinhas:1, mnemonicos:2, perguntas:3};
+  if (tabs[tabMap[tab]]) tabs[tabMap[tab]].classList.add('active');
+  const panel = document.getElementById('estudo-panel-' + tab);
+  if (panel) panel.classList.add('active');
+  // Show/hide ask area
+  const askArea = document.getElementById('estudo-ask-area');
+  if (askArea) askArea.style.display = (tab === 'perguntas' && estudoLoaded) ? 'flex' : 'none';
+}
+
+async function askEstudo() {
+  const input = document.getElementById('estudo-ask-input');
+  const btn = document.getElementById('estudo-ask-btn');
+  const question = input.value.trim();
+  if (!question) return;
+
+  input.value = '';
+  btn.disabled = true;
+  btn.textContent = '⏳';
+
+  const lista = document.getElementById('estudo-qa-list');
+  const loadId = 'qa-' + Date.now();
+  lista.innerHTML += `
+    <div class="estudo-qa-item" id="${loadId}">
+      <div class="estudo-qa-q">❓ ${question}</div>
+      <div class="estudo-qa-a" style="color:var(--text3)">⏳ Consultando IA...</div>
+    </div>`;
+  lista.scrollTop = lista.scrollHeight;
+
+  const sbText = document.querySelector(`.sb-item[data-ch="${estudoCurrentCh}"] .sb-text`);
+  const chapName = sbText ? sbText.textContent.trim() : 'Capítulo ' + estudoCurrentCh;
+  const tema = ESTUDO_TEMAS[estudoCurrentCh] || '';
+
+  try {
+    const systemPrompt = `Você é um professor especialista em concursos públicos, área de previdência social e RPPS. O aluno está se preparando para o concurso de Analista Previdenciário da FUNSERV Sorocaba 2026. Responda de forma clara, direta e focada no que cai em prova. Máximo de 300 palavras.`;
+    const userPrompt = `Tema do capítulo: ${chapName}\nConteúdo de referência: ${tema}\n\nPergunta do aluno: ${question}`;
+    const reply = await callAI(systemPrompt, [{role:'user',content:userPrompt}]);
+    const el = document.getElementById(loadId);
+    if (el) el.querySelector('.estudo-qa-a').innerHTML = reply.replace(/\n/g,'<br>');
+  } catch(e) {
+    const el = document.getElementById(loadId);
+    if (el) el.querySelector('.estudo-qa-a').textContent = '⚠️ Erro: ' + (e.message || 'Tente novamente.');
+  }
+
+  btn.disabled = false;
+  btn.textContent = 'Perguntar';
+}
+
+function closeEstudoAmplo() {
+  document.getElementById('estudo-modal-overlay').classList.remove('open');
+}
+
 // ============================================================
 // INIT
 // ============================================================
@@ -4570,6 +4849,51 @@ function sendAI() { sendAIMsg(); }
       <button class="modal-close" onclick="closeModal('revisao-modal')">✕</button>
     </div>
     <div class="modal-body" id="revisao-content"></div>
+  </div>
+</div>
+
+<!-- ========== MODAL: ESTUDO AMPLO ========== -->
+<div class="estudo-modal-overlay" id="estudo-modal-overlay" onclick="if(event.target===this)closeEstudoAmplo()">
+  <div class="estudo-modal">
+    <div class="estudo-modal-header">
+      <h3 id="estudo-modal-title">📚 Estudo Amplo — Explicação Completa</h3>
+      <button class="estudo-modal-close" onclick="closeEstudoAmplo()">✕</button>
+    </div>
+    <div class="estudo-tabs" id="estudo-tabs">
+      <button class="estudo-tab active" onclick="switchEstudoTab('resumo')">📖 Resumo Completo</button>
+      <button class="estudo-tab" onclick="switchEstudoTab('pegadinhas')">⚠️ Pegadinhas</button>
+      <button class="estudo-tab" onclick="switchEstudoTab('mnemonicos')">💡 Mnemônicos</button>
+      <button class="estudo-tab" onclick="switchEstudoTab('perguntas')">💬 Tire Dúvidas</button>
+    </div>
+    <div class="estudo-modal-body" id="estudo-modal-body">
+      <div class="estudo-loading" id="estudo-loading">
+        <div class="estudo-loading-dots">
+          <div class="estudo-ldot"></div><div class="estudo-ldot"></div><div class="estudo-ldot"></div>
+        </div>
+        <div class="estudo-loading-text">🤖 IA preparando estudo completo...</div>
+      </div>
+      <div id="estudo-panels" style="display:none">
+        <div class="estudo-panel active" id="estudo-panel-resumo">
+          <div class="estudo-content" id="estudo-resumo-content"></div>
+        </div>
+        <div class="estudo-panel" id="estudo-panel-pegadinhas">
+          <div class="estudo-content" id="estudo-pegadinhas-content"></div>
+        </div>
+        <div class="estudo-panel" id="estudo-panel-mnemonicos">
+          <div class="estudo-content" id="estudo-mnemonicos-content"></div>
+        </div>
+        <div class="estudo-panel" id="estudo-panel-perguntas">
+          <div class="estudo-content" id="estudo-perguntas-content">
+            <p style="font-size:13px;color:var(--text3);line-height:1.7;margin-bottom:16px">💬 Faça qualquer pergunta sobre este tema e a IA responderá com detalhes focados no concurso FUNSERV 2026.</p>
+            <div id="estudo-qa-list"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="estudo-ask-area" id="estudo-ask-area" style="display:none">
+      <input class="estudo-ask-input" id="estudo-ask-input" type="text" placeholder="Ex: O que é segregação de massas? Como calcular os pontos em 2026?" onkeydown="if(event.key==='Enter')askEstudo()">
+      <button class="estudo-ask-btn" id="estudo-ask-btn" onclick="askEstudo()">Perguntar</button>
+    </div>
   </div>
 </div>
 
