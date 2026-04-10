@@ -4698,7 +4698,10 @@ const ESTUDO_DATA = {
   },
 };
 
-function openEstudoAmplo(ch) {
+// Cache para não chamar a IA toda vez que abrir o mesmo capítulo
+const estudoCache = {};
+
+async function openEstudoAmplo(ch) {
   estudoCurrentCh = ch;
   estudoActiveTab = 'resumo';
   const overlay = document.getElementById('estudo-modal-overlay');
@@ -4708,24 +4711,183 @@ function openEstudoAmplo(ch) {
   const chapName = sbText ? sbText.textContent.trim() : 'Capítulo ' + ch;
   document.getElementById('estudo-modal-title').textContent = '📚 Estudo Amplo — ' + chapName;
 
-  document.getElementById('estudo-loading').style.display = 'none';
-  document.getElementById('estudo-panels').style.display = 'block';
+  // Mostrar loading enquanto gera
+  document.getElementById('estudo-loading').style.display = 'flex';
+  document.getElementById('estudo-panels').style.display = 'none';
   document.getElementById('estudo-ask-area').style.display = 'none';
 
-  switchEstudoTab('resumo');
+  // Se já tem cache, usar direto
+  if (estudoCache[ch]) {
+    document.getElementById('estudo-loading').style.display = 'none';
+    document.getElementById('estudo-panels').style.display = 'block';
+    switchEstudoTab('resumo');
+    return;
+  }
+
+  const chapterTopics = {
+    1:'Sistema Previdenciário Brasileiro, três pilares (RGPS, RPPS, RPC), princípios da seguridade social (CF art.194-195), PREVIC, SUSEP, quem pode ter RPPS',
+    2:'CF/88 art. 40, aposentadoria voluntária (65H/62M + 25 contribuição + 10 serviço público + 10 cargo efetivo + 5 cargo atual), compulsória 75 anos proporcional, incapacidade permanente (proporcional vs integral), pensão por morte (tabela de prazo por faixa etária), abono de permanência, cálculo dos proventos (60% + 2%/ano)',
+    3:'EC 103/2019: extinção da aposentadoria por tempo sem idade mínima, alíquotas progressivas (7,5% a 16%), pontos progressivos 2026 (103H/93M), pedágio 50% (como calcular), professores educação básica (redução 5 anos na idade), vedação de novos regimes de previdência complementar',
+    4:'Lei 9.717/98: normas gerais RPPS, unicidade (apenas 1 RPPS por ente), CADPREV (DIPR mensal, DRAA anual, DAIR anual), COMPREV (compensação financeira entre regimes), vedações expressas, consequências do descumprimento',
+    5:'Portaria MTP 1.467/2022: unidade gestora (autarquia/fundação/órgão com gestão exclusiva), segregação de massas (Fundo Financeiro repartição simples x Fundo Previdenciário capitalização), Conselho Deliberativo paridade 50/50, Conselho Fiscal, Plano de Custeio, Plano de Amortização máx 35 anos',
+    6:'Resolução CMN 4.963/2021: renda fixa máx 100%, renda variável máx 30%, exterior máx 10%, FII máx 8%, multimercado máx 10%, Política de Investimentos aprovação antes do exercício, vedações, responsabilidade do gestor',
+    7:'Avaliação atuarial anual obrigatória: reserva matemática (valor presente obrigações futuras), déficit atuarial (passivo > ativo) x superávit (ativo > passivo), alíquota normal (custeio futuro) x alíquota suplementar (amortização déficit), taxa de desconto, tábua de mortalidade, DRAA, Plano de Amortização 35 anos',
+    8:'LC 108/2001 (EFPCs públicas) e LC 109/2001 (geral previdência complementar): planos BD (benefício definido, risco no patrocinador), CD (contribuição definida, risco no participante), CV (variável, misto), portabilidade (transferência sem tributação, carência 3 anos), resgate, BPD (benefício proporcional diferido), PREVIC fiscaliza EFPCs, SUSEP fiscaliza EAPCs, contribuição patrocinador ≤ participante',
+    9:'Benefícios RPPS completo: aposentadoria voluntária todos os requisitos (5 cumulativos), compulsória 75 anos sempre proporcional, incapacidade permanente (proporcional REGRA / integral EXCEÇÃO: acidente em serviço, moléstia profissional, doença grave incurável em lei), pensão por morte (tabela faixa etária: <22=3anos, 22-27=6anos, 28-30=10anos, 31-41=15anos, 42-44=20anos, 45+=vitalícia), cálculo valor pensão',
+    10:'CF/88 art. 37 LIMPE: Legalidade, Impessoalidade, Moralidade, Publicidade, Eficiência — conceito de cada um, acumulação de cargos (regras e exceções), concurso público (obrigatoriedade e exceções), cargos em comissão (livre nomeação), teto remuneratório, nepotismo (Súmula Vinculante 13)',
+    11:'Lei 9.784/99: princípios do processo administrativo, prazos fundamentais (recurso 10 dias, decisão 30 dias prorrogável, cumprimento diligência 5 dias), decadência para anulação 5 anos boa-fé, autotutela (Súmula 473 STF), ampla defesa, contraditório, processo gratuito, proibição de documentos não previstos em lei',
+    12:'Matemática financeira: juros simples J=C*i*t M=C*(1+i*t) vs juros compostos M=C*(1+i)^t, taxas equivalentes (compostos: (1+ia)=(1+im)^12, simples: ia=12*im), desconto comercial D=N*d*t vs desconto racional D=N*i*t/(1+i*t), VPL (aceitar se >0), TIR (taxa que zera VPL), exemplos numéricos',
+    13:'Língua portuguesa para concurso: crase (regras completas: obrigatória, proibida, facultativa), concordância verbal (sujeito simples, composto anteposto/posposto, coletivo, expressões partitivas), concordância nominal, regência verbal dos verbos mais cobrados (obedecer, assistir, visar, aspirar, preferir), conectivos (concessão, oposição, conclusão), interpretação de texto',
+    14:'LGPD Lei 13.709/2018: âmbito de aplicação (setor público e privado), 10 princípios do art.6 (finalidade, adequação, necessidade, livre acesso, qualidade, transparência, segurança, prevenção, não-discriminação, responsabilização), dados sensíveis (art.5), papéis (controlador, operador, titular, DPO), ANPD, segurança da informação CID (Confidencialidade, Integridade, Disponibilidade), backup incremental vs diferencial vs completo, criptografia simétrica vs assimétrica, assinatura digital (chave privada assina, pública verifica)',
+    18:'Lei 3.800/1991 Estatuto Servidores Sorocaba: formas de provimento (nomeação, promoção, readaptação, reversão, aproveitamento, reintegração, recondução), vacância, estabilidade 3 anos + avaliação desempenho, abandono de cargo 30 dias consecutivos, inassiduidade habitual 60 dias em 12 meses, licenças (saúde remunerada, interesses particulares 3 anos sem remuneração), penalidades e prazos prescricionais (demissão 5 anos, suspensão 2 anos, advertência 180 dias)',
+    19:'FUNSERV Lei 13.164/2025: natureza jurídica fundação pública de direito público, administração indireta Sorocaba, gestão exclusiva RPPS servidores efetivos municipais, Diretoria Executiva (nomeada pelo Prefeito), Conselho Deliberativo (paridade 50/50), Conselho Fiscal, repasse contribuições até 5º dia útil mês subsequente, consequências do atraso',
+    20:'LRF LC 101/2000: limites de gastos com pessoal (União 50% RCL, Estados 60%, Municípios 60%), RREO bimestral (publicação 30 dias após encerramento bimestre), RGF quadrimestral (publicação 30 dias), RCL (conceito e deduções), consequências do excesso (suspensão admissões, promoções, horas extras, criação de cargos), vedações finais de mandato (180 dias)',
+    21:'Peças orçamentárias: PPA (4 anos, inicia 2º ano do mandato, prazos envio ao Legislativo), LDO (1 ano, aprovada até 17/jul, conteúdo), LOA (1 ano, aprovada até 22/dez, conteúdo), princípios orçamentários (unidade, universalidade, anualidade, exclusividade, publicidade, não-afetação, orçamento bruto), créditos adicionais (suplementares=reforço, especiais=finalidade nova, extraordinários=urgência/guerra)',
+    22:'MCASP e PCASP: PCASP 8 classes (1=Ativo, 2=Passivo/PL, 3=VPD, 4=VPA, 5-6=orçamentário, 7-8=compensação), VPA (Variações Patrimoniais Aumentativas = receitas aumentam PL) x VPD (Variações Patrimoniais Diminutivas = despesas reduzem PL), regime de competência (patrimônio) x regime de caixa (orçamento), estágios da despesa (Empenho→Liquidação→Pagamento), tipos de empenho (ordinário, estimativo, global), demonstrações (BP, BO, BF, DVPA, DFC)',
+    23:'Raciocínio lógico: proposição condicional P→Q (falsa somente quando P=V e Q=F), contrapositiva ¬Q→¬P equivale à original (recíproca e inversa NÃO equivalem), Leis de De Morgan (¬(P∧Q)=¬P∨¬Q e ¬(P∨Q)=¬P∧¬Q), quantificadores (negação de TODOS é EXISTE ALGUM QUE NÃO), porcentagem (desconto composto multiplica fatores), PA e PG (fórmulas completas), probabilidade (P(A)=favoráveis/totais, combinação vs arranjo)',
+    24:'Teorias da administração: Taylor (ORT, eficiência operacional, tempos e movimentos), Fayol (PODC: Planejar, Organizar, Dirigir, Controlar; 14 princípios), Weber (burocracia racional-legal, características), Mayo (Escola de Relações Humanas, Experimento Hawthorne), Maslow (pirâmide 5 níveis: Fisiológicas→Segurança→Social→Estima→Autorrealização), Herzberg (higiênicos=evitam insatisfação x motivacionais=motivam), McGregor (Teoria X=preguiçoso x Teoria Y=pró-ativo), modelos Adm. Pública (Patrimonialismo→Burocracia DASP/1936→Gerencialismo PDRAE/Bresser/1995→Governança)',
+    25:'Pró-Gestão RPPS: programa VOLUNTÁRIO (≠ CADPREV que é obrigatório), 4 dimensões ((I) Controles Internos e Gestão de Risco, (II) Governança Corporativa, (III) Educação Previdenciária, (IV) Transparência), 4 níveis progressivos sequenciais (I→II→III→IV, não pode pular), validade certificação 2 anos, candidatura pelo CADPREV ao MPS, benefício Nível IV = redução alíquota COMPREV, certificação não isenta do CADPREV nem da avaliação atuarial'
+  };
+
+  const topic = chapterTopics[ch] || chapName;
+
+  const systemPrompt = `Você é um professor especialista em concursos públicos brasileiros, com foco em RPPS, Previdência Social, Direito Administrativo e matérias correlatas. Você cria materiais de estudo COMPLETOS, APROFUNDADOS e DIDÁTICOS para candidatos a concurso. Escreva em HTML simples, usando apenas: <h3>, <h4>, <p>, <ul>, <li>, <strong>, <em>, <hr>. Use as classes CSS especiais para destaque:
+- <div class="estudo-highlight"><strong>TÍTULO</strong><br>conteúdo</div> para regras e conceitos importantes
+- <div class="estudo-alerta"><strong>ATENÇÃO</strong><br>conteúdo</div> para alertas, cuidados e o que NÃO fazer
+- <div class="estudo-dica"><strong>DICA</strong><br>conteúdo</div> para dicas práticas e macetes de prova
+NUNCA use tabelas HTML. NUNCA use markdown (**, ##, ---). Use somente o HTML descrito acima.`;
+
+  try {
+    // Gerar os 3 conteúdos em paralelo (mais rápido)
+    const [resumoHTML, pegadinhasHTML, mnemHTML] = await Promise.all([
+
+      callAIEstudo(systemPrompt, `Crie um ESTUDO COMPLETO E APROFUNDADO sobre o seguinte tema para o concurso de Analista Previdenciário FUNSERV Sorocaba 2026 (Instituto Avalia):
+
+TEMA: ${chapName}
+PONTOS OBRIGATÓRIOS: ${topic}
+
+Estruture o conteúdo em seções com <h3> para títulos principais:
+1. <h3>📌 Visão Geral e Contexto</h3> — O que é, por que existe, base legal principal
+2. <h3>📖 Conceitos Fundamentais</h3> — Explique cada conceito com profundidade
+3. <h3>⚖️ Regras, Prazos e Percentuais</h3> — Todos os números, prazos e regras específicas do tema (cite artigos)
+4. <h3>🔍 Pontos Críticos e Distinções</h3> — Compare institutos similares, aponte diferenças sutis
+5. <h3>✅ Resumo dos Pontos Essenciais</h3> — Lista objetiva com os dados mais importantes
+
+Seja COMPLETO como um capítulo de apostila. Mínimo 700 palavras de conteúdo útil.`),
+
+      callAIEstudo(systemPrompt, `Crie uma lista de PEGADINHAS DE PROVA sobre: ${chapName}
+PONTOS DO TEMA: ${topic}
+
+Gere entre 8 e 12 pegadinhas. Para cada uma:
+- Use <div class="estudo-alerta"> 
+- Coloque em negrito a afirmação ERRADA que a banca poderia colocar
+- Explique por que é errada e qual é a informação correta
+- Cite a lei/artigo/resolução quando relevante
+
+Exemplo de formato:
+<div class="estudo-alerta"><strong>❌ ERRADO: "O Pró-Gestão é obrigatório para todos os RPPS"</strong><br>O Pró-Gestão é VOLUNTÁRIO. O que é obrigatório é o envio ao CADPREV. (Lei 9.717/98)</div>
+
+Foque nas pegadinhas mais recorrentes em concursos de RPPS, previdência e direito administrativo.`),
+
+      callAIEstudo(systemPrompt, `Crie MNEMÔNICOS, MACETES e ESQUEMAS MENTAIS para memorizar: ${chapName}
+PONTOS DO TEMA: ${topic}
+
+Gere entre 6 e 10 mnemônicos/macetes. Para cada um:
+- Use <div class="estudo-dica">
+- Crie um recurso criativo: acrônimo, frase mnemônica, associação, regra prática
+- Explique o que ele ajuda a memorizar
+- Inclua o dado correto que o macete representa
+
+Também inclua no final uma seção <h3>🗺️ Esquema Mental Rápido</h3> com os principais dados do tema em formato de lista hierárquica com <ul><li> para revisão rápida de véspera.`)
+    ]);
+
+    estudoCache[ch] = {
+      resumo: resumoHTML,
+      pegadinhas: pegadinhasHTML,
+      mnemonicos: mnemHTML
+    };
+
+    document.getElementById('estudo-loading').style.display = 'none';
+    document.getElementById('estudo-panels').style.display = 'block';
+    switchEstudoTab('resumo');
+
+  } catch(e) {
+    document.getElementById('estudo-loading').style.display = 'none';
+    document.getElementById('estudo-panels').style.display = 'block';
+    const d = ESTUDO_DATA[ch];
+    if (d) {
+      estudoCache[ch] = { resumo: null, pegadinhas: null, mnemonicos: null, fallback: true };
+    } else {
+      estudoCache[ch] = { resumo: '<p style="color:var(--text3);padding:20px">Configure a chave Groq para gerar o estudo completo com IA.</p>', pegadinhas: null, mnemonicos: null, fallback: false };
+    }
+    switchEstudoTab('resumo');
+  }
+}
+
+// Versão do callAI com mais tokens para o Estudo Amplo
+async function callAIEstudo(systemPrompt, userMessage) {
+  const API_KEY = getApiKey();
+  if (!API_KEY) {
+    openApiKeyModal();
+    throw new Error('CHAVE_NAO_CONFIGURADA');
+  }
+  const groqMessages = [
+    { role: 'system', content: systemPrompt },
+    { role: 'user', content: userMessage }
+  ];
+  const res = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${API_KEY}`
+    },
+    body: JSON.stringify({
+      model: 'llama-3.3-70b-versatile',
+      messages: groqMessages,
+      max_tokens: 4000,
+      temperature: 0.3
+    })
+  });
+  const data = await res.json();
+  if (data.error) throw new Error(data.error.message || JSON.stringify(data.error));
+  const text = data?.choices?.[0]?.message?.content;
+  if (!text) throw new Error('Resposta vazia da IA');
+  return text;
 }
 
 function renderEstudoResumo() {
   const cont = document.getElementById('estudo-resumo-content');
+  const cached = estudoCache[estudoCurrentCh];
+
+  // Conteudo gerado pela IA
+  if (cached && cached.resumo) {
+    cont.innerHTML = '<div class="estudo-section">' + cached.resumo + '</div>';
+    return;
+  }
+
+  // Fallback para dados estaticos (se IA falhou mas ha dados estaticos)
   const d = ESTUDO_DATA[estudoCurrentCh];
-  if (!d || !d.resumo) { cont.innerHTML = '<p style="color:var(--text3);padding:20px">Conteúdo não disponível para este capítulo.</p>'; return; }
-  cont.innerHTML = '<div class="estudo-section"><div class="estudo-section-title">📖 Explicação Completa</div><div class="estudo-text">' +
-    d.resumo.map(p => '<p style="margin-bottom:14px">' + p + '</p>').join('') +
-    '</div></div>';
+  if (d && d.resumo) {
+    cont.innerHTML = '<div class="estudo-section"><div class="estudo-section-title">📖 Resumo Basico (Configure a IA Groq para conteudo completo)</div><div class="estudo-text">' +
+      d.resumo.map(p => '<p style="margin-bottom:14px">' + p + '</p>').join('') +
+      '</div></div>';
+    return;
+  }
+
+  cont.innerHTML = '<p style="color:var(--text3);padding:20px">Configure a chave Groq para gerar o estudo completo com IA.</p>';
 }
 
 function renderEstudoPegadinhas() {
   const cont = document.getElementById('estudo-pegadinhas-content');
+  const cached = estudoCache[estudoCurrentCh];
+
+  // Conteudo gerado pela IA
+  if (cached && cached.pegadinhas) {
+    cont.innerHTML = '<div class="estudo-section"><div class="estudo-section-title">⚠️ Pegadinhas de Prova — Geradas por IA</div>' + cached.pegadinhas + '</div>';
+    return;
+  }
+
+  // Fallback para dados estaticos
   const d = ESTUDO_DATA[estudoCurrentCh];
   if (!d || !d.pegadinhas) { cont.innerHTML = '<p style="color:var(--text3);padding:20px">Conteúdo não disponível.</p>'; return; }
   cont.innerHTML = '<div class="estudo-section"><div class="estudo-section-title">⚠️ Pegadinhas de Prova</div>' +
@@ -4735,6 +4897,15 @@ function renderEstudoPegadinhas() {
 
 function renderEstudoMnemonicos() {
   const cont = document.getElementById('estudo-mnemonicos-content');
+  const cached = estudoCache[estudoCurrentCh];
+
+  // Conteudo gerado pela IA
+  if (cached && cached.mnemonicos) {
+    cont.innerHTML = '<div class="estudo-section"><div class="estudo-section-title">💡 Mnemônicos e Macetes — Gerados por IA</div>' + cached.mnemonicos + '</div>';
+    return;
+  }
+
+  // Fallback para dados estaticos
   const d = ESTUDO_DATA[estudoCurrentCh];
   if (!d || !d.mnemonicos) { cont.innerHTML = '<p style="color:var(--text3);padding:20px">Conteúdo não disponível.</p>'; return; }
   cont.innerHTML = '<div class="estudo-section"><div class="estudo-section-title">💡 Mnemônicos e Macetes</div>' +
@@ -4793,6 +4964,13 @@ async function askEstudo() {
 
 function closeEstudoAmplo() {
   document.getElementById('estudo-modal-overlay').classList.remove('open');
+}
+
+function regenerarEstudo() {
+  if (estudoCurrentCh) {
+    delete estudoCache[estudoCurrentCh];
+    openEstudoAmplo(estudoCurrentCh);
+  }
 }
 
 
@@ -4865,7 +5043,10 @@ function sendAI() { sendAIMsg(); }
   <div class="estudo-modal">
     <div class="estudo-modal-header">
       <h3 id="estudo-modal-title">📚 Estudo Amplo — Explicação Completa</h3>
-      <button class="estudo-modal-close" onclick="closeEstudoAmplo()">✕</button>
+      <div style="display:flex;gap:8px;align-items:center">
+        <button onclick="regenerarEstudo()" title="Regenerar conteúdo com IA" style="background:rgba(255,255,255,.15);border:none;color:#fff;border-radius:8px;padding:5px 10px;cursor:pointer;font-size:11px;font-weight:700;font-family:inherit">🔄 Regenerar</button>
+        <button class="estudo-modal-close" onclick="closeEstudoAmplo()">✕</button>
+      </div>
     </div>
     <div class="estudo-tabs" id="estudo-tabs">
       <button class="estudo-tab active" onclick="switchEstudoTab('resumo')">📖 Resumo Completo</button>
@@ -4878,7 +5059,7 @@ function sendAI() { sendAIMsg(); }
         <div class="estudo-loading-dots">
           <div class="estudo-ldot"></div><div class="estudo-ldot"></div><div class="estudo-ldot"></div>
         </div>
-        <div class="estudo-loading-text">🤖 IA preparando estudo completo...</div>
+        <div class="estudo-loading-text">🤖 IA gerando estudo completo... pode levar 10-20 segundos</div>
       </div>
       <div id="estudo-panels" style="display:none">
         <div class="estudo-panel active" id="estudo-panel-resumo">
