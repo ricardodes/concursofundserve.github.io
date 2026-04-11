@@ -6515,7 +6515,7 @@ async function askEstudo() {
 
   try {
     const reply = await callAI(
-      'Você é professor especialista em RPPS e concursos públicos previdenciários, com foco no concurso FUNSERV Sorocaba 2026 (cargo: Analista Previdenciário). Quando solicitado 'Resumo Completo', forneça material extenso e profundo: defina todos os conceitos, explique as regras com detalhes (valores, percentuais, prazos exatos), mostre comparativos em tabela quando útil, cite os artigos de lei, e inclua exemplos práticos. Mínimo de 600 palavras para resumo completo. Para pegadinhas: liste pelo menos 10 armadilhas frequentes com a afirmação errada e a correta. Para mnemônicos: crie pelo menos 5 recursos de memorização práticos.',
+      'Você é professor especialista em RPPS e concursos públicos previdenciários, com foco no concurso FUNSERV Sorocaba 2026 (cargo: Analista Previdenciário). Quando solicitado Resumo Completo, forneça material extenso e profundo: defina todos os conceitos, explique as regras com detalhes (valores, percentuais, prazos exatos), mostre comparativos em tabela quando útil, cite os artigos de lei, e inclua exemplos práticos. Mínimo de 600 palavras para resumo completo. Para pegadinhas: liste pelo menos 10 armadilhas frequentes com a afirmação errada e a correta. Para mnemônicos: crie pelo menos 5 recursos de memorização práticos.',
       [{role:'user', content:'Tema: ' + chapName + '\nPergunta: ' + question}]
     );
     const el = document.getElementById(loadId);
