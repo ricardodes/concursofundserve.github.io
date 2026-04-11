@@ -2539,6 +2539,62 @@ body.dark-mode .estudo-qa-a{color:#c9d1d9}
         </div>
       </div>
 
+
+      <div class="section-block">
+        <div class="section-h2-wrap">
+          <div class="section-h2">🏛️ Poderes da Administração Pública</div>
+          <button class="ai-section-btn" onclick="openAI('Poderes da administração pública: poder vinculado, discricionário, hierárquico, disciplinar, regulamentar e de polícia — conceito de cada, diferença entre eles, abuso de poder e desvio de finalidade')">🤖 Explicar</button>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Poder</th><th>O que é</th><th>Exemplo prático</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Vinculado</strong></td><td>Lei não dá margem de escolha — agente só pode fazer o que a lei manda</td><td>Concessão de aposentadoria quando todos os requisitos estão presentes: obrigatório conceder</td></tr>
+              <tr><td><strong>Discricionário</strong></td><td>Lei dá margem de conveniência e oportunidade (mérito administrativo)</td><td>Escolha do horário de expediente de um órgão; nomeação para cargo em comissão</td></tr>
+              <tr><td><strong>Hierárquico</strong></td><td>Organização interna: superior pode dar ordens, avocar, delegar, rever atos do subordinado</td><td>Diretor do RPPS delega ao analista a instrução de processo de benefício</td></tr>
+              <tr><td><strong>Disciplinar</strong></td><td>Punir servidores e particulares com vínculo especial. Decorre do hierárquico</td><td>PAD para apurar infração disciplinar de servidor da UG do RPPS</td></tr>
+              <tr><td><strong>Regulamentar</strong></td><td>Chefe do Executivo expede decretos para fiel execução das leis (não pode inovar)</td><td>Decreto municipal regulamentando o Estatuto dos Servidores de Sorocaba</td></tr>
+              <tr><td><strong>de Polícia</strong></td><td>Restringir direitos individuais em favor do interesse coletivo. Atributo: coercibilidade</td><td>PREVIC aplicando sanções a EFPC que descumpriu normas</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="benefit-grid">
+          <div class="benefit-card">
+            <span class="benefit-icon">⚠️</span>
+            <div class="benefit-title">Abuso de Poder — 2 Formas</div>
+            <ul class="benefit-list">
+              <li><strong>Excesso de poder:</strong> age além da competência (vício no elemento competência)</li>
+              <li><strong>Desvio de finalidade:</strong> age com a competência mas busca fim diverso do legal (vício na finalidade)</li>
+              <li>Ambos tornam o ato nulo</li>
+              <li>Geram responsabilidade do agente</li>
+            </ul>
+          </div>
+          <div class="benefit-card">
+            <span class="benefit-icon">📋</span>
+            <div class="benefit-title">Atributos dos Atos Administrativos</div>
+            <ul class="benefit-list">
+              <li><strong>Presunção de legitimidade:</strong> presumem-se válidos até prova em contrário</li>
+              <li><strong>Imperatividade:</strong> impõem obrigações independente da vontade do administrado</li>
+              <li><strong>Autoexecutoriedade:</strong> executados pela própria Adm. sem precisar do Judiciário</li>
+              <li><strong>Tipicidade:</strong> cada ato tem forma prevista em lei</li>
+            </ul>
+          </div>
+          <div class="benefit-card">
+            <span class="benefit-icon">🔑</span>
+            <div class="benefit-title">Delegação e Avocação</div>
+            <ul class="benefit-list">
+              <li><strong>Delegação:</strong> superior transfere competência ao subordinado (não transfere responsabilidade total)</li>
+              <li><strong>Avocação:</strong> superior chama para si competência do subordinado (excepcional)</li>
+              <li>Não se delega: competência exclusiva por lei, atos normativos, recursos administrativos</li>
+            </ul>
+          </div>
+        </div>
+        <div class="box box-gold">
+          <div class="box-title">💡 Pegadinha Clássica — Ato Vinculado pode ser Revogado?</div>
+          <strong>Não.</strong> Ato vinculado só pode ser <strong>anulado</strong> (quando ilegal). Não pode ser revogado por conveniência, pois não há mérito a rever — a lei não deixou margem de escolha. Revogação é exclusiva de atos discricionários. Prova troca os conceitos com frequência.
+        </div>
+      </div>
+
 <div class="bottom-nav">
       <button class="btn-nav btn-back" onclick="prevChapter()">← Anterior</button>
       <div style="display:flex;gap:10px;flex-wrap:wrap">
@@ -6327,44 +6383,62 @@ NUNCA use tabelas HTML. NUNCA use markdown (**, ##, ---). Use somente o HTML des
     // Gerar os 3 conteúdos em paralelo (mais rápido)
     const [resumoHTML, pegadinhasHTML, mnemHTML] = await Promise.all([
 
-      callAIEstudo(systemPrompt, `Crie um ESTUDO COMPLETO E APROFUNDADO sobre o seguinte tema para o concurso de Analista Previdenciário FUNSERV Sorocaba 2026 (Instituto Avalia):
+      callAIEstudo(systemPrompt, `Você vai criar um ESTUDO COMPLETO no nível de apostila de cursinho para o concurso Analista Previdenciário FUNSERV Sorocaba 2026.
 
 TEMA: ${chapName}
-PONTOS OBRIGATÓRIOS: ${topic}
+PONTOS QUE DEVEM SER COBERTOS (TODOS OBRIGATÓRIOS): ${topic}
 
-Estruture o conteúdo em seções com <h3> para títulos principais:
-1. <h3>📌 Visão Geral e Contexto</h3> — O que é, por que existe, base legal principal
-2. <h3>📖 Conceitos Fundamentais</h3> — Explique cada conceito com profundidade
-3. <h3>⚖️ Regras, Prazos e Percentuais</h3> — Todos os números, prazos e regras específicas do tema (cite artigos)
-4. <h3>🔍 Pontos Críticos e Distinções</h3> — Compare institutos similares, aponte diferenças sutis
-5. <h3>✅ Resumo dos Pontos Essenciais</h3> — Lista objetiva com os dados mais importantes
+ESTRUTURA OBRIGATÓRIA — use exatamente estes títulos com <h3>:
 
-Seja COMPLETO como um capítulo de apostila. Mínimo 700 palavras de conteúdo útil.`),
+<h3>📌 1. O Que É e Por Que Existe</h3>
+Contextualize o tema no sistema previdenciário. Explique o que resolve, sua base legal completa (artigos CF/88, número da lei, portaria, resolução). Mínimo 3 parágrafos detalhados.
 
-      callAIEstudo(systemPrompt, `Crie uma lista de PEGADINHAS DE PROVA sobre: ${chapName}
+<h3>📖 2. Todos os Conceitos e Definições</h3>
+Defina CADA termo técnico dos pontos obrigatórios: o que é, como funciona, diferença para conceitos similares. Use <div class="estudo-highlight"> para definições centrais. Mínimo 4 parágrafos.
+
+<h3>⚖️ 3. Regras, Números, Prazos e Percentuais</h3>
+Liste TODOS os valores, alíquotas, percentuais, prazos e limites. Para cada um: valor exato, o que representa, artigo/lei de origem. Use <div class="estudo-highlight"> por grupo de regras. Mínimo 4 parágrafos.
+
+<h3>🔄 4. Comparativos, Exceções e Casos Especiais</h3>
+Compare institutos que a banca confunde. Regra geral vs exceções. Use <div class="estudo-alerta"> para exceções críticas. Mínimo 3 parágrafos.
+
+<h3>🎯 5. Como Cai em Prova</h3>
+3 exemplos de enunciado típico de questão com resposta correta explicada. Use <div class="estudo-dica"> para cada exemplo.
+
+<h3>✅ 6. Quadro-Resumo Completo</h3>
+Lista <ul><li> com TODOS os dados para memorizar: números, prazos, exceções, bases legais. Dados em <strong>.
+
+EXIGÊNCIA: mínimo 1500 palavras de conteúdo real. Seja exaustivo como uma apostila completa.`),
+
+      callAIEstudo(systemPrompt, `Crie 15 PEGADINHAS DE PROVA sobre: ${chapName}
 PONTOS DO TEMA: ${topic}
 
-Gere entre 8 e 12 pegadinhas. Para cada uma:
-- Use <div class="estudo-alerta"> 
-- Coloque em negrito a afirmação ERRADA que a banca poderia colocar
-- Explique por que é errada e qual é a informação correta
-- Cite a lei/artigo/resolução quando relevante
+Para cada pegadinha use EXATAMENTE este formato:
+<div class="estudo-alerta"><strong>&#10060; BANCA ESCREVE: [afirmacao errada]</strong><br><strong>&#10003; CORRETO:</strong> [explicacao completa]<br><em>Base legal: [lei/artigo]</em></div>
 
-Exemplo de formato:
-<div class="estudo-alerta"><strong>❌ ERRADO: "O Pró-Gestão é obrigatório para todos os RPPS"</strong><br>O Pró-Gestão é VOLUNTÁRIO. O que é obrigatório é o envio ao CADPREV. (Lei 9.717/98)</div>
+ORGANIZE ASSIM:
+- Pegadinhas 1-5: erros de numero (prazo errado, percentual trocado, valor incorreto)
+- Pegadinhas 6-10: inversao de conceitos (regra e excecao trocadas)
+- Pegadinhas 11-15: confusao entre institutos similares
 
-Foque nas pegadinhas mais recorrentes em concursos de RPPS, previdência e direito administrativo.`),
+Apos as 15 pegadinhas, adicione obrigatoriamente:
+<h3>Os 3 Erros Mais Fatais Neste Tema</h3>
+Para cada um dos 3: explique por que candidatos erram, o raciocinio correto, e como identificar na prova. Use <div class="estudo-alerta">.`),
 
-      callAIEstudo(systemPrompt, `Crie MNEMÔNICOS, MACETES e ESQUEMAS MENTAIS para memorizar: ${chapName}
+      callAIEstudo(systemPrompt, `Crie MNEMÔNICOS, MACETES e ESQUEMA MENTAL para: ${chapName}
 PONTOS DO TEMA: ${topic}
 
-Gere entre 6 e 10 mnemônicos/macetes. Para cada um:
-- Use <div class="estudo-dica">
-- Crie um recurso criativo: acrônimo, frase mnemônica, associação, regra prática
-- Explique o que ele ajuda a memorizar
-- Inclua o dado correto que o macete representa
+PARTE 1 — MNEMÔNICOS E ACRONIMOS (minimo 5)
+<div class="estudo-dica"><strong>MNEMÔNICO: [nome]</strong><br>Frase/Acronimo: [o recurso]<br>Representa: [todos os itens com dados corretos]<br>Na prova: [como usar]</div>
 
-Também inclua no final uma seção <h3>🗺️ Esquema Mental Rápido</h3> com os principais dados do tema em formato de lista hierárquica com <ul><li> para revisão rápida de véspera.`)
+PARTE 2 — ANALOGIAS COM O COTIDIANO (minimo 3)
+Comparacoes criativas com situacoes do dia a dia. Use <div class="estudo-dica">.
+
+PARTE 3 — REGRAS DE BOLSO (minimo 5)
+<div class="estudo-highlight"><strong>REGRA: [frase curta e memoravel]</strong><br>[o que significa com numero/prazo/valor correto]</div>
+
+<h3>Mapa Mental Completo</h3>
+Esquema hierarquico em ul/li aninhados com TODOS os conceitos e seus dados em strong.`)
     ]);
 
     estudoCache[ch] = {
@@ -6410,7 +6484,7 @@ async function callAIEstudo(systemPrompt, userMessage) {
     body: JSON.stringify({
       model: 'llama-3.3-70b-versatile',
       messages: groqMessages,
-      max_tokens: 4000,
+      max_tokens: 8000,
       temperature: 0.3
     })
   });
