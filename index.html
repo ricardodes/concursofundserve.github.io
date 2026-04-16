@@ -351,30 +351,299 @@ footer{background:var(--ink);padding:22px 28px;margin-top:32px;text-align:center
 // BASE VERIFICADA — 25 concursos com links reais
 // ═══════════════════════════════════════════════════════
 const BASE = [
-  {id:'pf',src:'base',orgao:'Polícia Federal',cargo:'Delegado, Agente, Escrivão, Papiloscopista, Perito',status:'previsto',esfera:'federal',nivel:'superior',vagas:'~1.500',salario:'R$ 7.547 a R$ 26.717',prazo:'2026',banca:'CEBRASPE',uf:'BR',desc:'Concurso da PF aguardado para 2026 com autorização do MPOG. Aguardando publicação do edital no DOU.',link_edital:'https://www.gov.br/pf/pt-br/acesso-a-informacao/servidores/concursos',link_banca:'https://www.cebraspe.org.br/concursos'},
-  {id:'inss',src:'base',orgao:'INSS — Instituto Nacional do Seguro Social',cargo:'Técnico do Seguro Social',status:'previsto',esfera:'federal',nivel:'medio',vagas:'~7.500',salario:'R$ 5.905',prazo:'2025-2026',banca:'a confirmar',uf:'BR',desc:'Um dos concursos mais esperados. O INSS não abre concurso desde 2015. Autorização de vagas publicada.',link_edital:'https://www.gov.br/inss/pt-br/assuntos/concurso-publico',link_banca:'https://pciconcursos.com.br/concurso/inss'},
-  {id:'rfb',src:'base',orgao:'Receita Federal do Brasil (SRFB)',cargo:'Auditor Fiscal / Analista Tributário',status:'previsto',esfera:'federal',nivel:'superior',vagas:'~500',salario:'R$ 12.295 a R$ 21.029',prazo:'2026',banca:'CEBRASPE',uf:'BR',desc:'Uma das carreiras mais valorizadas do serviço público federal. Aguardando edital para 2026.',link_edital:'https://www.gov.br/receitafederal/pt-br/acesso-a-informacao/servidores/concursos-publicos',link_banca:'https://www.cebraspe.org.br/concursos'},
-  {id:'bb',src:'base',orgao:'Banco do Brasil S.A.',cargo:'Escriturário — Ag. Comercial / Ag. Tecnologia',status:'previsto',esfera:'federal',nivel:'medio',vagas:'~4.000',salario:'R$ 3.622 + benef. (~R$ 5.200 total)',prazo:'2025-2026',banca:'CESGRANRIO',uf:'BR',desc:'Sem edital aberto em 2025. BB realiza concurso a cada ~2 anos. Último: 2023. Acompanhe o site oficial.',link_edital:'https://www.bb.com.br/pbb/pagina-inicial/sobre-nos/carreira/talentos-externos/concurso-publico',link_banca:'https://www.cesgranrio.org.br'},
-  {id:'cef',src:'base',orgao:'Caixa Econômica Federal',cargo:'Técnico Bancário Novo (TBN)',status:'previsto',esfera:'federal',nivel:'medio',vagas:'~3.000 a 5.000',salario:'R$ 3.194 + benef. (~R$ 4.900 total)',prazo:'2025-2026',banca:'CESGRANRIO',uf:'BR',desc:'Sem edital aberto em 2025. Último concurso da CEF foi em 2023. Acompanhe o site oficial da Caixa.',link_edital:'https://caixa.gov.br/voce/trabalhe-na-caixa/concurso-publico/Paginas/default.aspx',link_banca:'https://www.cesgranrio.org.br'},
-  {id:'tjsp',src:'base',orgao:'TJ-SP — Tribunal de Justiça de São Paulo',cargo:'Escrevente Técnico Judiciário',status:'aberto',esfera:'estadual',nivel:'medio',vagas:'2.065',salario:'R$ 4.800 + benefícios',prazo:'Verificar edital',banca:'VUNESP',uf:'SP',desc:'Concurso aberto do TJSP. Vagas em comarcas de todo o estado de SP. Verifique datas no site da VUNESP.',link_edital:'https://www.tjsp.jus.br/Concursos',link_banca:'https://www.vunesp.com.br'},
-  {id:'seed-pr',src:'base',orgao:'SEED-PR — Secretaria de Educação do Paraná',cargo:'Professor QPM — diversas disciplinas',status:'inscricoes',esfera:'estadual',nivel:'superior',vagas:'12.000+',salario:'R$ 4.200 a R$ 6.800',prazo:'Verificar edital',banca:'FCC',uf:'PR',desc:'Um dos maiores concursos de professores do Brasil. Vagas em diversas disciplinas da rede pública do Paraná.',link_edital:'https://www.educacao.pr.gov.br/Concurso',link_banca:'https://www.concursosfcc.com.br'},
-  {id:'tjmg',src:'base',orgao:'TJ-MG — Tribunal de Justiça de MG',cargo:'Analista Judiciário / Técnico Judiciário',status:'inscricoes',esfera:'estadual',nivel:'superior',vagas:'1.103',salario:'R$ 5.183 a R$ 8.474',prazo:'Verificar edital',banca:'IBFC',uf:'MG',desc:'Concurso do TJMG com vagas para diversas especialidades. Verifique cronograma no site da IBFC.',link_edital:'https://www.tjmg.jus.br/portal-tjmg/concursos-e-selecoes/',link_banca:'https://www.ibfc.org.br'},
-  {id:'pcrj',src:'base',orgao:'Polícia Civil — Rio de Janeiro',cargo:'Delegado, Investigador, Escrivão, Perito',status:'inscricoes',esfera:'estadual',nivel:'superior',vagas:'2.610',salario:'R$ 4.500 a R$ 18.000',prazo:'Verificar edital',banca:'FGV',uf:'RJ',desc:'Concurso da PC-RJ para diversas carreiras policiais. Verifique fases e documentos no portal FGV.',link_edital:'https://conhecimento.fgv.br/concursos',link_banca:'https://conhecimento.fgv.br/concursos'},
-  {id:'tcu',src:'base',orgao:'TCU — Tribunal de Contas da União',cargo:'Auditor Federal de Controle Externo',status:'previsto',esfera:'federal',nivel:'superior',vagas:'~80',salario:'R$ 21.947',prazo:'2025-2026',banca:'CEBRASPE',uf:'BR',desc:'Uma das carreiras mais prestigiadas do serviço público federal. Alta concorrência e excelente remuneração.',link_edital:'https://portal.tcu.gov.br/transparencia/servidores/concursos-e-selecoes/',link_banca:'https://www.cebraspe.org.br/concursos'},
-  {id:'anatel',src:'base',orgao:'ANATEL — Agência Nac. de Telecomunicações',cargo:'Especialista em Regulação de Telecom',status:'previsto',esfera:'federal',nivel:'superior',vagas:'~150',salario:'R$ 19.198',prazo:'2025-2026',banca:'CEBRASPE',uf:'BR',desc:'Agência reguladora com carreira estável. Concurso previsto para reposição de servidores.',link_edital:'https://www.gov.br/anatel/pt-br/acesso-a-informacao/servidores/concurso-publico',link_banca:'https://www.cebraspe.org.br/concursos'},
-  {id:'cgu',src:'base',orgao:'CGU — Controladoria-Geral da União',cargo:'Auditor Federal de Finanças e Controle',status:'previsto',esfera:'federal',nivel:'superior',vagas:'~300',salario:'R$ 19.650',prazo:'2025-2026',banca:'CEBRASPE',uf:'BR',desc:'Carreira de controle interno do executivo federal. Excelente remuneração e estabilidade.',link_edital:'https://www.gov.br/cgu/pt-br/acesso-a-informacao/servidores/concursos',link_banca:'https://www.cebraspe.org.br/concursos'},
-  {id:'tjrs',src:'base',orgao:'TJ-RS — Tribunal de Justiça do RS',cargo:'Analista Judiciário / Oficial de Justiça',status:'aberto',esfera:'estadual',nivel:'superior',vagas:'600',salario:'R$ 5.600 a R$ 8.200',prazo:'Verificar edital',banca:'FCC',uf:'RS',desc:'Concurso do TJRS com vagas para analistas e oficiais. Verifique cronograma no site da FCC.',link_edital:'https://www.tjrs.jus.br/novo/concursos-e-selecoes/',link_banca:'https://www.concursosfcc.com.br'},
-  {id:'sefazsp',src:'base',orgao:'SEFAZ-SP — Fazenda do Estado de SP',cargo:'Agente Fiscal de Rendas',status:'previsto',esfera:'estadual',nivel:'superior',vagas:'~100',salario:'R$ 18.000+',prazo:'2025-2026',banca:'FCC',uf:'SP',desc:'Um dos concursos estaduais mais valorizados. Carreira de auditor fiscal de SP.',link_edital:'https://www.fazenda.sp.gov.br/SER/servidores/concurso.shtm',link_banca:'https://www.concursosfcc.com.br'},
-  {id:'ibge',src:'base',orgao:'IBGE — Instituto Brasileiro de Geog. e Est.',cargo:'Agente de Pesquisas e Mapeamento',status:'aberto',esfera:'federal',nivel:'medio',vagas:'900',salario:'R$ 2.100',prazo:'Verificar edital',banca:'FGV',uf:'BR',desc:'IBGE com concurso para agentes de pesquisa em cidades de todo o Brasil.',link_edital:'https://conhecimento.fgv.br/concursos',link_banca:'https://conhecimento.fgv.br/concursos'},
-  {id:'correios',src:'base',orgao:'ECT — Correios',cargo:'Carteiro / Operador de Triagem / Analista',status:'previsto',esfera:'federal',nivel:'medio',vagas:'~4.000',salario:'R$ 2.429 a R$ 5.800',prazo:'2025-2026',banca:'IBFC',uf:'BR',desc:'Correios realizam concurso com frequência. Vagas de carteiro, operador e analista em todo o Brasil.',link_edital:'https://www.correios.com.br/sobre-os-correios/nossa-empresa/fale-com-os-correios/trabalhe-nos-correios',link_banca:'https://www.ibfc.org.br'},
-  {id:'pmmg',src:'base',orgao:'PM-MG — Polícia Militar de Minas Gerais',cargo:'Soldado da Polícia Militar',status:'inscricoes',esfera:'estadual',nivel:'medio',vagas:'2.700',salario:'R$ 3.800',prazo:'Verificar edital',banca:'FUMARC',uf:'MG',desc:'Concurso da PMMG para soldado. Uma das maiores corporações militares estaduais do Brasil.',link_edital:'https://www.pm.mg.gov.br/node/concurso-publico',link_banca:'https://www.fumarc.com.br'},
-  {id:'funserv',src:'base',orgao:'FUNSERV — Sorocaba/SP',cargo:'Analista Previdenciário',status:'aberto',esfera:'municipal',nivel:'superior',vagas:'10',salario:'R$ 6.500',prazo:'2026',banca:'Instituto Avalia',uf:'SP',desc:'Fundação de Previdência dos Servidores de Sorocaba. Gestão do RPPS municipal. Matérias: CF/88, EC 103/2019, atuária, CMN 4.963/2021.',link_edital:'https://www.sorocaba.sp.gov.br/concursos',link_banca:'https://www.institutoavalia.com.br'},
-  {id:'mpf',src:'base',orgao:'MPF — Ministério Público Federal',cargo:'Analista / Técnico do MPF',status:'previsto',esfera:'federal',nivel:'superior',vagas:'~300',salario:'R$ 8.800 a R$ 22.000',prazo:'2026',banca:'CEBRASPE',uf:'BR',desc:'MPF prevê concurso para cargos de apoio administrativo e analistas especializados.',link_edital:'https://www.mpf.mp.br/servidor/concursos',link_banca:'https://www.cebraspe.org.br/concursos'},
-  {id:'dpf',src:'base',orgao:'Defensoria Pública da União (DPU)',cargo:'Defensor Público Federal',status:'previsto',esfera:'federal',nivel:'superior',vagas:'a definir',salario:'R$ 14.000 a R$ 28.000',prazo:'2025-2026',banca:'CEBRASPE',uf:'BR',desc:'DPU prevê concurso para reposição de defensores públicos federais. Exige formação em Direito.',link_edital:'https://www.dpu.def.br/index.php/concurso-publico',link_banca:'https://www.cebraspe.org.br/concursos'},
-  {id:'pfn',src:'base',orgao:'PGFN — Procuradoria-Geral da Fazenda Nac.',cargo:'Procurador da Fazenda Nacional',status:'previsto',esfera:'federal',nivel:'superior',vagas:'~100',salario:'R$ 26.000+',prazo:'2026',banca:'CEBRASPE',uf:'BR',desc:'Carreira jurídica federal de elite. Exige Direito e aprovação em prova de alta dificuldade.',link_edital:'https://www.gov.br/pgfn/pt-br/acesso-a-informacao/concursos-e-selecoes',link_banca:'https://www.cebraspe.org.br/concursos'},
-  {id:'sedf',src:'base',orgao:'SEDF — Secretaria de Educação do DF',cargo:'Professor da Rede Pública do DF',status:'previsto',esfera:'estadual',nivel:'superior',vagas:'~2.000',salario:'R$ 4.800 a R$ 7.200',prazo:'2025-2026',banca:'CEBRASPE',uf:'DF',desc:'Concurso para professores da rede pública do Distrito Federal. Grande demanda reprimida.',link_edital:'https://www.educacao.df.gov.br/concurso-publico/',link_banca:'https://www.cebraspe.org.br/concursos'},
-  {id:'pmsp',src:'base',orgao:'Prefeitura de São Paulo',cargo:'Analista, Técnico, Assistente — diversas áreas',status:'aberto',esfera:'municipal',nivel:'superior',vagas:'2.200+',salario:'R$ 3.000 a R$ 12.000',prazo:'Verificar edital',banca:'FCC',uf:'SP',desc:'Prefeitura de SP abre concursos regularmente para diversas secretarias. Verifique editais no portal da prefeitura.',link_edital:'https://www.prefeitura.sp.gov.br/cidade/secretarias/gestao/concursos_e_selecoes/',link_banca:'https://www.concursosfcc.com.br'},
-  {id:'ana',src:'base',orgao:'ANA — Agência Nacional de Águas e Saneamento',cargo:'Analista em Recursos Hídricos',status:'previsto',esfera:'federal',nivel:'superior',vagas:'~60',salario:'R$ 18.400',prazo:'2026',banca:'CEBRASPE',uf:'BR',desc:'Agência reguladora na área de recursos hídricos. Alta qualidade de vida e excelente remuneração.',link_edital:'https://www.gov.br/ana/pt-br/acesso-a-informacao/servidores/concursos',link_banca:'https://www.cebraspe.org.br/concursos'},
+  // ── FEDERAIS ──────────────────────────────────────────────────────────
+  {
+    id:'pf', src:'base',
+    orgao:'Polícia Federal (PF)',
+    cargo:'Delegado, Agente, Escrivão, Papiloscopista, Perito Criminal',
+    status:'previsto', esfera:'federal', nivel:'superior',
+    vagas:'~1.500', salario:'R$ 7.547 a R$ 26.717', prazo:'Previsão: 2026',
+    banca:'CEBRASPE', uf:'BR',
+    desc:'⚠️ SEM EDITAL ABERTO. Concurso autorizado pelo MPOG, aguardando publicação do edital. Quando abrir, será pela CEBRASPE. Acompanhe a banca.',
+    link_edital:'https://www.cebraspe.org.br/concursos',
+    link_banca:'https://www.cebraspe.org.br/concursos'
+  },
+  {
+    id:'inss', src:'base',
+    orgao:'INSS — Instituto Nac. do Seguro Social',
+    cargo:'Técnico do Seguro Social',
+    status:'previsto', esfera:'federal', nivel:'medio',
+    vagas:'~7.500', salario:'R$ 5.905', prazo:'Previsão: 2025-2026',
+    banca:'a definir', uf:'BR',
+    desc:'⚠️ SEM EDITAL ABERTO. INSS não realiza concurso desde 2015. Autorização de vagas publicada. Acompanhe o PCI Concursos para o edital.',
+    link_edital:'https://www.pciconcursos.com.br/concursos/federais/',
+    link_banca:'https://www.pciconcursos.com.br/concursos/federais/'
+  },
+  {
+    id:'rfb', src:'base',
+    orgao:'Receita Federal do Brasil (SRFB)',
+    cargo:'Auditor Fiscal / Analista Tributário da Receita Federal',
+    status:'previsto', esfera:'federal', nivel:'superior',
+    vagas:'~500', salario:'R$ 12.295 a R$ 21.029', prazo:'Previsão: 2026',
+    banca:'CEBRASPE', uf:'BR',
+    desc:'⚠️ SEM EDITAL ABERTO. Uma das carreiras mais valorizadas do funcionalismo. Quando o edital sair, estará no site da CEBRASPE.',
+    link_edital:'https://www.cebraspe.org.br/concursos',
+    link_banca:'https://www.cebraspe.org.br/concursos'
+  },
+  {
+    id:'bb', src:'base',
+    orgao:'Banco do Brasil S.A.',
+    cargo:'Escriturário — Agente Comercial / Agente de Tecnologia',
+    status:'previsto', esfera:'federal', nivel:'medio',
+    vagas:'~4.000', salario:'R$ 3.622 + benef. (~R$ 5.200 total)', prazo:'Previsão: 2025-2026',
+    banca:'CESGRANRIO', uf:'BR',
+    desc:'⚠️ SEM EDITAL ABERTO. Último concurso do BB foi em 2023 (CESGRANRIO). Banco realiza seleção a cada ~2 anos. Acompanhe o portal de talentos.',
+    link_edital:'https://talentos.bb.com.br',
+    link_banca:'https://www.cesgranrio.org.br/eventos/concursos.aspx'
+  },
+  {
+    id:'cef', src:'base',
+    orgao:'Caixa Econômica Federal',
+    cargo:'Técnico Bancário Novo (TBN)',
+    status:'previsto', esfera:'federal', nivel:'medio',
+    vagas:'~3.000 a 5.000', salario:'R$ 3.194 + benef. (~R$ 4.900 total)', prazo:'Previsão: 2025-2026',
+    banca:'CESGRANRIO', uf:'BR',
+    desc:'⚠️ SEM EDITAL ABERTO EM 2025. Último concurso da CEF foi em 2023. Não há seleção em andamento. Acompanhe o portal de carreiras da Caixa.',
+    link_edital:'https://www.caixa.gov.br/carreiras',
+    link_banca:'https://www.cesgranrio.org.br/eventos/concursos.aspx'
+  },
+  {
+    id:'tcu', src:'base',
+    orgao:'TCU — Tribunal de Contas da União',
+    cargo:'Auditor Federal de Controle Externo',
+    status:'previsto', esfera:'federal', nivel:'superior',
+    vagas:'~80', salario:'R$ 21.947', prazo:'Previsão: 2025-2026',
+    banca:'CEBRASPE', uf:'BR',
+    desc:'⚠️ SEM EDITAL ABERTO. Uma das carreiras mais prestigiadas. Quando abrir, o edital estará na CEBRASPE.',
+    link_edital:'https://www.cebraspe.org.br/concursos',
+    link_banca:'https://www.cebraspe.org.br/concursos'
+  },
+  {
+    id:'cgu', src:'base',
+    orgao:'CGU — Controladoria-Geral da União',
+    cargo:'Auditor Federal de Finanças e Controle',
+    status:'previsto', esfera:'federal', nivel:'superior',
+    vagas:'~300', salario:'R$ 19.650', prazo:'Previsão: 2025-2026',
+    banca:'CEBRASPE', uf:'BR',
+    desc:'⚠️ SEM EDITAL ABERTO. Carreira de controle interno federal com ótima remuneração. Edital previsto pela CEBRASPE.',
+    link_edital:'https://www.cebraspe.org.br/concursos',
+    link_banca:'https://www.cebraspe.org.br/concursos'
+  },
+  {
+    id:'anatel', src:'base',
+    orgao:'ANATEL — Agência Nac. de Telecomunicações',
+    cargo:'Especialista em Regulação de Telecomunicações',
+    status:'previsto', esfera:'federal', nivel:'superior',
+    vagas:'~150', salario:'R$ 19.198', prazo:'Previsão: 2025-2026',
+    banca:'CEBRASPE', uf:'BR',
+    desc:'⚠️ SEM EDITAL ABERTO. Carreira de agência reguladora, estável e bem remunerada. Acompanhe a CEBRASPE.',
+    link_edital:'https://www.cebraspe.org.br/concursos',
+    link_banca:'https://www.cebraspe.org.br/concursos'
+  },
+  {
+    id:'mpf', src:'base',
+    orgao:'MPF — Ministério Público Federal',
+    cargo:'Analista / Técnico do MPF',
+    status:'previsto', esfera:'federal', nivel:'superior',
+    vagas:'~300', salario:'R$ 8.800 a R$ 22.000', prazo:'Previsão: 2026',
+    banca:'CEBRASPE', uf:'BR',
+    desc:'⚠️ SEM EDITAL ABERTO. MPF prevê concurso para reposição de quadros. Edital esperado pela CEBRASPE.',
+    link_edital:'https://www.cebraspe.org.br/concursos',
+    link_banca:'https://www.cebraspe.org.br/concursos'
+  },
+  {
+    id:'correios', src:'base',
+    orgao:'ECT — Correios',
+    cargo:'Carteiro / Operador de Triagem e Transbordo / Analista',
+    status:'previsto', esfera:'federal', nivel:'medio',
+    vagas:'~4.000', salario:'R$ 2.429 a R$ 5.800', prazo:'Previsão: 2025-2026',
+    banca:'IBFC ou CESGRANRIO', uf:'BR',
+    desc:'⚠️ SEM EDITAL ABERTO. Correios abrem concurso com frequência. Vagas em todo o Brasil. Acompanhe o PCI Concursos.',
+    link_edital:'https://www.pciconcursos.com.br/concursos/federais/',
+    link_banca:'https://www.ibfc.org.br/concursos'
+  },
+  {
+    id:'ibge', src:'base',
+    orgao:'IBGE — Instituto Brasileiro de Geografia e Estatística',
+    cargo:'Agente de Pesquisas e Mapeamento',
+    status:'previsto', esfera:'federal', nivel:'medio',
+    vagas:'~900', salario:'R$ 2.100', prazo:'Verificar FGV',
+    banca:'FGV', uf:'BR',
+    desc:'IBGE realiza concursos para recenseadores e agentes de pesquisa periodicamente. Verifique a FGV Conhecimento.',
+    link_edital:'https://conhecimento.fgv.br/concursos',
+    link_banca:'https://conhecimento.fgv.br/concursos'
+  },
+  {
+    id:'dpf', src:'base',
+    orgao:'Defensoria Pública da União (DPU)',
+    cargo:'Defensor Público Federal / Apoio Técnico',
+    status:'previsto', esfera:'federal', nivel:'superior',
+    vagas:'a definir', salario:'R$ 14.000 a R$ 28.000', prazo:'Previsão: 2025-2026',
+    banca:'CEBRASPE', uf:'BR',
+    desc:'⚠️ SEM EDITAL ABERTO. DPU prevê reposição de defensores e servidores. Exige Direito para o cargo de defensor.',
+    link_edital:'https://www.cebraspe.org.br/concursos',
+    link_banca:'https://www.cebraspe.org.br/concursos'
+  },
+
+  // ── ESTADUAIS ─────────────────────────────────────────────────────────
+  {
+    id:'tjsp', src:'base',
+    orgao:'TJ-SP — Tribunal de Justiça de São Paulo',
+    cargo:'Escrevente Técnico Judiciário',
+    status:'previsto', esfera:'estadual', nivel:'medio',
+    vagas:'~2.000', salario:'R$ 4.800 + benefícios', prazo:'Verificar VUNESP',
+    banca:'VUNESP', uf:'SP',
+    desc:'TJSP abre concurso regularmente para Escrevente Técnico. Um dos mais concorridos do estado. Verifique a VUNESP.',
+    link_edital:'https://www.vunesp.com.br',
+    link_banca:'https://www.vunesp.com.br'
+  },
+  {
+    id:'seed-pr', src:'base',
+    orgao:'SEED-PR — Educação do Estado do Paraná',
+    cargo:'Professor QPM — diversas disciplinas',
+    status:'previsto', esfera:'estadual', nivel:'superior',
+    vagas:'~12.000', salario:'R$ 4.200 a R$ 6.800', prazo:'Verificar FCC',
+    banca:'FCC', uf:'PR',
+    desc:'Um dos maiores concursos de professores do Brasil. Rede pública do Paraná. Vagas em inúmeras disciplinas.',
+    link_edital:'https://www.concursosfcc.com.br/concursos/',
+    link_banca:'https://www.concursosfcc.com.br/concursos/'
+  },
+  {
+    id:'tjmg', src:'base',
+    orgao:'TJ-MG — Tribunal de Justiça de MG',
+    cargo:'Analista Judiciário / Técnico Judiciário',
+    status:'previsto', esfera:'estadual', nivel:'superior',
+    vagas:'~1.100', salario:'R$ 5.183 a R$ 8.474', prazo:'Verificar IBFC',
+    banca:'IBFC', uf:'MG',
+    desc:'TJMG abre concursos periodicamente para diversas especialidades judiciárias. Verifique o site da IBFC.',
+    link_edital:'https://www.ibfc.org.br/concursos',
+    link_banca:'https://www.ibfc.org.br/concursos'
+  },
+  {
+    id:'pcrj', src:'base',
+    orgao:'Polícia Civil — Rio de Janeiro (PC-RJ)',
+    cargo:'Delegado, Investigador, Escrivão, Papiloscopista, Perito',
+    status:'previsto', esfera:'estadual', nivel:'superior',
+    vagas:'~2.600', salario:'R$ 4.500 a R$ 18.000', prazo:'Verificar FGV',
+    banca:'FGV', uf:'RJ',
+    desc:'PC-RJ realiza concursos com frequência. Verifique fases e editais no portal FGV Conhecimento.',
+    link_edital:'https://conhecimento.fgv.br/concursos',
+    link_banca:'https://conhecimento.fgv.br/concursos'
+  },
+  {
+    id:'sefazsp', src:'base',
+    orgao:'SEFAZ-SP — Fazenda do Estado de São Paulo',
+    cargo:'Agente Fiscal de Rendas (AFR)',
+    status:'previsto', esfera:'estadual', nivel:'superior',
+    vagas:'~100', salario:'R$ 18.000+', prazo:'Previsão: 2025-2026',
+    banca:'FCC', uf:'SP',
+    desc:'⚠️ SEM EDITAL ABERTO. Um dos concursos estaduais mais valorizados. Quando sair, o edital estará na FCC.',
+    link_edital:'https://www.concursosfcc.com.br/concursos/',
+    link_banca:'https://www.concursosfcc.com.br/concursos/'
+  },
+  {
+    id:'tjrs', src:'base',
+    orgao:'TJ-RS — Tribunal de Justiça do RS',
+    cargo:'Analista Judiciário / Oficial de Justiça',
+    status:'previsto', esfera:'estadual', nivel:'superior',
+    vagas:'~600', salario:'R$ 5.600 a R$ 8.200', prazo:'Verificar FCC',
+    banca:'FCC', uf:'RS',
+    desc:'TJRS abre concursos periodicamente. Verifique o cronograma e editais na FCC.',
+    link_edital:'https://www.concursosfcc.com.br/concursos/',
+    link_banca:'https://www.concursosfcc.com.br/concursos/'
+  },
+  {
+    id:'pmmg', src:'base',
+    orgao:'PM-MG — Polícia Militar de Minas Gerais',
+    cargo:'Soldado / Oficial da Polícia Militar',
+    status:'previsto', esfera:'estadual', nivel:'medio',
+    vagas:'~2.700', salario:'R$ 3.800', prazo:'Verificar FUMARC',
+    banca:'FUMARC', uf:'MG',
+    desc:'PMMG uma das maiores corporações estaduais do Brasil. Verifique edital e datas na FUMARC.',
+    link_edital:'https://www.fumarc.com.br',
+    link_banca:'https://www.fumarc.com.br'
+  },
+  {
+    id:'sedf', src:'base',
+    orgao:'SEDF — Secretaria de Educação do DF',
+    cargo:'Professor da Rede Pública do Distrito Federal',
+    status:'previsto', esfera:'estadual', nivel:'superior',
+    vagas:'~2.000', salario:'R$ 4.800 a R$ 7.200', prazo:'Previsão: 2025-2026',
+    banca:'CEBRASPE', uf:'DF',
+    desc:'⚠️ SEM EDITAL ABERTO. Grande demanda reprimida para professores do DF. Edital esperado via CEBRASPE.',
+    link_edital:'https://www.cebraspe.org.br/concursos',
+    link_banca:'https://www.cebraspe.org.br/concursos'
+  },
+
+  // ── MUNICIPAIS ────────────────────────────────────────────────────────
+  {
+    id:'funserv', src:'base',
+    orgao:'FUNSERV — Sorocaba/SP',
+    cargo:'Analista Previdenciário',
+    status:'aberto', esfera:'municipal', nivel:'superior',
+    vagas:'10', salario:'R$ 6.500', prazo:'2026',
+    banca:'Instituto Avalia', uf:'SP',
+    desc:'Fundação de Previdência dos Servidores Municipais de Sorocaba. Gestão do RPPS. Matérias: CF/88, EC 103/2019, Lei 9.717/98, atuária, CMN 4.963/2021.',
+    link_edital:'https://www.institutoavalia.com.br',
+    link_banca:'https://www.institutoavalia.com.br'
+  },
+  {
+    id:'pmsp', src:'base',
+    orgao:'Prefeitura de São Paulo (SP)',
+    cargo:'Analista, Técnico, Assistente — diversas secretarias',
+    status:'previsto', esfera:'municipal', nivel:'superior',
+    vagas:'~2.000', salario:'R$ 3.000 a R$ 12.000', prazo:'Verificar FCC',
+    banca:'FCC', uf:'SP',
+    desc:'Prefeitura de SP abre concursos regularmente. Verifique os editais abertos no site da FCC Concursos.',
+    link_edital:'https://www.concursosfcc.com.br/concursos/',
+    link_banca:'https://www.concursosfcc.com.br/concursos/'
+  },
+
+  // ── PORTAL GERAL (sempre atualizado) ──────────────────────────────────
+  {
+    id:'pci-geral', src:'base',
+    orgao:'🔍 Ver TODOS os concursos abertos',
+    cargo:'Federal, Estadual e Municipal — todas as áreas',
+    status:'aberto', esfera:'federal', nivel:'superior',
+    vagas:'Centenas', salario:'Varia por concurso', prazo:'Vários',
+    banca:'Diversas', uf:'BR',
+    desc:'Lista completa e atualizada de todos os concursos públicos abertos no Brasil, em todos os estados e esferas.',
+    link_edital:'https://www.pciconcursos.com.br/concursos/',
+    link_banca:'https://www.pciconcursos.com.br/concursos/'
+  },
+  {
+    id:'pci-federal', src:'base',
+    orgao:'🏛️ Concursos Federais Abertos — PCI',
+    cargo:'Todos os órgãos federais com seleção ativa',
+    status:'aberto', esfera:'federal', nivel:'superior',
+    vagas:'Vários', salario:'Varia', prazo:'Vários',
+    banca:'Diversas', uf:'BR',
+    desc:'Portal PCI Concursos com lista completa de concursos federais com inscrições abertas ou provas previstas.',
+    link_edital:'https://www.pciconcursos.com.br/concursos/federais/',
+    link_banca:'https://www.pciconcursos.com.br/concursos/federais/'
+  },
+  {
+    id:'pci-estadual', src:'base',
+    orgao:'🗺️ Concursos Estaduais Abertos — PCI',
+    cargo:'Todos os estados — inscrições abertas',
+    status:'aberto', esfera:'estadual', nivel:'medio',
+    vagas:'Vários', salario:'Varia', prazo:'Vários',
+    banca:'Diversas', uf:'BR',
+    desc:'Portal PCI com todos os concursos estaduais com inscrições abertas em qualquer estado do Brasil.',
+    link_edital:'https://www.pciconcursos.com.br/concursos/estaduais/',
+    link_banca:'https://www.pciconcursos.com.br/concursos/estaduais/'
+  },
+  {
+    id:'pci-municipal', src:'base',
+    orgao:'🏙️ Concursos Municipais Abertos — PCI',
+    cargo:'Prefeituras e câmaras — inscrições abertas',
+    status:'aberto', esfera:'municipal', nivel:'medio',
+    vagas:'Vários', salario:'Varia', prazo:'Vários',
+    banca:'Diversas', uf:'BR',
+    desc:'PCI Concursos com lista de concursos municipais abertos em cidades de todos os estados.',
+    link_edital:'https://www.pciconcursos.com.br/concursos/municipais/',
+    link_banca:'https://www.pciconcursos.com.br/concursos/municipais/'
+  },
 ];
 
 // ═══════════════════════════════════════════════════════
@@ -739,8 +1008,9 @@ function cardHTML(c) {
       ${c.prazo&&c.prazo!=='Ver edital'?`<span class="cp">${esc(c.prazo)}</span>`:''}
       ${c.link_edital?`<a href="${attr(c.link_edital)}" target="_blank" rel="noopener"
         class="cl ${isRSS?'cl-rss':''}" onclick="event.stopPropagation()">
-        ${isRSS?'📡':'📄'} ${isRSS?'Ver notícia':'Edital'} ↗</a>`:''}
+        ${isRSS?'📡 Ver notícia ↗':c.status==='previsto'?'🔍 Acompanhar ↗':'📄 Edital / Banca ↗'}</a>`:''}
     </div>
+    ${c.status==='previsto'&&!isRSS?`<div class="fonte-badge" style="color:var(--gld)">⚠️ Sem edital aberto — acompanhe o link acima para novidades</div>`:''}
     ${isRSS&&c.pubDate?`<div class="fonte-badge">📡 PCI Concursos · ${new Date(c.pubDate).toLocaleDateString('pt-BR')}</div>`:''}
   </div>`;
 }
@@ -767,12 +1037,19 @@ function abrirM(id) {
       <div class="mf"><label>Esfera</label><div class="v">${cap(c.esfera||'—')}</div></div>
       <div class="mf"><label>Abrangência</label><div class="v">${c.uf==='BR'?'Nacional':c.uf||'—'}</div></div>
     </div>
-    ${c.link_edital?`<a href="${attr(c.link_edital)}" target="_blank" rel="noopener"
-      class="mlink pri">📄 ${isRSS?'Ver Notícia Completa':'Acessar Edital Oficial'} ↗</a>`:''}
+    ${c.status==='previsto'&&!isRSS?`
+      <div style="background:rgba(240,180,41,.1);border:1px solid rgba(240,180,41,.3);border-radius:9px;padding:12px 14px;margin-bottom:12px;font-size:12.5px;line-height:1.6;color:#7a5c00">
+        <strong>⚠️ SEM EDITAL ABERTO</strong><br>
+        Este concurso está previsto mas ainda não tem edital publicado. Use o link abaixo para acompanhar quando o edital sair.
+      </div>`:''
+    }
+    ${c.link_edital?`<a href="${attr(c.link_edital)}" target="_blank" rel="noopener" class="mlink pri">
+      ${isRSS?'📡 Ver Notícia Completa ↗':c.status==='previsto'?'🔍 Acompanhar na Banca / PCI Concursos ↗':'📄 Acessar Edital / Banca ↗'}
+    </a>`:''}
     ${c.link_banca&&c.link_banca!==c.link_edital?`<a href="${attr(c.link_banca)}" target="_blank" rel="noopener"
-      class="mlink sec">🏛️ Site da Banca Organizadora ↗</a>`:''}
+      class="mlink sec">🏛️ Site da Banca: ${esc(c.banca||'Ver banca')} ↗</a>`:''}
     ${isRSS?`<a href="https://pciconcursos.com.br" target="_blank" class="mlink pur">🔍 Ver mais no PCI Concursos ↗</a>`:''}
-    <div class="mwarn">⚠️ Sempre confirme datas e informações diretamente nos sites oficiais dos órgãos.</div>`;
+    <div class="mwarn">⚠️ Sempre confirme datas e informações diretamente nos sites das bancas e dos órgãos. Editais podem ser alterados.</div>`;
   document.getElementById('mo').classList.add('on');
   document.body.style.overflow = 'hidden';
 }
